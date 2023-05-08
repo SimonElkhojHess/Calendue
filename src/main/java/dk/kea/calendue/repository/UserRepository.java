@@ -53,7 +53,6 @@ public class UserRepository
             Connection connection = DriverManager.getConnection(DB_URL, UID, PWD);
             String SEARCH_QUERY = "SELECT * FROM calendue.user WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
-
             preparedStatement.setString(1, username);
 
             ResultSet resultSet = preparedStatement.executeQuery();
