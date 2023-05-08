@@ -1,0 +1,63 @@
+*
+{
+    margin: 0;
+    padding:0;
+    text-decoration: none;
+    color: black;
+    overflow-x:hidden;
+}
+.navbar
+{
+    display: grid;
+    border:1px solid green;
+    width: 100%;
+    height:4rem;
+    grid-template-columns: repeat(12, auto);
+    align-content: space-evenly;
+    background-color: #8ED0AB;
+    font-family: 'Poiret One', cursive;
+    font-weight: bold;
+    font-size: 1.5rem;
+    overflow-y: hidden;
+}
+
+.navbar a:hover
+{
+    color: #255188;
+    text-decoration: underline;
+}
+.navbar div
+{
+    height:100%;
+}
+
+.home-button
+{
+    grid-column: 1/1;
+}
+
+.myprojects-button
+{
+    grid-column: 5/5;
+    padding-top:10px;
+}
+
+.mytasks-button
+{
+    grid-column: 6/6;
+    padding-top:10px;
+}
+.resources-button
+{
+    grid-column: 7/7;
+    padding-top:10px;
+}
+
+.profile-button
+{
+    grid-column: 12/12;
+    padding-top:10px;
+}
+
+
+

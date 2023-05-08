@@ -1,7 +1,7 @@
 DROP SCHEMA IF EXISTS `calendue`;
 CREATE SCHEMA `calendue`;
 USE `calendue`;
-DROP TABLE IF EXISTS `project`, `subproject`, `task`, `user`, `linkedtask`, `project_user`, `subproject_user`, `task_user`
+DROP TABLE IF EXISTS `project`, `subproject`, `task`, `user`, `linkedtask`, `project_user`, `subproject_user`, `task_user`;
 CREATE TABLE `calendue`.`project` (
                                       `project_id` INT NOT NULL AUTO_INCREMENT,
                                       `project_name` VARCHAR(255) NOT NULL,

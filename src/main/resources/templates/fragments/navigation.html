@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../../css/navbar.css}" href="../../static/css/navbar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar" th:fragment="navbar">
+        <div class="home-button">
+            <a href="/"><img class="logo-img" src="../../static/images/logo.png" alt="Homepage" style="width:auto; height: 50px;"></a></div>
+
+        <div class="myprojects-button">
+            <a href="/myprojects">My Projects</a></div>
+
+        <div class="mytasks-button">
+            <a href="/mytasks">My Tasks</a></div>
+
+        <div class="resources-button">
+            <a href="/resources">Resources</a></div>
+
+        <div class="profile-button">
+            <a href="/profile">Profile</a></div>
+</nav>
+
+
+
+</body>
+</html>
