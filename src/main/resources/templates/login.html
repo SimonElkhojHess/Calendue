@@ -4,8 +4,31 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{../css/navbar.css}">
+    <link rel="stylesheet" th:href="@{../css/footer.css}">
+    <link rel="stylesheet" th:href="@{../css/login.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav th:insert="fragments/navigation.html :: navbar"></nav>
+    <nav th:insert="fragments/navigation.html :: navbar"> </nav>
+    <div class="outer-container">
+        <div class="login-box">
+            <div class="login-form-box">
+                <form action="/login" method="post">
+                    <input id="username-field" name="username" type="text" placeholder="Enter username...">
+                    <br>
+                    <input id="password-field" name="password" type="text" placeholder="Enter password...">
+                    <br>
+                    <input id="submit-button" type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+        <div class="login-image-box">
+            <img th:src="@{../images/loginImage.png}" src="../static/images/loginImage.png" alt="loginPicture" style="height:auto; width:100%;">
+        </div>
+    </div>
+
 </body>
+<footer th:insert="fragments/navigation.html :: footer"></footer>
 </html>

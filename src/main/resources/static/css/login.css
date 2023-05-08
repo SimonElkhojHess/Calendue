@@ -1,0 +1,29 @@
+*{
+    overflow:hidden;
+}
+.outer-container
+{
+    width:100%;
+    height:40rem;
+    display:flex;
+    align-content: space-evenly;
+}
+.login-box
+{
+    width:25%;
+    background-color: #1d3c65;
+}
+.login-form-box
+{
+    position: fixed;
+    top:30%;
+    left:5%;
+}
+.login-image-box
+{
+    width:75%;
+}
+#password-field
+{
+    margin: 10px 0 10px 0;
+}
