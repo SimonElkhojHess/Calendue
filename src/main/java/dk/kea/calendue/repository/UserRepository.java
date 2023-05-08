@@ -1,5 +1,6 @@
 package dk.kea.calendue.repository;
 
+import dk.kea.calendue.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,7 +51,7 @@ public class UserRepository
         try
         {
             Connection connection = DriverManager.getConnection(DB_URL, UID, PWD);
-            String SEARCH_QUERY = "SELECT * from calendue.user WHERE username = ?";
+            String SEARCH_QUERY = "SELECT * FROM calendue.user WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
 
             preparedStatement.setString(1, username);
@@ -73,4 +74,33 @@ public class UserRepository
         }
         return true;
     }
+
+    public User getUserInfo(String username)
+    {
+        User tempUser = new User();
+        try
+        {
+            Connection connection = DriverManager.getConnection(DB_URL, UID, PWD);
+            String SEARCH_QUERY = "SELECT user_id, username, email, is_admin FROM calendue.user WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
+
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            tempUser.setUser_id(resultSet.getInt(1));
+            tempUser.setUsername(resultSet.getString(2));
+            tempUser.setEmail(resultSet.getString(3));
+            tempUser.setIs_admin(resultSet.getInt(4));
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get user info");
+        }
+
+        return tempUser;
+    }
+
+
 }
