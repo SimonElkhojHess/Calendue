@@ -6,6 +6,7 @@
     color: black;
     overflow-x:hidden;
 }
+
 .navbar
 {
     display: grid;
@@ -58,6 +59,8 @@
     grid-column: 12/12;
     padding-top:10px;
 }
+
+
 
 
 
