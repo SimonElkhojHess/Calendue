@@ -1,9 +1,13 @@
 package dk.kea.calendue.controller;
 
 import dk.kea.calendue.model.User;
+import dk.kea.calendue.repository.ProjectRepository;
+import dk.kea.calendue.repository.SubprojectRepository;
+import dk.kea.calendue.repository.TaskRepository;
 import dk.kea.calendue.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,10 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
-    UserRepository userRepo;
-    public HomeController(UserRepository userRepo)
+    private UserRepository userRepo;
+    private ProjectRepository projectRepo;
+    private SubprojectRepository subprojectRepo;
+    private TaskRepository taskRepo;
+
+    public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo)
     {
         this.userRepo = userRepo;
+        this.projectRepo = projectRepo;
+        this.subprojectRepo = subprojectRepo;
+        this.taskRepo = taskRepo;
     }
 
     @GetMapping("/login")
@@ -57,5 +68,18 @@ public class HomeController {
         session.removeAttribute("is_admin");
 
         return "redirect:/login";
+    }
+
+    @GetMapping("/homepage")
+    public String showHomepage(HttpSession session, Model model)
+    {
+        /*if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }*/
+
+        model.addAttribute("allprojectlist", projectRepo.getAllProjects());
+
+        return "homepage";
     }
 }
