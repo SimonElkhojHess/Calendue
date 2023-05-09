@@ -10,13 +10,14 @@ import java.sql.*;
 @Repository
 public class UserRepository
 {
-    @Value("spring.datasource.url")
+    @Value("${spring.datasource.url}")
     private String DB_URL;
 
-    @Value("spring.datasource.username")
+    @Value("${spring.datasource.username}")
     private String UID;
 
-    @Value("spring.datasource.password")
+    @Value("${spring.datasource.password}")
+
     private String PWD;
 
     public boolean checkLogin(String username, String password)
