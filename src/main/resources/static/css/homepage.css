@@ -14,6 +14,27 @@
     background-color: #1d3c65;
 }
 
+.side-box-title
+{
+    color: #255188;
+    font-family: "Poiret One", cursive;
+    position: fixed;
+    top: 15%;
+    left: 5.5%;
+}
+
+.side-box-title h3
+{
+    color: #255188;
+}
+
+.create-project-form-box
+{
+    position: fixed;
+    top:30%;
+    left:4.5%;
+}
+
 input[type=text]
 {
     padding:0 8px;
@@ -31,5 +52,5 @@ input[type=text]
 {
     width:10rem;
     height:1.8rem;
-    border-radius: 20% / 50%;
+    border-radius: 10% / 50%;
 }
