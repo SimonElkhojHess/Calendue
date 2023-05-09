@@ -48,11 +48,8 @@ CREATE TABLE `calendue`.`task` (
 
 CREATE TABLE `calendue`.`user` (
                                    `user_id` INT NOT NULL AUTO_INCREMENT,
-<<<<<<< HEAD
                                    `username` VARCHAR(255) NOT NULL,
-=======
                                    `username` VARCHAR(255) NOT NULL UNIQUE,
->>>>>>> 5dd2cb603df9dffa07ec024cc5c8dc5803394730
                                    `password` VARCHAR(60) NOT NULL,
                                    `email` VARCHAR(255) NOT NULL,
                                    `is_admin` INT NOT NULL,

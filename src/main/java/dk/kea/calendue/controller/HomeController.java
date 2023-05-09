@@ -55,4 +55,10 @@ public class HomeController {
 
         return "redirect:/login";
     }
+
+    @GetMapping("/")
+    public String frontpage()
+    {
+        return "frontpage";
+    }
 }

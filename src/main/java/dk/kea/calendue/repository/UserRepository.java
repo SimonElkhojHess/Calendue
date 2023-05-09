@@ -30,6 +30,7 @@ public class UserRepository
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            resultSet.next();
             String savedCode = resultSet.getString(1);
             System.out.println(savedCode);
             if(encoder.matches(password, savedCode))
@@ -86,6 +87,7 @@ public class UserRepository
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            resultSet.next();
             tempUser.setUser_id(resultSet.getInt(1));
             tempUser.setUsername(resultSet.getString(2));
             tempUser.setEmail(resultSet.getString(3));
