@@ -26,6 +26,8 @@ public class HomeController {
         }
         return "redirect:/";
     }
+
+    //First checks for user in table 'user', then tries login method
     @PostMapping("/login")
     public String tryLogin(@RequestParam String username, @RequestParam String password, HttpSession session)
     {
@@ -45,6 +47,7 @@ public class HomeController {
         return "/login";
     }
 
+    //Removes session attributes from token
     @GetMapping("/logout")
     public String tryLogout(HttpSession session)
     {
@@ -54,11 +57,5 @@ public class HomeController {
         session.removeAttribute("is_admin");
 
         return "redirect:/login";
-    }
-
-    @GetMapping("/")
-    public String frontpage()
-    {
-        return "frontpage";
     }
 }

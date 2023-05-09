@@ -18,6 +18,7 @@ public class UserRepository
     @Value("${spring.datasource.password}")
     private String PWD;
 
+    //Compares password with hashed password from DB and logs in if it matches
     public boolean checkLogin(String username, String password)
     {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10); //The strength affects how long it takes to encrypt and decrypt the password. 10 takes about a second for us, so we will leave it there.
@@ -46,6 +47,7 @@ public class UserRepository
         return false;
     }
 
+    //Searches for specific username in database table 'user'
     public boolean checkUsername(String username)
     {
         try
@@ -74,6 +76,7 @@ public class UserRepository
         return true;
     }
 
+    //Returns all but password info for 1 user from database table 'user'
     public User getUserInfo(String username)
     {
         User tempUser = new User();
