@@ -11,9 +11,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav th:insert="fragments/navigation.html :: navbar"> </nav>
+    <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
     <div class="outer-container">
         <div class="login-box">
+            <div class="login-form-image">
+                <img th:src="@{../images/Loginlogo.png}" src="../static/images/Loginlogo.png" alt="loginLogo" style="height:auto; width:100%";>
+                <br>
+                <span>Enter your login details below</span>
+            </div>
             <div class="login-form-box">
                 <form action="/login" method="post">
                     <input id="username-field" name="username" type="text" placeholder="Enter username...">
@@ -30,5 +35,5 @@
     </div>
 
 </body>
-<footer th:insert="fragments/navigation.html :: footer"></footer>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
 </html>

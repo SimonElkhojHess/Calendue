@@ -15,17 +15,18 @@
         <div class="home-button">
             <a href="/"><img class="logo-img" th:src="@{../images/logo.png}" src="../../static/images/logo.png" alt="Homepage" style="width:auto; height: 50px;"></a></div>
 
-        <div class="myprojects-button">
+        <div class="myprojects-button" th:if="${session.username != null}">
             <a href="/myprojects">My Projects</a></div>
 
-        <div class="mytasks-button">
+        <div class="mytasks-button" th:if="${session.username != null}">
             <a href="/mytasks">My Tasks</a></div>
 
-        <div class="resources-button">
+        <div class="resources-button" th:if="${session.username != null}">
             <a href="/resources">Resources</a></div>
 
-        <div class="profile-button">
-            <a href="/profile">Profile</a></div>
+        <div class="profile-button" th:if="${session.username != null}">
+            <a href="/profile">Profile</a>
+        </div>
 </nav>
 </body>
 
