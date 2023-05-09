@@ -5,10 +5,7 @@ import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,5 +95,26 @@ public class ProjectRepository
 
         return pList;
 
+    }
+
+    public void createProject(Project project)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String CREATE_QUERY =
+                    "INSERT INTO calendue.project(project_name) VALUES (?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setString(1, project.getProject_name());
+
+            preparedStatement.executeUpdate();
+
+
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not create new Project");
+        }
     }
 }
