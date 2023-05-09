@@ -4,7 +4,6 @@ import dk.kea.calendue.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import java.sql.*;
 
 @Repository
@@ -17,7 +16,6 @@ public class UserRepository
     private String UID;
 
     @Value("${spring.datasource.password}")
-
     private String PWD;
 
     public boolean checkLogin(String username, String password)
