@@ -16,13 +16,13 @@ import java.util.List;
 @Repository
 public class TaskRepository
 {
-    @Value("$(spring.datasource.url)")
+    @Value("${spring.datasource.url}")
     private String HOSTNAME;
 
-    @Value("$(spring.datasource.username)")
+    @Value("${spring.datasource.username}")
     private String USERNAME;
 
-    @Value("$(spring.datasource.password")
+    @Value("${spring.datasource.password}")
     private String PASSWORD;
 
     //Liste over alle opgaver tilknyttet til et bruger-id

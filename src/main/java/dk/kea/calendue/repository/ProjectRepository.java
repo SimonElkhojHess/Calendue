@@ -15,13 +15,13 @@ import java.util.List;
 @Repository
 public class ProjectRepository
 {
-    @Value("$(spring.datasource.url)")
+    @Value("${spring.datasource.url}")
     private String HOSTNAME;
 
-    @Value("$(spring.datasource.username)")
+    @Value("${spring.datasource.username}")
     private String USERNAME;
 
-    @Value("$(spring.datasource.password")
+    @Value("${spring.datasource.password}")
     private String PASSWORD;
 
     public List<Project> getAllProjects()
