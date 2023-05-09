@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" th:href="@{../css/homepage.css}">
     <link rel="stylesheet" th:href="@{../css/navbar.css}">
     <link rel="stylesheet" th:href="@{../css/footer.css}">
-    <link rel="stylesheet" th:href="@{../css/login.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
@@ -13,5 +13,22 @@
 <body>
     <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 
+   <div class="outer-container">
+    <div class="create-project">
+        <div class="side-box-title">
+            <h3>Welcome back <span th:text="${session.username}">USERNAME</span></h3>
+        </div>
+        <div class="create-project-form-box">
+            <form action="/createproject" method="post">
+                <input id="project-name-field" name="project-name" type="text" placeholder="Enter project name...">
+                <br>
+                <input id="create-project-button" type="submit" value="Create new project">
+            </form>
+        </div>
+    </div>
+
+   </div>
+
 </body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
 </html>
