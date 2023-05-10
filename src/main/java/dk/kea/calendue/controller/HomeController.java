@@ -92,11 +92,9 @@ public class HomeController {
         {
             return "redirect:/login";
         }*/
-
-        Project project = projectRepo.getOneProject(project_id);
-        model.addAttribute("project", project);
+        model.addAttribute("project", projectRepo.getOneProject(project_id));
         model.addAttribute("subprojects", subprojectRepo.getAllSubprojects(project_id));
-
+        model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
         return "subprojects";
     }
 }

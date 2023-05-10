@@ -23,7 +23,10 @@
     <a href="/editproject" id="edit-project-button"><div>Edit project</div></a>
     <div id="assignto-project-button">Assign</div>
     <a href="/createsubproject" id="create-subproject-button"><div>Create subproject</div></a>
-    <div id="project-participants">
+    <div id="project-participants" th:each="user : ${assignedusers}">
+        <div th:text="${user.fullname}"></div>
+        <div th:text="${user.email}"></div>
+    </div>
       <!--<div>th:each ting med users</div>-->
       Participants in the project
     </div>

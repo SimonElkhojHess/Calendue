@@ -31,6 +31,8 @@
 
 #project-name
 {
+    font-size: 3rem;
+    color:white;
     grid-column:1/4;
     grid-row: 1/1;
 }
