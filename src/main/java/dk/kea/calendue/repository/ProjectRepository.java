@@ -99,4 +99,31 @@ public class ProjectRepository
         return pList;
 
     }
+
+    public Project getOneProject(int projectID)
+    {
+        Project tempProject = new Project();
+        try {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT * FROM calendue.project WHERE project_id =" + projectID;
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            resultSet.next();
+
+            tempProject.setProject_id(projectID);
+            tempProject.setProject_name(resultSet.getString(2));
+            tempProject.setProject_description(resultSet.getString(3));
+            tempProject.setProject_start(resultSet.getString(4));
+            tempProject.setProject_deadline(resultSet.getString(5));
+            tempProject.setProject_hours(resultSet.getInt(6));
+            tempProject.setProject_status(resultSet.getString(7));
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get specific project info");
+        }
+         return tempProject;
+    }
 }

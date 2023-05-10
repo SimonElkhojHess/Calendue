@@ -48,11 +48,11 @@ CREATE TABLE `calendue`.`task` (
 
 CREATE TABLE `calendue`.`user` (
                                    `user_id` INT NOT NULL AUTO_INCREMENT,
-                                   `username` VARCHAR(255) NOT NULL,
                                    `username` VARCHAR(255) NOT NULL UNIQUE,
                                    `password` VARCHAR(60) NOT NULL,
                                    `email` VARCHAR(255) NOT NULL,
                                    `is_admin` INT NOT NULL,
+                                   `full_name` VARCHAR(255) NOT NULL,
                                    PRIMARY KEY (`user_id`));
 
 CREATE TABLE `calendue`.`linkedtask` (

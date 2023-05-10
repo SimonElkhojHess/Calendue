@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>This project</title>
+  <link rel="stylesheet" th:href="@{../css/navbar.css}">
+  <link rel="stylesheet" th:href="@{../css/footer.css}">
+  <link rel="stylesheet" th:href="@{../css/subprojects.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+<div class="outer-box">
+  <div class="grid-box">
+    <div id="project-name" th:text="${project.project_name}">Project name</div>
+    <div id="project-desc" th:text="${project.project_description}">Project describtion</div>
+    <div id="project-start" th:text="${project.project_start}">Start date</div>
+    <div id="project-deadline" th:text="${project.project_deadline}">Deadline</div>
+    <div id="project-status" th:text="${project.project_status}">Status</div>
+    <div id="project-hours" th:text="${project.project_hours}">Hours</div>
+    <a href="/editproject" id="edit-project-button"><div>Edit project</div></a>
+    <div id="assignto-project-button">Assign</div>
+    <a href="/createsubproject" id="create-subproject-button"><div>Create subproject</div></a>
+    <div id="project-participants">
+      <!--<div>th:each ting med users</div>-->
+      Participants in the project
+    </div>
+
+  </div>
+
+  <div class="subproject-box">
+  </div>
+</div>
+
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+</html>

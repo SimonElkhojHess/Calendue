@@ -1,6 +1,7 @@
 package dk.kea.calendue.repository;
 
 import dk.kea.calendue.model.User;
+import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +26,7 @@ public class UserRepository
 
         try
         {
-            Connection connection = DriverManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
             String SEARCH_QUERY = "SELECT password FROM calendue.user WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
             preparedStatement.setString(1, username);
