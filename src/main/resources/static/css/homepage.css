@@ -8,6 +8,11 @@
     display:flex;
     align-content: space-evenly;
 }
+
+.fragment-size
+{
+    width: 75%;
+}
 .create-project
 {
     width:25%;
@@ -16,16 +21,16 @@
 
 .side-box-title
 {
-    color: #255188;
+/*color: #255188;*/
     font-family: "Poiret One", cursive;
     position: fixed;
-    top: 15%;
+    top: 20%;
     left: 5.5%;
 }
 
 .side-box-title h3
 {
-    color: #255188;
+    color: aliceblue;
 }
 
 .create-project-form-box

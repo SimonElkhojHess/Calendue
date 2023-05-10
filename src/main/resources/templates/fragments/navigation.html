@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{../../css/navbar.css}" href="../../static/css/navbar.css">
     <link rel="stylesheet" th:href="@{../../css/footer.css}" href="../../static/css/footer.css">
+    <link rel="stylesheet" th:href="@{../css/projectlist.css}" href="../static/css/projectlist.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
@@ -29,8 +30,46 @@
         </div>
 </nav>
 
-<div class="project-list" th:fragment="project-list">
 
+<div class="projects-container" th:fragment="projects-container">
+           <div class="project-header">
+               <div class="table-names">
+                   <div class="name-box">
+                       <span>Project name</span>
+                   </div>
+                   <div class="start-date-box">
+                       <span>Start date</span>
+                   </div>
+                   <div class="deadline-box">
+                       <span>Deadline</span>
+                   </div>
+               </div>
+
+           </div>
+               <div class="project-box" th:if="${session.currentpage == '/homepage'}" th:each="project : ${allprojectlist}">
+                   <div class="project-title">
+                       <span th:text="${project.getProject_name}">*Project from database*</span>
+                   </div>
+                   <div class="project-start">
+                       <span th:text="${project.getProject_start}">*Project from database*</span>
+
+                   </div>
+                   <div class="project-deadline">
+                       <span th:text="${project.getProject_deadline}">*Project from database*</span>
+                   </div>
+               </div>
+    <div class="project-box" th:if="${session.currentpage == '/myprojects'}" th:each="project : ${allmyprojectlist}">
+        <div class="project-title">
+            <span th:text="${project.getProject_name}">*Project from database*</span>
+        </div>
+        <div class="project-start">
+            <span th:text="${project.getProject_start}">*Project from database*</span>
+
+        </div>
+        <div class="project-deadline">
+            <span th:text="${project.getProject_deadline}">*Project from database*</span>
+        </div>
+    </div>
 </div>
 
 </body>

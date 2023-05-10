@@ -79,6 +79,7 @@ public class HomeController {
         }*/
 
         model.addAttribute("allprojectlist", projectRepo.getAllProjects());
+        session.setAttribute("currentpage", "/homepage");
 
         return "homepage";
     }

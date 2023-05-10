@@ -1,0 +1,3 @@
+INSERT INTO `calendue`.`project` (`project_id`, `project_name`, `project_start`, `project_deadline`) VALUES ('1', 'test1', '01-01-2021', '02-02-2024');
+INSERT INTO `calendue`.`project` (`project_id`, `project_name`, `project_description`, `project_start`, `project_deadline`, `project_hours`, `project_status`) VALUES ('2', 'test2', 'this is a good project', '03-03-2023', '12-12-2026', '5', '0');
+INSERT INTO `calendue`.`project` (`project_id`, `project_name`) VALUES ('3', 'test3');

@@ -1,0 +1,94 @@
+.projects-container
+{
+    font-family: "Poiret One";
+    height:auto;
+    /*width: 120%;*/
+    font-size:30px;
+    padding-top:1px;
+    padding-bottom:30px;
+}
+
+
+.table-names
+{
+    display:grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    height:7%;
+    width:97.5%;
+    border-radius:16px;
+    margin:1% 0 3% 1%;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    background-color: #1d3c65;
+    box-shadow: 5px 10px 5px #d3d3d3;
+
+
+}
+
+.table-names span
+{
+    color: aliceblue;
+}
+.name-box
+{
+    grid-column: 2/7;
+    text-align: left;
+}
+
+.start-date-box
+{
+    grid-column: 7/9;
+}
+
+.deadline-box
+{
+    grid-column: 9/13;
+}
+
+.project-box
+{
+    display:grid;
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+    overflow: hidden;
+    height:25%;
+    width:97.5%;
+    border:1px solid black;
+    border-radius:16px;
+    box-shadow: 5px 10px 5px #d3d3d3;
+    margin:1% 0 2% 1%;
+    position: relative;
+    text-align: center;
+    transition: transform .2s;
+
+}
+
+.project-box:hover
+{
+    transform: scale(1.5);
+}
+
+.project-title
+{
+    grid-column: 2/13;
+    text-align: left;
+}
+
+.project-start
+{
+    grid-column: 13/19;
+    text-align: left;
+    font-size: 20px;
+    align-self: center;
+}
+
+.project-deadline
+{
+    grid-column: 19/25;
+    text-align: left;
+    font-size: 20px;
+    align-self: center;
+}
+
+
+
