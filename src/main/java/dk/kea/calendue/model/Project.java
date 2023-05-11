@@ -1,5 +1,9 @@
 package dk.kea.calendue.model;
 
+import dk.kea.calendue.utility.ConnectionManager;
+
+import java.sql.Connection;
+
 public class Project
 {
     private int project_id;
