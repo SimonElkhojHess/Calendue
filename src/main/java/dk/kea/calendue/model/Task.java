@@ -28,6 +28,96 @@ public class Task
         this.task_status = task_status;
     }
 
+    public int getTask_id()
+    {
+        return task_id;
+    }
+
+    public void setTask_id(int task_id)
+    {
+        this.task_id = task_id;
+    }
+
+    public int getSubproject_id()
+    {
+        return subproject_id;
+    }
+
+    public void setSubproject_id(int subproject_id)
+    {
+        this.subproject_id = subproject_id;
+    }
+
+    public String getTask_name()
+    {
+        return task_name;
+    }
+
+    public void setTask_name(String task_name)
+    {
+        this.task_name = task_name;
+    }
+
+    public String getTask_description()
+    {
+        return task_description;
+    }
+
+    public void setTask_description(String task_description)
+    {
+        this.task_description = task_description;
+    }
+
+    public String getTask_comment()
+    {
+        return task_comment;
+    }
+
+    public void setTask_comment(String task_comment)
+    {
+        this.task_comment = task_comment;
+    }
+
+    public String getTask_start()
+    {
+        return task_start;
+    }
+
+    public void setTask_start(String task_start)
+    {
+        this.task_start = task_start;
+    }
+
+    public int getTask_hours()
+    {
+        return task_hours;
+    }
+
+    public void setTask_hours(int task_hours)
+    {
+        this.task_hours = task_hours;
+    }
+
+    public int getTask_priority()
+    {
+        return task_priority;
+    }
+
+    public void setTask_priority(int task_priority)
+    {
+        this.task_priority = task_priority;
+    }
+
+    public String getTask_status()
+    {
+        return task_status;
+    }
+
+    public void setTask_status(String task_status)
+    {
+        this.task_status = task_status;
+    }
+
     @Override
     public String toString()
     {

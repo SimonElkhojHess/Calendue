@@ -86,7 +86,7 @@ public class HomeController {
     }
 
     @GetMapping("/project/{id}")
-    public String showSubproject(@PathVariable("id")int project_id, HttpSession session, Model model)
+    public String showProject(@PathVariable("id")int project_id, HttpSession session, Model model)
     {
         /*if (session.getAttribute("user_id") == null)
         {
@@ -95,6 +95,7 @@ public class HomeController {
         model.addAttribute("project", projectRepo.getOneProject(project_id));
         model.addAttribute("subprojects", subprojectRepo.getAllSubprojects(project_id));
         model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
+        model.addAttribute("all_users", userRepo.getAllUsers());
         return "subprojects";
     }
 }

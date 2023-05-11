@@ -15,25 +15,68 @@
 <div class="outer-box">
   <div class="grid-box">
     <div id="project-name" th:text="${project.project_name}">Project name</div>
-    <div id="project-desc" th:text="${project.project_description}">Project describtion</div>
-    <div id="project-start" th:text="${project.project_start}">Start date</div>
-    <div id="project-deadline" th:text="${project.project_deadline}">Deadline</div>
-    <div id="project-status" th:text="${project.project_status}">Status</div>
-    <div id="project-hours" th:text="${project.project_hours}">Hours</div>
-    <a href="/editproject" id="edit-project-button"><div>Edit project</div></a>
-    <div id="assignto-project-button">Assign</div>
-    <a href="/createsubproject" id="create-subproject-button"><div>Create subproject</div></a>
-    <div id="project-participants" th:each="user : ${assignedusers}">
-        <div th:text="${user.fullname}"></div>
-        <div th:text="${user.email}"></div>
-    </div>
-      <!--<div>th:each ting med users</div>-->
-      Participants in the project
+    <div id="project-desc" th:text="${project.project_description}">Project description</div>
+
+    <div id="project-start">
+      <span id="start-headline">Start: <br></span>
+      <span id="start-date" th:text="${project.project_start}"></span>
     </div>
 
+    <div id="project-deadline">
+      <span id="deadline-headline">Deadline: <br></span>
+      <span id="deadline-date" th:text="${project.project_deadline}"></span>
+    </div>
+
+    <div id="project-status">
+      <span id="status-headline">Status: <br></span>
+      <span id="status-current" th:text="${project.project_status}"></span>
+    </div>
+
+
+    <div id="project-hours">
+      <span id="manhours-headline">Total man-hours: <br></span>
+      <span id="manhours-total" th:text="${project.project_hours}"></span>
+    </div>
+    <a href="/editproject" th:href="@{'/editproject/'+${project.project_id}}" id="edit-project-button"><div>Edit project</div></a>
+    <div id="assign-form">
+      <form action="/assignproject" method="post">
+        <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail...">
+        <datalist id="email-box">
+             <option th:each="user : ${all_users}" th:value="${user.email}">
+             </option>
+        </datalist>
+        <label for="assign-roles">Assign a role:</label>
+        <select id="assign-roles" name="role">
+          <option value="Developer" selected>Developer</option>
+          <option value="Project Leader">Project Leader</option>
+        </select>
+        <input id="assign-project-button" type="submit" value="Assign">
+      </form>
+    </div>
+    <a href="/createsubproject" id="create-subproject-button"><div>Create subproject</div></a>
+    <div id="project-participants">
+      <div id="assignment-object" th:each="user : ${assignedusers}">
+        <div id="assigned-user-fullname" th:text="${user.full_name}"></div>
+        <div id="assigned-user-role" th:text="${user.role}"></div>
+        <div id="assigned-user-email" th:text="${user.email}"></div>
+      </div>
+    </div>
+    <div id="participants-headline">Participants in the project</div>
+    </div>
+
+ <div class="subproject-outerbox">
+  <div class="subproject-element" th:each="subproject : ${subprojects}">
+    <a href="/subproject" th:href="@{'/subproject/'+${subproject.getSubproject_id}}">
+      <div id="subproject-name" th:text="${subproject.subproject_name}"></div>
+    </a>
+      <div id="subproject_describtion-title">Description:</div>
+      <div id="subproject_description" th:text="${subproject.subproject_description}"></div>
+      <div id="subproject_deadline-title">Deadline:</div>
+      <div id="subproject_deadline" th:text="${subproject.subproject_deadline}"></div>
+      <div id="subproject_status-title">Status:</div>
+      <div id="subproject_status" th:text="${subproject.subproject_status}"></div>
   </div>
 
-  <div class="subproject-box">
   </div>
 </div>
 
