@@ -52,41 +52,43 @@
     grid-template-columns: repeat(24, minmax(0, 1fr));
     overflow: hidden;
     height:25%;
-    width:97.5%;
-    border:1px solid black;
+    width:93%;
+    border:1px solid #1d3c65;
     border-radius:16px;
     box-shadow: 5px 10px 5px #d3d3d3;
-    margin:1% 0 2% 1%;
+    margin:1% 0 2% 3%;
     position: relative;
     text-align: center;
     transition: transform .2s;
+    font-family: Calibri Light;
+    font-size: 25px;
+    padding: 3px 0px 3px 0px;
+
 
 }
 
 .project-box:hover
 {
-    transform: scale(1.5);
+    transform: scale(1.05);
 }
 
 .project-title
 {
-    grid-column: 2/13;
+    grid-column: 2/14;
     text-align: left;
 }
 
 .project-start
 {
-    grid-column: 13/19;
+    grid-column: 14/20;
     text-align: left;
-    font-size: 20px;
     align-self: center;
 }
 
 .project-deadline
 {
-    grid-column: 19/25;
+    grid-column: 20/25;
     text-align: left;
-    font-size: 20px;
     align-self: center;
 }
 

@@ -14,6 +14,8 @@ public class Project
     private int project_hours;
     private String project_status;
 
+    public Project(){};
+
     public Project(int project_id, String project_name, String project_description, String project_start, String project_deadline, int project_hours, String project_status)
     {
         this.project_id = project_id;
@@ -24,6 +26,7 @@ public class Project
         this.project_hours = project_hours;
         this.project_status = project_status;
     }
+
 
     @Override
     public String toString()
