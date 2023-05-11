@@ -47,7 +47,10 @@
 
            </div>
 
-               <div class="project-box" th:if="${session.currentpage == '/homepage'}" th:each="project : ${allprojectlist}">
+            <div th:if="${session.currentpage == '/homepage'}" th:each="project : ${allprojectlist}">
+                <a href="/project" th:href="@{'/project/'+${project.getProject_id}}">
+                <div class="project-box" >
+
                    <div class="project-title">
                        <span th:text="${project.getProject_name}">*Project from database*</span>
                    </div>
@@ -58,9 +61,14 @@
                    <div class="project-deadline">
                        <span th:text="${project.getProject_deadline}">*Project from database*</span>
                    </div>
-               </div>
 
-    <div class="project-box" th:if="${session.currentpage == '/myprojects'}" th:each="project : ${allmyprojectlist}">
+               </div>
+                </a>
+            </div>
+
+    <div th:if="${session.currentpage == '/myprojects'}" th:each="project : ${allmyprojectlist}">
+        <a href="/project" th:href="@{'/project/'+${project.getProject_id}}">
+    <div class="project-box" >
         <div class="project-title">
             <span th:text="${project.getProject_name}">*Project from database*</span>
         </div>
@@ -72,8 +80,10 @@
             <span th:text="${project.getProject_deadline}">*Project from database*</span>
         </div>
     </div>
-</div>
+        </a>
+    </div>
 
+</div>
 </body>
 
 <footer th:fragment="footer">
