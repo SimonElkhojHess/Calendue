@@ -117,4 +117,30 @@ public class ProjectRepository
             System.out.println("Could not create new Project");
         }
     }
+
+    public int getMaxProjectId()
+    {
+        int tempProjectID = -99;
+            try{
+        Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+        Statement statement = connection.createStatement();
+        final String SQL_QUERY = "SELECT MAX(project_id) FROM calendue.project";
+
+        ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+        if(resultSet.next())
+        {
+            tempProjectID = resultSet.getInt(1);
+        }
+
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not find max project id ");
+        }
+
+            return tempProjectID;
+    }
+
+
 }

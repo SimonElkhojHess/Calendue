@@ -1,10 +1,8 @@
 package dk.kea.calendue.controller;
 
+import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.User;
-import dk.kea.calendue.repository.ProjectRepository;
-import dk.kea.calendue.repository.SubprojectRepository;
-import dk.kea.calendue.repository.TaskRepository;
-import dk.kea.calendue.repository.UserRepository;
+import dk.kea.calendue.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +17,15 @@ public class HomeController {
     private ProjectRepository projectRepo;
     private SubprojectRepository subprojectRepo;
     private TaskRepository taskRepo;
+    private Project_userRepository project_userRepo;
 
-    public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo)
+    public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo, Project_userRepository project_userRepo)
     {
         this.userRepo = userRepo;
         this.projectRepo = projectRepo;
         this.subprojectRepo = subprojectRepo;
         this.taskRepo = taskRepo;
+        this.project_userRepo = project_userRepo;
     }
 
     @GetMapping("/login")
@@ -35,7 +35,7 @@ public class HomeController {
         {
             return "/login";
         }
-        return "redirect:/";
+        return "redirect:/homepage";
     }
 
     //First checks for user in table 'user', then tries login method
@@ -51,7 +51,7 @@ public class HomeController {
                session.setAttribute("username", user.getUsername());
                session.setAttribute("email", user.getEmail());
                session.setAttribute("is_admin", user.getIs_admin());
-               return "redirect:/";
+               return "redirect:/homepage";
            }
         }
         session.setAttribute("wronglogin", true);
@@ -73,14 +73,34 @@ public class HomeController {
     @GetMapping("/homepage")
     public String showHomepage(HttpSession session, Model model)
     {
-        /*if(session.getAttribute("user_id") == null)
+        if(session.getAttribute("user_id") == null)
         {
             return "redirect:/login";
-        }*/
+        }
 
         model.addAttribute("allprojectlist", projectRepo.getAllProjects());
         session.setAttribute("currentpage", "/homepage");
 
         return "homepage";
     }
+
+    @PostMapping("/createproject")
+    public String createProject(@RequestParam("project-name") String project_name, HttpSession session)
+    {
+        Project tempProject = new Project();
+
+        tempProject.setProject_name(project_name);
+
+        projectRepo.createProject(tempProject);
+
+        int tempUserID = (int) session.getAttribute("user_id");
+
+        int tempProjectID = projectRepo.getMaxProjectId();
+
+        project_userRepo.setRole(tempProjectID, tempUserID, "Project leader");
+
+
+        return "redirect:/project/" + tempProjectID;
+    }
+
 }

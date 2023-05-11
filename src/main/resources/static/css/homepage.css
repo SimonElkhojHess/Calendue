@@ -33,6 +33,10 @@
     color: aliceblue;
 }
 
+.side-box-title h3 span
+{
+    color: aliceblue;
+}
 .create-project-form-box
 {
     position: fixed;
