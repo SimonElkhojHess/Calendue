@@ -1,13 +1,13 @@
 .projects-container
 {
     font-family: "Poiret One";
-    height:auto;
+    height:100vh;
     /*width: 120%;*/
     font-size:30px;
     padding-top:1px;
     padding-bottom:30px;
+    overflow: hidden;
 }
-
 
 .table-names
 {
@@ -93,6 +93,8 @@
 }
 
 a{ text-decoration: none}
+
+
 
 
 

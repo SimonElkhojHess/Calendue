@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My projects</title>
+
+    <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+    <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+    <link rel="stylesheet" th:href="@{../css/projectlist.css}" href="../static/css/projectlist.css">
+    <link rel="stylesheet" th:href="@{../css/myprojects.css}" href="../static/css/myprojects.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+
+
+<div class="outer-box">
+<div class="fragment-size" th:insert="~{fragments/navigation.html :: projects-container}"></div>
+</div>
+
+
+
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+
+</html>
