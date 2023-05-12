@@ -127,4 +127,28 @@ public class ProjectRepository
         }
          return tempProject;
     }
+
+    public String getUserProjectAssignment(int user_id, int project_id)
+    {
+        String userAssignment = "none";
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT role " +
+                                        "FROM calendue.project_user " +
+                                            "WHERE user_id = "+user_id+
+                                                " AND project_id = "+project_id;
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            if(resultSet.next())
+            {
+                userAssignment = resultSet.getString(1);
+            }
+        }
+        catch(SQLException e)
+        {
+
+        }
+        return userAssignment;
+    }
 }

@@ -136,6 +136,7 @@
     border-radius:10px 10px 10px 10px;
     color:black;
     cursor:pointer;
+    z-index:10;
 }
 
 #assign-form
@@ -214,6 +215,7 @@ input[type=text]
     height:2.5rem;
     border-radius: 10px 10px 10px 10px;
     background-color: #8ED0AB;
+    box-shadow: 2px 4px 2px #727391;
 }
 
 #assigned-user-fullname
@@ -254,7 +256,6 @@ input[type=text]
 }
 .subproject-outerbox
 {
-    display:flex;
     width:100%;
     height:auto;
     min-height: 20rem;
@@ -264,19 +265,26 @@ input[type=text]
 {
     grid-column:1/3;
     grid-row:1/4;
+
 }
 .subproject-element
 {
     display:grid;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: repeat(10,1fr);
-    margin: 10px 0 20px 10px;
+    margin: 15px 15px 15px 15px;
     float:left;
     border:2px solid blue;
     height:25rem;
     width:20rem;
     font-size:18px;
+    background-color:#8ED0AB;
     border-radius:10px 10px 10px 10px;
+    box-shadow: 10px 10px 5px #878484;
+}
+.subproject-element:hover
+{
+    transform: scale(1.02);
 }
 #subproject-name
 {

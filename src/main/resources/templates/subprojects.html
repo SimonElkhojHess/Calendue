@@ -37,12 +37,12 @@
       <span id="manhours-headline">Total man-hours: <br></span>
       <span id="manhours-total" th:text="${project.project_hours}"></span>
     </div>
-    <a href="/editproject" th:href="@{'/editproject/'+${project.project_id}}" id="edit-project-button"><div>Edit project</div></a>
-    <div id="assign-form">
+    <a id="edit-project-button" href="/editproject" th:href="@{'/editproject/'+${project.project_id}}" th:if="${session.project_role == 'Project Leader'}"><div>Edit project</div></a>
+    <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
       <form action="/assignproject" method="post">
         <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail...">
         <datalist id="email-box" size="5">
-             <option th:each="user : ${all_users}" th:value="${user.email}">
+             <option th:each="users : ${all_users}" th:value="${users.email}">
              </option>
         </datalist>
         <label for="assign-roles">Assign a role:</label>

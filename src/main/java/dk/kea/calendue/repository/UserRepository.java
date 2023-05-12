@@ -129,8 +129,10 @@ public class UserRepository
             Statement statement = connection.createStatement();
             final String SQL_QUERY =
                             "SELECT u.user_id, u.username, u.email, u.is_admin, u.full_name, p.role " +
-                                "FROM calendue.user u JOIN calendue.project_user p " +
-                                    "WHERE p.project_id = "+projectID+ " ORDER BY p.role DESC, u.full_name ASC";
+                                "FROM calendue.project_user p JOIN calendue.user u " +
+                                    "WHERE p.project_id = "+projectID+
+                                        " AND p.user_id = u.user_id"+
+                                            " ORDER BY p.role DESC, u.full_name ASC";
 
 
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
