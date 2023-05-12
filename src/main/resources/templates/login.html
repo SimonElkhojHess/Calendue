@@ -19,8 +19,11 @@
                 <br>
                 <span>Enter your login details below</span>
             </div>
+
             <div class="login-form-box">
+                <a style="color:#fa2727; font-weight: bolder; margin-left: 8px;" th:if="${session.wronglogin == true}">Incorrect username or password </a>
                 <form action="/login" method="post">
+                    <br>
                     <input id="username-field" name="username" type="text" placeholder="Enter username...">
                     <br>
                     <input id="password-field" name="password" type="password" placeholder="Enter password...">

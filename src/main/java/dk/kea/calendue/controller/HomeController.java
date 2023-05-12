@@ -41,8 +41,10 @@ public class HomeController {
     {
         if(session.getAttribute("user_id") == null)
         {
+            session.setAttribute("wronglogin", false);
             return "/login";
         }
+
         return "redirect:/homepage";
     }
 

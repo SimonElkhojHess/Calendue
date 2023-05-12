@@ -38,13 +38,16 @@ input[type=text]
 {
     padding:0 8px;
 }
+input[type=password]
+{
+    padding:0 8px;
+}
 #username-field
 {
     height:1.7rem;
     width:14rem;
     border-radius: 5% / 50%;
 }
-
 #password-field
 {
     height:1.7rem;
