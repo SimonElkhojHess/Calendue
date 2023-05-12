@@ -23,6 +23,11 @@ public class Project
     }
     public Project(){}
 
+    public Project(String project_name)
+    {
+        this.project_name = project_name;
+    }
+
     public int getProject_id() {
         return project_id;
     }
