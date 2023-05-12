@@ -66,10 +66,10 @@ public class ProjectRepository
             Statement statement = connection.createStatement();
             final String SQL_QUERY =
                     "SELECT * FROM calendue.project " +
-                    "WHERE project_id IN" +
-                        ("SELECT project_id " +
+                    "WHERE project_id IN " +
+                        "(SELECT project_id " +
                          "FROM calendue.project_user " +
-                         "WHERE user_id =" + user_id);
+                         "WHERE user_id = " + user_id + ")";
 
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
 

@@ -88,12 +88,7 @@ public class HomeController {
 
         model.addAttribute("allprojectlist", projectRepo.getAllProjects());
         session.setAttribute("currentpage", "/homepage");
-        /*if(session.getAttribute("user_id") == null)
-        {
-            return "redirect:/login";
-        }*/
 
-        model.addAttribute("allprojectlist", projectRepo.getAllProjects());
 
         return "homepage";
     }
@@ -138,12 +133,26 @@ public class HomeController {
     @PostMapping("/createsubproject")
     public String createSubproject(@RequestParam("subprojectName")String subprojectName, @RequestParam("projectId")int projectId,HttpSession session)
     {
-        if(subprojectName.equals("")) //Stops null subproject names
+        if (subprojectName.equals("")) //Stops null subproject names
         {
-            return "redirect:/project/"+projectId;
+            return "redirect:/project/" + projectId;
         }
         subprojectRepo.createSubProject(projectId, subprojectName);
         int subprojectId = subprojectRepo.getMaxSubprojectId();
-        return "redirect:/subproject/"+subprojectId;
+        return "redirect:/subproject/" + subprojectId;
+    }
+    @GetMapping("/myprojects")
+    public String showMyprojects(HttpSession session, Model model)
+    {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
+
+        int user_id = (int) session.getAttribute("user_id");
+        model.addAttribute("allmyprojectlist", projectRepo.getAllMyProjects(user_id));
+        session.setAttribute("currentpage", "/myprojects");
+
+        return "myprojects";
     }
 }
