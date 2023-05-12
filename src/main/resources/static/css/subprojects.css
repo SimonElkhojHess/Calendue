@@ -369,26 +369,3 @@ input[type=text]
     background-color: #a2e9e9;
 }
 
-
-
-/* width */
-::-webkit-scrollbar {
-    width: 8px;
-}
-/* Track */
-::-webkit-scrollbar-track {
-    background: #A2E9E9;
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 8px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #588585;
-    border-radius: 8px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #365252;
-}
