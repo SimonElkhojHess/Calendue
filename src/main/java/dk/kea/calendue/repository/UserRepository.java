@@ -93,7 +93,7 @@ public class UserRepository
         try
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
-            String SEARCH_QUERY = "SELECT user_id, username, email, is_admin, full_name" +
+            String SEARCH_QUERY = "SELECT user_id, username, email, is_admin, full_name " +
                                         "FROM calendue.user" +
                                             " WHERE username = ?";
 
