@@ -41,7 +41,7 @@
     <div id="assign-form">
       <form action="/assignproject" method="post">
         <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail...">
-        <datalist id="email-box">
+        <datalist id="email-box" size="5">
              <option th:each="user : ${all_users}" th:value="${user.email}">
              </option>
         </datalist>
@@ -76,7 +76,6 @@
       <div id="subproject_status-title">Status:</div>
       <div id="subproject_status" th:text="${subproject.subproject_status}"></div>
   </div>
-
   </div>
 </div>
 
