@@ -6,6 +6,8 @@ public class User
     String username;
     String email;
     int is_admin;
+    String full_name;
+    String role;
 
     public User(int user_id, String username, String email, int is_admin)
     {
@@ -15,7 +17,33 @@ public class User
         this.is_admin = is_admin;
     }
 
+    public User(int user_id, String username, String email, int is_admin, String full_name, String role) {
+        this.user_id = user_id;
+        this.username = username;
+        this.email = email;
+        this.is_admin = is_admin;
+        this.full_name = full_name;
+        this.role = role;
+    }
+
     public User(){}
+
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public int getUser_id()
     {
         return user_id;
@@ -57,13 +85,14 @@ public class User
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" +
                 "user_id=" + user_id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", is_admin='" + is_admin + '\'' +
+                ", is_admin=" + is_admin +
+                ", full_name='" + full_name + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

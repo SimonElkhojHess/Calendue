@@ -21,6 +21,76 @@ public class Subproject
         this.subproject_status = subproject_status;
     }
 
+    public int getSubproject_id()
+    {
+        return subproject_id;
+    }
+
+    public void setSubproject_id(int subproject_id)
+    {
+        this.subproject_id = subproject_id;
+    }
+
+    public int getProject_id()
+    {
+        return project_id;
+    }
+
+    public void setProject_id(int project_id)
+    {
+        this.project_id = project_id;
+    }
+
+    public String getSubproject_name()
+    {
+        return subproject_name;
+    }
+
+    public void setSubproject_name(String subproject_name)
+    {
+        this.subproject_name = subproject_name;
+    }
+
+    public String getSubproject_description()
+    {
+        return subproject_description;
+    }
+
+    public void setSubproject_description(String subproject_description)
+    {
+        this.subproject_description = subproject_description;
+    }
+
+    public String getSubproject_deadline()
+    {
+        return subproject_deadline;
+    }
+
+    public void setSubproject_deadline(String subproject_deadline)
+    {
+        this.subproject_deadline = subproject_deadline;
+    }
+
+    public int getSubproject_hours()
+    {
+        return subproject_hours;
+    }
+
+    public void setSubproject_hours(int subproject_hours)
+    {
+        this.subproject_hours = subproject_hours;
+    }
+
+    public String getSubproject_status()
+    {
+        return subproject_status;
+    }
+
+    public void setSubproject_status(String subproject_status)
+    {
+        this.subproject_status = subproject_status;
+    }
+
     @Override
     public String toString()
     {
@@ -34,4 +104,5 @@ public class Subproject
                 ", subproject_status='" + subproject_status + '\'' +
                 '}';
     }
+
 }

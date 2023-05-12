@@ -52,6 +52,7 @@ CREATE TABLE `calendue`.`user` (
                                    `password` VARCHAR(60) NOT NULL,
                                    `email` VARCHAR(255) NOT NULL,
                                    `is_admin` INT NOT NULL,
+                                   `full_name` VARCHAR(255) NOT NULL,
                                    PRIMARY KEY (`user_id`));
 
 CREATE TABLE `calendue`.`linkedtask` (

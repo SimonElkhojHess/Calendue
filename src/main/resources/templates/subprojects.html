@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>This project</title>
+  <link rel="stylesheet" th:href="@{../css/navbar.css}">
+  <link rel="stylesheet" th:href="@{../css/footer.css}">
+  <link rel="stylesheet" th:href="@{../css/subprojects.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+<div class="outer-box">
+  <div class="grid-box">
+    <div id="project-name" th:text="${project.project_name}">Project name</div>
+    <div id="project-desc" th:text="${project.project_description}">Project description</div>
+
+    <div id="project-start">
+      <span id="start-headline">Start: <br></span>
+      <span id="start-date" th:text="${project.project_start}"></span>
+    </div>
+
+    <div id="project-deadline">
+      <span id="deadline-headline">Deadline: <br></span>
+      <span id="deadline-date" th:text="${project.project_deadline}"></span>
+    </div>
+
+    <div id="project-status">
+      <span id="status-headline">Status: <br></span>
+      <span id="status-current" th:text="${project.project_status}"></span>
+    </div>
+
+
+    <div id="project-hours">
+      <span id="manhours-headline">Total man-hours: <br></span>
+      <span id="manhours-total" th:text="${project.project_hours}"></span>
+    </div>
+    <a id="edit-project-button" href="/editproject" th:href="@{'/editproject/'+${project.project_id}}" th:if="${session.project_role == 'Project Leader'}"><div>Edit project</div></a>
+    <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
+      <form action="/assignproject" method="post">
+        <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail...">
+        <datalist id="email-box" size="5">
+             <option th:each="users : ${all_users}" th:value="${users.email}">
+             </option>
+        </datalist>
+        <label for="assign-roles">Assign a role:</label>
+        <select id="assign-roles" name="role">
+          <option value="Developer" selected>Developer</option>
+          <option value="Project Leader">Project Leader</option>
+        </select>
+        <input id="assign-project-button" type="submit" value="Assign">
+      </form>
+    </div>
+    <a href="/createsubproject" id="create-subproject-button"><div>Create subproject</div></a>
+    <div id="project-participants">
+      <div id="assignment-object" th:each="user : ${assignedusers}">
+        <div id="assigned-user-fullname" th:text="${user.full_name}"></div>
+        <div id="assigned-user-role" th:text="${user.role}"></div>
+        <div id="assigned-user-email" th:text="${user.email}"></div>
+      </div>
+    </div>
+    <div id="participants-headline">Participants in the project</div>
+    </div>
+
+ <div class="subproject-outerbox">
+  <div class="subproject-element" th:each="subproject : ${subprojects}">
+    <a href="/subproject" th:href="@{'/subproject/'+${subproject.getSubproject_id}}">
+      <div id="subproject-name" th:text="${subproject.subproject_name}"></div>
+    </a>
+      <div id="subproject_describtion-title">Description:</div>
+      <div id="subproject_description" th:text="${subproject.subproject_description}"></div>
+      <div id="subproject_deadline-title">Deadline:</div>
+      <div id="subproject_deadline" th:text="${subproject.subproject_deadline}"></div>
+      <div id="subproject_status-title">Status:</div>
+      <div id="subproject_status" th:text="${subproject.subproject_status}"></div>
+  </div>
+  </div>
+</div>
+
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+</html>

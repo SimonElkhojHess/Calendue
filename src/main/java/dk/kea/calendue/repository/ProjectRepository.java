@@ -65,7 +65,7 @@ public class ProjectRepository
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
             final String SQL_QUERY =
-                    "SELECT * FROM calendue.project" +
+                    "SELECT * FROM calendue.project " +
                     "WHERE project_id IN" +
                         ("SELECT project_id " +
                          "FROM calendue.project_user " +
@@ -143,4 +143,55 @@ public class ProjectRepository
     }
 
 
+    public Project getOneProject(int projectID)
+    {
+        Project tempProject = new Project();
+        try {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT * FROM calendue.project WHERE project_id =" + projectID;
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            if(resultSet.next())
+            {
+                tempProject.setProject_id(projectID);
+                tempProject.setProject_name(resultSet.getString(2));
+                tempProject.setProject_description(resultSet.getString(3));
+                tempProject.setProject_start(resultSet.getString(4));
+                tempProject.setProject_deadline(resultSet.getString(5));
+                tempProject.setProject_hours(resultSet.getInt(6));
+                tempProject.setProject_status(resultSet.getString(7));
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get specific project info");
+        }
+         return tempProject;
+    }
+
+    public String getUserProjectAssignment(int user_id, int project_id)
+    {
+        String userAssignment = "none";
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT role " +
+                                        "FROM calendue.project_user " +
+                                            "WHERE user_id = "+user_id+
+                                                " AND project_id = "+project_id;
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            if(resultSet.next())
+            {
+                userAssignment = resultSet.getString(1);
+            }
+        }
+        catch(SQLException e)
+        {
+
+        }
+        return userAssignment;
+    }
 }

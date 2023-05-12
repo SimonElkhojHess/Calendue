@@ -3,10 +3,16 @@ package dk.kea.calendue.controller;
 import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.User;
 import dk.kea.calendue.repository.*;
+import dk.kea.calendue.repository.ProjectRepository;
+import dk.kea.calendue.repository.SubprojectRepository;
+import dk.kea.calendue.repository.TaskRepository;
+import dk.kea.calendue.repository.UserRepository;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,7 +25,9 @@ public class HomeController {
     private TaskRepository taskRepo;
     private Project_userRepository project_userRepo;
 
+
     public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo, Project_userRepository project_userRepo)
+
     {
         this.userRepo = userRepo;
         this.projectRepo = projectRepo;
@@ -80,6 +88,12 @@ public class HomeController {
 
         model.addAttribute("allprojectlist", projectRepo.getAllProjects());
         session.setAttribute("currentpage", "/homepage");
+        /*if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }*/
+
+        model.addAttribute("allprojectlist", projectRepo.getAllProjects());
 
         return "homepage";
     }
@@ -103,4 +117,21 @@ public class HomeController {
         return "redirect:/project/" + tempProjectID;
     }
 
+
+    @GetMapping("/project/{id}")
+    public String showProject(@PathVariable("id")int project_id, HttpSession session, Model model)
+    {
+        /*if (session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }*/
+        model.addAttribute("project", projectRepo.getOneProject(project_id));
+        model.addAttribute("subprojects", subprojectRepo.getAllSubprojects(project_id));
+        model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
+        model.addAttribute("all_users", userRepo.getAllUsers());
+
+        //int tempID = (int) session.getAttribute("user_id");
+        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID,project_id));
+        return "subprojects";
+    }
 }

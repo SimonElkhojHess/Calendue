@@ -1,22 +1,27 @@
 package dk.kea.calendue.repository;
 
 import dk.kea.calendue.model.User;
+import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserRepository
 {
     @Value("${spring.datasource.url}")
-    private String DB_URL;
+    private String HOSTNAME;
 
     @Value("${spring.datasource.username}")
-    private String UID;
+    private String USERNAME;
 
     @Value("${spring.datasource.password}")
-    private String PWD;
+    private String PASSWORD;
 
     //Compares password with hashed password from DB and logs in if it matches
     public boolean checkLogin(String username, String password)
@@ -25,8 +30,11 @@ public class UserRepository
 
         try
         {
-            Connection connection = DriverManager.getConnection(DB_URL, UID, PWD);
-            String SEARCH_QUERY = "SELECT password FROM calendue.user WHERE username = ?";
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            String SEARCH_QUERY = "SELECT password " +
+                                    "FROM calendue.user " +
+                                        "WHERE username = ?";
+
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -52,8 +60,10 @@ public class UserRepository
     {
         try
         {
-            Connection connection = DriverManager.getConnection(DB_URL, UID, PWD);
-            String SEARCH_QUERY = "SELECT * FROM calendue.user WHERE username = ?";
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            String SEARCH_QUERY = "SELECT * " +
+                                    "FROM calendue.user " +
+                                        "WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
             preparedStatement.setString(1, username);
 
@@ -82,19 +92,24 @@ public class UserRepository
         User tempUser = new User();
         try
         {
-            Connection connection = DriverManager.getConnection(DB_URL, UID, PWD);
-            String SEARCH_QUERY = "SELECT user_id, username, email, is_admin FROM calendue.user WHERE username = ?";
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            String SEARCH_QUERY = "SELECT user_id, username, email, is_admin " +
+                                        "FROM calendue.user" +
+                                            " WHERE username = ?";
+
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
 
             preparedStatement.setString(1, username);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            resultSet.next();
-            tempUser.setUser_id(resultSet.getInt(1));
-            tempUser.setUsername(resultSet.getString(2));
-            tempUser.setEmail(resultSet.getString(3));
-            tempUser.setIs_admin(resultSet.getInt(4));
+            if(resultSet.next())
+            {
+                tempUser.setUser_id(resultSet.getInt(1));
+                tempUser.setUsername(resultSet.getString(2));
+                tempUser.setEmail(resultSet.getString(3));
+                tempUser.setIs_admin(resultSet.getInt(4));
+            }
         }
         catch(SQLException e)
         {
@@ -105,5 +120,70 @@ public class UserRepository
         return tempUser;
     }
 
+    //Collects all users assigned to project, and their role from project_user table.
+    public List<User> getUsersOnProject(int projectID)
+    {
+        ArrayList<User> userList = new ArrayList<>();
+        try {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY =
+                            "SELECT u.user_id, u.username, u.email, u.is_admin, u.full_name, p.role " +
+                                "FROM calendue.project_user p JOIN calendue.user u " +
+                                    "WHERE p.project_id = "+projectID+
+                                        " AND p.user_id = u.user_id"+
+                                            " ORDER BY p.role DESC, u.full_name ASC";
 
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+            while(resultSet.next())
+            {
+                int tempUserid = resultSet.getInt(1);
+                String tempUsername = resultSet.getString(2);
+                String tempEmail = resultSet.getString(3);
+                int tempIsadmin = resultSet.getInt(4);
+                String tempFullname = resultSet.getString(5);
+                String tempRole = resultSet.getString(6);
+                User user = new User(tempUserid, tempUsername, tempEmail, tempIsadmin, tempFullname, tempRole);
+                userList.add(user);
+                System.out.println("Found: "+user);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get assigned users on project "+projectID);
+        }
+            return userList;
+    }
+
+    //Collects all user IDs and emails for the datalist in the html file "subprojects" to assign users to a project.
+    public List<User> getAllUsers()
+    {
+        ArrayList<User> userList = new ArrayList<>();
+
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SEARCH_QUERY = "SELECT user_id, email from calendue.user";
+
+            ResultSet resultSet = statement.executeQuery(SEARCH_QUERY);
+
+            while(resultSet.next())
+            {
+                User user = new User();
+                user.setUser_id(resultSet.getInt(1));
+                user.setEmail(resultSet.getString(2));
+                userList.add(user);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get all users");
+        }
+        return userList;
+    }
 }
