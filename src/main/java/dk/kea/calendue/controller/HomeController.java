@@ -61,6 +61,7 @@ public class HomeController {
                session.setAttribute("username", user.getUsername());
                session.setAttribute("email", user.getEmail());
                session.setAttribute("is_admin", user.getIs_admin());
+               session.setAttribute("full_name", user.getFull_name());
                return "redirect:/homepage";
            }
         }

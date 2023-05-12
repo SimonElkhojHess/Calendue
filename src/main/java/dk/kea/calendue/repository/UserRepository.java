@@ -93,7 +93,7 @@ public class UserRepository
         try
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
-            String SEARCH_QUERY = "SELECT user_id, username, email, is_admin " +
+            String SEARCH_QUERY = "SELECT user_id, username, email, is_admin, full_name" +
                                         "FROM calendue.user" +
                                             " WHERE username = ?";
 
@@ -109,6 +109,7 @@ public class UserRepository
                 tempUser.setUsername(resultSet.getString(2));
                 tempUser.setEmail(resultSet.getString(3));
                 tempUser.setIs_admin(resultSet.getInt(4));
+                tempUser.setFull_name(resultSet.getString(5));
             }
         }
         catch(SQLException e)
