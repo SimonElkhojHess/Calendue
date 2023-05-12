@@ -5,10 +5,7 @@ import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,5 +56,51 @@ public class SubprojectRepository
         }
 
         return sList;
+    }
+
+    public void createSubProject(int project_id, String subprojectName)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String CREATE_QUERY =
+                    "INSERT INTO calendue.subproject(project_id, subproject_name) VALUES (?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setInt(1, project_id);
+            preparedStatement.setString(2, subprojectName);
+
+            preparedStatement.executeUpdate();
+
+
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not create new Project");
+        }
+    }
+
+    public int getMaxSubprojectId()
+    {
+        int tempSubprojectID = -99;
+            try
+            {
+                Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+                Statement statement = connection.createStatement();
+                final String SQL_QUERY = "SELECT MAX(subproject_id) FROM calendue.subproject";
+
+                ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+                if(resultSet.next())
+                {
+                    tempSubprojectID = resultSet.getInt(1);
+                }
+            }
+            catch(SQLException e)
+            {
+                e.printStackTrace();
+                System.out.println("Could not get max subproject id");
+            }
+            return tempSubprojectID;
     }
 }

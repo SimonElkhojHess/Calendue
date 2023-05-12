@@ -63,8 +63,7 @@
     font-family: Calibri Light;
     font-size: 25px;
     padding: 3px 0px 3px 0px;
-
-
+    transition: transform 200ms ease-in-out;
 }
 
 .project-box:hover

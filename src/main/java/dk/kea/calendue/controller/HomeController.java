@@ -134,4 +134,16 @@ public class HomeController {
         //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID,project_id));
         return "subprojects";
     }
+
+    @PostMapping("/createsubproject")
+    public String createSubproject(@RequestParam("subprojectName")String subprojectName, @RequestParam("projectId")int projectId,HttpSession session)
+    {
+        if(subprojectName.equals("")) //Stops null subproject names
+        {
+            return "redirect:/project/"+projectId;
+        }
+        subprojectRepo.createSubProject(projectId, subprojectName);
+        int subprojectId = subprojectRepo.getMaxSubprojectId();
+        return "redirect:/subproject/"+subprojectId;
+    }
 }

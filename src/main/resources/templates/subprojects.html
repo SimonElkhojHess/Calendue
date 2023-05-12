@@ -53,7 +53,15 @@
         <input id="assign-project-button" type="submit" value="Assign">
       </form>
     </div>
-    <a href="/createsubproject" id="create-subproject-button"><div>Create subproject</div></a>
+
+      <div id="create-subproject-form">
+        <form action="/createsubproject" method="post">
+          <input name="projectId" type="hidden" th:value="${project.getProject_id}">
+          <input id="create-subproject-name" name="subprojectName" type="text" placeholder="Subproject title...">
+          <input id="create-subproject-button" type="submit" value="Create subproject">
+        </form>
+      </div>
+
     <div id="project-participants">
       <div id="assignment-object" th:each="user : ${assignedusers}">
         <div id="assigned-user-fullname" th:text="${user.full_name}"></div>
@@ -69,7 +77,7 @@
     <a href="/subproject" th:href="@{'/subproject/'+${subproject.getSubproject_id}}">
       <div id="subproject-name" th:text="${subproject.subproject_name}"></div>
     </a>
-      <div id="subproject_describtion-title">Description:</div>
+      <div id="subproject_description-title">Description:</div>
       <div id="subproject_description" th:text="${subproject.subproject_description}"></div>
       <div id="subproject_deadline-title">Deadline:</div>
       <div id="subproject_deadline" th:text="${subproject.subproject_deadline}"></div>
