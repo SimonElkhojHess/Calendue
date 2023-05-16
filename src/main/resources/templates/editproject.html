@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit project</title>
+
+</head>
+<body>
+<div class="edit-form-popup" id="editForm">
+<form action="/editproject" method="post">
+
+    <input id="projectID" name="projectID" type="hidden" th:value="${project.getProjectID}">
+
+    <input id="projectName" name="projectName" type="text" placeholder="Project name" th:value="${project.getProjectName}">
+    <input id="projectDescription" name="projectDescription" type="text" placeholder="Project description" th:value="${project.getProjectDescription}">
+    <input id="projectStart" name="projectStart" type="text" placeholder="Project start date" th:value="${project.getProjectStart}">
+    <input id="projectDeadline" name="projectDeadline" type="text" placeholder="Project deadline" th:value="${project.getProjectDeadline}">
+    <input id="projectHours" name="projectHours" type="text" placeholder="Project hours" th:value="${project.getProjectHours}">
+    <input id="projectStatus" name="projectStatus" type="text" placeholder="Project status" th:value="${project.getProjectStatus}">
+    <input id="edit-button" type="submit" value="Update">
+
+</form>
+</div>
+<!--<script>
+    function openEditForm()
+    {
+        document.getElementById("editForm").style.display = "block";
+    }
+
+    function closeEditForm()
+    {
+        document.getElementById("editForm").style.display = "none";
+    }
+</script>-->
+
+</body>
+</html>

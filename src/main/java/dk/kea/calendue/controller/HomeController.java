@@ -111,6 +111,8 @@ public class HomeController {
 
         project_userRepo.setRole(tempProjectID, tempUserID, "Project leader");
 
+        session.setAttribute("project_role", "Project Leader");
+
 
         return "redirect:/project/" + tempProjectID;
     }
@@ -157,5 +159,25 @@ public class HomeController {
         session.setAttribute("currentpage", "/myprojects");
 
         return "myprojects";
+    }
+
+    @GetMapping("/editproject/{id}")
+    public String showEditProject(@PathVariable("id") int project_ID, HttpSession session, Model model)
+    {
+        session.setAttribute("projectID", project_ID);
+        int pID = (int) session.getAttribute("projectID");
+        Project editProject = projectRepo.getOneProject(project_ID);
+        model.addAttribute("projectedit", editProject);
+        return "editproject";
+    }
+
+    @PostMapping("/editproject")
+    public String editProject(@RequestParam("projectID") int tempID, @RequestParam("projectName") String editName, @RequestParam("projectDescription") String editDescription, @RequestParam("projectStart") String editStart, @RequestParam("projectDeadline") String editDeadline, @RequestParam("projectHours") int editHours, @RequestParam("projectStatus") String editStatus, HttpSession session, Model model)
+    {
+        Project tempProject = new Project(tempID, editName, editDescription, editStart, editDeadline, editHours, editStatus);
+        projectRepo.editProject(tempProject);
+
+
+        return "redirect:/project/" + tempID;
     }
 }

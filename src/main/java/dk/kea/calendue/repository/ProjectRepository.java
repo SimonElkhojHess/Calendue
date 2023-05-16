@@ -194,4 +194,33 @@ public class ProjectRepository
         }
         return userAssignment;
     }
+
+    public void editProject(Project project)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String UPDATE_QUERY =
+                    "UPDATE calendue.project " +
+                            "SET project_name=?, project_description=?, project_start=?, " +
+                            "project_deadline=?, project_hours=?, project_status=? " +
+                            "WHERE project_id = " + project.getProject_id();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, project.getProject_name());
+            preparedStatement.setString(2, project.getProject_description());
+            preparedStatement.setString(3, project.getProject_start());
+            preparedStatement.setString(4, project.getProject_deadline());
+            preparedStatement.setInt(5, project.getProject_hours());
+            preparedStatement.setString(6, project.getProject_status());
+
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit project");
+        }
+    }
 }
