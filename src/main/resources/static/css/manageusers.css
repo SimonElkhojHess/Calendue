@@ -66,3 +66,51 @@ input[type=text], input[type=password]
     cursor:pointer;
     font-size:24px;
 }
+
+.user-list
+{
+    width:75%;
+    height:auto;
+}
+.user-object
+{
+    display:grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    border:1px solid orange;
+    margin:20px 0 15px 30px;
+    width:85%;
+    border-radius: 7px 7px 7px 7px;
+    padding-bottom:10px;
+    font-size: 16px;
+}
+
+.user-object-fullname
+{
+    grid-column: 2/8;
+    grid-row:2/4
+}
+
+.user-object-email
+{
+    grid-column: 2/8;
+    grid-row:4/6;
+}
+
+.user-object-username
+{
+    grid-column: 12/18;
+    grid-row: 2/4;
+}
+
+.user-object-isadmin
+{
+    grid-column: 12/18;
+    grid-row: 4/6;
+}
+
+.submit-edit-button
+{
+    grid-column: 20/23;
+    grid-row: 3/5;
+}

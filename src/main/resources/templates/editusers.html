@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit users</title>
+  <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+  <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+  <link rel="stylesheet" th:href="@{../css/editusers.css}" href="../static/css/editusers.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+<div class="blurred-background">
+  <img id="background-image" th:src="@{../images/tempbackground.png}">
+</div>
+  <div class="form-popup" id="myEditForm">
+    <form action="/edituser" method="post" class="form-container">
+      <h1>Edit user</h1>
+      <br>
+      <input type="hidden" name="user_id" th:value="${oneuser.user_id}">
+      <label for="edit-username"><b>Username</b></label><br>
+      <input id="edit-username" name="edit-username" type="text" th:value="${oneuser.username}" required>
+      <br>
+      <label for="edit-full_name"><b>Full name</b></label><br>
+      <input id="edit-full_name" name="edit-full_name" type="text" th:value="${oneuser.full_name}" required>
+      <br>
+      <label for="edit-password"><b>Password</b></label><br>
+      <input id="edit-password" name="edit-password" type="password" th:value="${oneuser.password}">
+      <br>
+      <label for="edit-email"><b>Email</b></label><br>
+      <input id="edit-email" name="edit-email" type="text" th:value="${oneuser.email}" required>
+      <br>
+      <p><b>Give admin privileges?</b></p>
+      <input id="edit-admin-privilege-yes" name="edit-admin-privilege" type="radio" value="1" th:checked="${oneuser.is_admin == 1}">
+      <label for="edit-admin-privilege-yes" ><b>Yes</b></label>
+      <input id="edit-admin-privilege-no" name="edit-admin-privilege" type="radio" value="0"  th:checked="${oneuser.is_admin == 0}">
+      <label for="edit-admin-privilege-no"><b>No</b></label>
+      <br>
+      <button class="submit-edit-button" type="submit">Done</button>
+      <button class="btn cancel" type="button" onclick="history.back()">Cancel</button>
+    </form>
+  </div>
+
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+</html>

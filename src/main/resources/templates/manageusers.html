@@ -16,7 +16,24 @@
     <div class="outer-container">
         <div class="create-project">
             <button class="open-create-button" onclick="openCreateForm()">Create User</button>
-            <!-- Brug som edit knap på hver user <button class="open-edit-button" onclick="openEditForm()">Edit User</button> -->
+        </div>
+
+        <div class="user-list" >
+            <div class="user-object" th:each="user : ${userlist}">
+                <div class="user-object-fullname" th:text="${user.full_name}">name</div>
+                <div class="user-object-email" th:text="${user.email}"></div>
+                <div class="user-object-username">
+                    <span>Username: </span>
+                    <span th:text="${user.username}"></span>
+                </div>
+                <div class="user-object-isadmin">
+                    <span th:if="${user.is_admin == 0}">Admin: No</span>
+                    <span th:if="${user.is_admin == 1}">Admin: Yes</span>
+                </div>
+                <div class="submit-edit-button"><a th:href="@{'/editusers/'+${user.getUser_id}}">Edit user</a></div>
+            </div>
+
+
         </div>
 
         <div class="form-popup" id="myCreateForm">
@@ -47,6 +64,8 @@
 
         </div>
     </div>
+
+
 <script>
     function openCreateForm() {
         document.getElementById("myCreateForm").style.display = "block";
@@ -55,6 +74,7 @@
     function closeCreateForm() {
         document.getElementById("myCreateForm").style.display = "none";
     }
+
 </script>
 </body>
 <footer th:insert="~{fragments/navigation.html :: footer}"></footer>

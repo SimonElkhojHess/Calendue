@@ -162,8 +162,31 @@ public class HomeController {
     @GetMapping("/manage")
     public String showManageUsers(HttpSession session, Model model)
     {
-
+        model.addAttribute("userlist", userRepo.getAllUsersForAdmin());
         return "manageusers";
+    }
+
+    @GetMapping("/editusers/{id}")
+    public String showEditUsers(@PathVariable("id")int tempId, Model model)
+    {
+        model.addAttribute("oneuser", userRepo.getOneUser(tempId));
+        return "editusers";
+    }
+
+    @PostMapping("/edituser")
+    public String editUser(@RequestParam("user_id") int user_id, @RequestParam("edit-username")String username, @RequestParam("edit-password")String password, @RequestParam("edit-email")String email, @RequestParam("edit-admin-privilege")int is_admin, @RequestParam("edit-full_name")String full_name)
+    {
+        if(password.length() > 0){
+            password = userRepo.encodePassword(password);
+        }
+        else
+        {
+            password = "noEdit";
+        }
+        User user = new User(user_id, username, full_name, password, email, is_admin);
+        userRepo.editUser(user);
+
+        return "redirect:/manage";
     }
 
     @PostMapping("/createuser")

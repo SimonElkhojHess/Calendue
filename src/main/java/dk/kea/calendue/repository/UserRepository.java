@@ -3,6 +3,7 @@ package dk.kea.calendue.repository;
 import dk.kea.calendue.model.User;
 import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -195,7 +196,36 @@ public class UserRepository
     }
 
     //Get all users for admin method
+    public List<User> getAllUsersForAdmin()
+    {
+        ArrayList<User> userList = new ArrayList<>();
 
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT * FROM calendue.user";
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+            while(resultSet.next())
+            {
+                int user_id = resultSet.getInt(1);
+                String username = resultSet.getString(2);
+                String email = resultSet.getString(4);
+                int is_admin = resultSet.getInt(5);
+                String full_name = resultSet.getString(6);
+
+                userList.add(new User(user_id, username, email, is_admin, full_name));
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get all users for admin");
+        }
+        return userList;
+    }
 
     public void createUser(User user)
     {
@@ -220,6 +250,63 @@ public class UserRepository
         }
     }
 
+    public User getOneUser(int id)
+    {
+        User user = new User();
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT * FROM calendue.user WHERE user_id = "+id;
 
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+            if(resultSet.next())
+            {
+                user.setUser_id(resultSet.getInt(1));
+                user.setUsername(resultSet.getString(2));
+                user.setEmail(resultSet.getString(4));
+                user.setIs_admin(resultSet.getInt(5));
+                user.setFull_name(resultSet.getString(6));
+            }
+
+    } catch(SQLException e) {
+            e.printStackTrace();
+            System.out.println("Could not get one user by id");
+        }
+        return user;
+    }
+
+    public void editUser(User user)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String UPDATE_QUERY = "UPDATE calendue.user SET username=?, email=?, is_admin=?, full_name=? WHERE user_id="+user.getUser_id();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setInt(3, user.getIs_admin());
+            preparedStatement.setString(4, user.getFull_name());
+
+            preparedStatement.executeUpdate();
+
+            //If user does not edit password, the password is not touched in the DB at all
+            if(!user.getPassword().equals("noEdit"))
+            {
+                final String PASSWORD_QUERY = "UPDATE calendue.user SET password=? WHERE user_id="+user.getUser_id();
+                preparedStatement = connection.prepareStatement(PASSWORD_QUERY);
+                preparedStatement.setString(1, user.getPassword());
+                preparedStatement.executeUpdate();
+            }
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit user");
+        }
+    }
 
 }

@@ -11,12 +11,31 @@ public class User
 
     private String password;
 
+
     public User(int user_id, String username, String email, int is_admin)
     {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.is_admin = is_admin;
+    }
+    public User(int user_id, String username, String email, int is_admin, String full_name)
+    {
+        this.user_id = user_id;
+        this.username = username;
+        this.email = email;
+        this.is_admin = is_admin;
+        this.full_name = full_name;
+    }
+    public User(int user_id, String username,String full_name, String password, String email, int is_admin)
+    {
+        this.user_id = user_id;
+        this.username = username;
+        this.full_name = full_name;
+        this.password = password;
+        this.email = email;
+        this.is_admin = is_admin;
+
     }
 
     public User(String username, String full_name, String password, String email, int is_admin)
@@ -27,6 +46,7 @@ public class User
         this.email = email;
         this.is_admin = is_admin;
     }
+
     public User(int user_id, String username, String email, int is_admin, String full_name, String role) {
         this.user_id = user_id;
         this.username = username;
@@ -35,6 +55,9 @@ public class User
         this.full_name = full_name;
         this.role = role;
     }
+
+
+
 
     public User(){}
 
