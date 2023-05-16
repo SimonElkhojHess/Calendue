@@ -158,4 +158,25 @@ public class HomeController {
 
         return "myprojects";
     }
+
+    @GetMapping("/manage")
+    public String showManageUsers(HttpSession session, Model model)
+    {
+
+        return "manageusers";
+    }
+
+    @PostMapping("/createuser")
+    public String createUser(@RequestParam("create-username") String username, @RequestParam("create-full_name")String fullname, @RequestParam("create-password")String password, @RequestParam("create-email")String email, @RequestParam("create-admin-privilege")int is_admin)
+    {
+        if(is_admin != 1)
+        {
+            is_admin = 0;
+        }
+        password = userRepo.encodePassword(password);
+        User user = new User(username, fullname, password, email, is_admin);
+        userRepo.createUser(user);
+
+        return "redirect:/manage";
+    }
 }

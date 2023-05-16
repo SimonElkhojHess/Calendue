@@ -1,0 +1,68 @@
+
+
+.form-popup {
+    display: none;
+    position: fixed;
+    top:20%;
+    left:35%;
+    max-width: 400px;
+    right: 15px;
+    border: 3px solid #c1c1c1;
+    z-index: 9;
+    font-family: "Calibri Light";
+}
+
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+.outer-container
+{
+    width:100%;
+    height:82vh;
+    display:flex;
+    align-content: space-evenly;
+}
+
+.create-project
+{
+    width:25%;
+    background-color: #1d3c65;
+}
+
+input[type=text], input[type=password]
+{
+    padding:0 8px;
+    border-radius: 10px 10px 10px 10px;
+    margin: 5px 0 5px 0;
+    width:13rem;
+    height:1.6rem;
+}
+
+.form-container button
+{
+    padding:1px 3px 1px 3px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #8ED0AB;
+    height:auto;
+    width:auto;
+    margin-top: 10px;
+    margin-right:5px;
+    cursor:pointer;
+}
+
+.open-create-button
+{
+    position: relative;
+    top: 15%;
+    left: 28%;
+    padding:5px 5px 5px 5px;
+    border-radius: 10px 10px 10px 10px;
+    min-height: 2rem;
+    min-width:6rem;
+    background-color: #8ED0AB;
+    cursor:pointer;
+    font-size:24px;
+}

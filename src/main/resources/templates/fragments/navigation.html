@@ -25,6 +25,10 @@
         <div class="resources-button" th:if="${session.username != null}">
             <a href="/resources">Resources</a></div>
 
+        <div class="manage-user-button" th:if="${session.is_admin == 1}">
+            <a href="/manage">Manage users</a>
+        </div>
+
         <div class="profile-button" th:if="${session.username != null}">
             <a href="/profile">Edit profile</a>
         </div>

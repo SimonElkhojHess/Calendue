@@ -40,7 +40,7 @@
     <a id="edit-project-button" href="/editproject" th:href="@{'/editproject/'+${project.project_id}}" th:if="${session.project_role == 'Project Leader'}"><div>Edit project</div></a>
     <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
       <form action="/assignproject" method="post">
-        <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail...">
+        <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail..." required>
         <datalist id="email-box" size="5">
              <option th:each="users : ${all_users}" th:value="${users.email}">
              </option>
@@ -58,7 +58,7 @@
         <form action="/createsubproject" method="post">
           <input name="projectId" type="hidden" th:value="${project.getProject_id}">
           <input id="create-subproject-name" name="subprojectName" type="text" placeholder="Subproject title...">
-          <input id="create-subproject-button" type="submit" value="Create subproject">
+          <input id="create-subproject-button" type="submit" value="Create subproject" required>
         </form>
       </div>
 

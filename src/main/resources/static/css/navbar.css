@@ -53,11 +53,18 @@
     padding-top:10px;
 }
 
+.manage-user-button
+{
+    grid-column: 8/8;
+    padding-top:10px;
+}
 .profile-button
 {
     grid-column: 12/12;
     padding-top:10px;
 }
+
+
 /* width */
 ::-webkit-scrollbar {
     width: 8px;

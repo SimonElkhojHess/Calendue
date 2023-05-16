@@ -55,6 +55,12 @@ public class UserRepository
         return false;
     }
 
+    public String encodePassword(String password)
+    {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10); //The strength affects how long it takes to encrypt and decrypt the password. 10 takes about a second for us, so we will leave it there.
+        return encoder.encode(password);
+    }
+
     //Searches for specific username in database table 'user'
     public boolean checkUsername(String username)
     {
@@ -187,4 +193,33 @@ public class UserRepository
         }
         return userList;
     }
+
+    //Get all users for admin method
+
+
+    public void createUser(User user)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME,PASSWORD);
+            final String CREATE_QUERY = "INSERT INTO calendue.user(username, password, email, is_admin, full_name) VALUES (?,?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setInt(4, user.getIs_admin());
+            preparedStatement.setString(5, user.getFull_name());
+
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not create user");
+        }
+    }
+
+
+
 }
