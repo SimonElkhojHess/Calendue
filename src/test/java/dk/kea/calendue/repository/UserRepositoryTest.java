@@ -37,7 +37,7 @@ class UserRepositoryTest {
 
     @Test
     void testCheckLoginWithValidCredentials() {
-        userRepository = new UserRepository();
+
         //arrange
         String username = "user";
         String password = "user";

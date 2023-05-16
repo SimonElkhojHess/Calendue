@@ -14,10 +14,10 @@ import java.util.List;
 @Repository
 public class UserRepository
 {
-    //@Value("${spring.datasource.url}")
-    //private String HOSTNAME;
+    @Value("${spring.datasource.url}")
+    private String HOSTNAME;
 
-    private String HOSTNAME = System.getenv("HOSTNAME");
+    //private String HOSTNAME = System.getenv("HOSTNAME");
     @Value("${spring.datasource.username}")
     private String USERNAME;
 
