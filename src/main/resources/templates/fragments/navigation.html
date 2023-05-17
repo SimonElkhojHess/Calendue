@@ -44,7 +44,6 @@
                        <span>Deadline</span>
                    </div>
                </div>
-
            </div>
 
             <div th:if="${session.currentpage == '/homepage'}" th:each="project : ${allprojectlist}">
@@ -61,7 +60,6 @@
                    <div class="project-deadline">
                        <span th:text="${project.getProject_deadline}">*Project from database*</span>
                    </div>
-
                </div>
                 </a>
             </div>
