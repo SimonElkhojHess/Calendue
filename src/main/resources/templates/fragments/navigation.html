@@ -26,8 +26,13 @@
             <a href="/resources">Resources</a></div>
 
         <div class="profile-button" th:if="${session.username != null}">
-            <a href="/profile">Edit profile</a>
+            <a href="/profile">Profile</a>
         </div>
+            <div class="logout-button" th:if="${session.username != null}">
+                <a href="/logout">Log out</a>
+            </div>
+
+
 </nav>
 
 
@@ -72,7 +77,6 @@
         </div>
         <div class="project-start">
             <span th:text="${project.getProject_start}">*Project from database*</span>
-
         </div>
         <div class="project-deadline">
             <span th:text="${project.getProject_deadline}">*Project from database*</span>

@@ -155,7 +155,6 @@ public class HomeController {
         int user_id = (int) session.getAttribute("user_id");
         model.addAttribute("allmyprojectlist", projectRepo.getAllMyProjects(user_id));
         session.setAttribute("currentpage", "/myprojects");
-
         return "myprojects";
     }
 }
