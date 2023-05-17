@@ -49,5 +49,17 @@ class UserRepositoryTest {
         assertEquals(true, result);
     }
 
-    //void testCheckLoginWithInvalidCredentials() {}
+   @Test
+    void testCheckLoginWithInvalidCredentials()
+    {
+        //arrange
+        String username = "user";
+        String password = "WrongPassword";
+
+        //act
+        boolean result = userRepository.checkLogin(username, password);
+
+        //assert
+        assertEquals(false, result);
+    }
 }
