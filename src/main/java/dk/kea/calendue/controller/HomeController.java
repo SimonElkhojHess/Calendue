@@ -165,9 +165,8 @@ public class HomeController {
     public String showEditProject(@PathVariable("id") int project_ID, HttpSession session, Model model)
     {
         session.setAttribute("projectID", project_ID);
-        int pID = (int) session.getAttribute("projectID");
         Project editProject = projectRepo.getOneProject(project_ID);
-        model.addAttribute("projectedit", editProject);
+        model.addAttribute("project", editProject);
         return "editproject";
     }
 
