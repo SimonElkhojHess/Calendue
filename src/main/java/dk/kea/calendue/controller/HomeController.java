@@ -109,7 +109,7 @@ public class HomeController {
 
         int tempProjectID = projectRepo.getMaxProjectId();
 
-        project_userRepo.setRole(tempProjectID, tempUserID, "Project leader");
+        project_userRepo.setRole(tempProjectID, tempUserID, "Project Leader");
 
         session.setAttribute("project_role", "Project Leader");
 
@@ -130,8 +130,8 @@ public class HomeController {
         model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
         model.addAttribute("all_users", userRepo.getAllUsers());
 
-        //int tempID = (int) session.getAttribute("user_id");
-        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID,project_id));
+        int tempID = (int) session.getAttribute("user_id");
+        session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID,project_id));
         return "subprojects";
     }
 
@@ -165,9 +165,8 @@ public class HomeController {
     public String showEditProject(@PathVariable("id") int project_ID, HttpSession session, Model model)
     {
         session.setAttribute("projectID", project_ID);
-        int pID = (int) session.getAttribute("projectID");
         Project editProject = projectRepo.getOneProject(project_ID);
-        model.addAttribute("projectedit", editProject);
+        model.addAttribute("project", editProject);
         return "editproject";
     }
 

@@ -6,6 +6,7 @@
   <link rel="stylesheet" th:href="@{../css/navbar.css}">
   <link rel="stylesheet" th:href="@{../css/footer.css}">
   <link rel="stylesheet" th:href="@{../css/subprojects.css}">
+  <link rel="stylesheet" th:href="@{../css/editproject.css}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
@@ -37,7 +38,7 @@
       <span id="manhours-headline">Total man-hours: <br></span>
       <span id="manhours-total" th:text="${project.project_hours}"></span>
     </div>
-    <a id="edit-project-button" href="/editproject" th:href="@{'/editproject/'+${project.project_id}}" th:if="${session.project_role == 'Project Leader'}"><div>Edit project</div></a>
+    <button id="edit-project-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Project</button>
     <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
       <form action="/assignproject" method="post">
         <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail...">
@@ -85,7 +86,37 @@
       <div id="subproject_status" th:text="${subproject.subproject_status}"></div>
   </div>
   </div>
+
+  <div class="edit-form-popup" id="editForm">
+    <form action="/editproject" method="post">
+
+      <input id="projectID" name="projectID" type="hidden" th:value="${project.getProject_id}">
+
+      <input id="projectName" name="projectName" type="text" placeholder="Project name" th:value="${project.getProject_name}">
+      <input id="projectDescription" name="projectDescription" type="text" placeholder="Project description" th:value="${project.getProject_description}">
+      <input id="projectStart" name="projectStart" type="text" placeholder="Project start date" th:value="${project.getProject_start}">
+      <input id="projectDeadline" name="projectDeadline" type="text" placeholder="Project deadline" th:value="${project.getProject_deadline}">
+      <input id="projectHours" name="projectHours" type="text" placeholder="Project hours" th:value="${project.getProject_hours}">
+      <input id="projectStatus" name="projectStatus" type="text" placeholder="Project status" th:value="${project.getProject_status}">
+      <input id="edit-button" type="submit" value="Update">
+
+    </form>
+  </div>
 </div>
+
+
+
+<script>
+  function openEditForm()
+  {
+    document.getElementById("editForm").style.display = "block";
+  }
+
+  function closeEditForm()
+  {
+    document.getElementById("editForm").style.display = "none";
+  }
+</script>
 
 </body>
 <footer th:insert="~{fragments/navigation.html :: footer}"></footer>
