@@ -157,4 +157,12 @@ public class HomeController {
         session.setAttribute("currentpage", "/myprojects");
         return "myprojects";
     }
+
+   @PostMapping("/assignproject")
+    public String assignUser(@RequestParam("email")String email, @RequestParam("role")String role, @RequestParam("projectId")int projectId, HttpSession session)
+    {
+        int assignuserId = userRepo.getUserIDFromEmail(email);
+        project_userRepo.setRole(projectId, assignuserId, role);
+        return "redirect:/project/" + projectId;
+    }
 }

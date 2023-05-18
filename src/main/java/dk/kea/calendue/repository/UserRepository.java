@@ -188,4 +188,32 @@ public class UserRepository
         }
         return userList;
     }
+
+    public int getUserIDFromEmail(String email)
+    {
+        int assignuserId = 0;
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            String SEARCH_QUERY = "SELECT user_id" + " FROM calendue.user" + " WHERE email = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
+
+            preparedStatement.setString(1, email);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next())
+            {
+                assignuserId = resultSet.getInt(1);
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get user ID from email");
+        }
+
+        return assignuserId;
+
+    }
 }
