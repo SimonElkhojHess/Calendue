@@ -50,7 +50,7 @@ class UserRepositoryTest {
     }
 
    @Test
-    void testCheckLoginWithInvalidCredentials()
+   void testCheckLoginWithInvalidCredentials()
     {
         //arrange
         String username = "user";

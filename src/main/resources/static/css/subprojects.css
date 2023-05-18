@@ -31,14 +31,14 @@
 
 #project-desc
 {
-    background-color: #A2E9E9;
+    background-color: #ffffff;
     color: black;
     grid-column: 1/5;
     grid-row:2/4;
     margin-left: 7px;
     border-radius: 5px 5px 5px 5px;
     width: 87.5%;
-    border: 4px inset #a2e9e9;
+    border: 4px inset #d6eeee;
     padding: 3px 0 0 3px;
 }
 
