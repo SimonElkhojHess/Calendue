@@ -20,11 +20,30 @@
     border: 3px solid #c1c1c1;
     z-index: 9;
     font-family: "Calibri Light";
+    background-color: white;
 }
 
 .form-container {
     max-width: 300px;
     padding: 10px;
-    background-color: white;
+
+}
+
+.delete-user-form
+{
+    position:fixed;
+    left: 49%;
+}
+
+.form-container button, #delete-user
+{
+    padding:1px 3px 1px 3px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #8ED0AB;
+    height:auto;
+    width:auto;
+    margin-top: 10px;
+    margin-right:5px;
+    cursor:pointer;
 }
 

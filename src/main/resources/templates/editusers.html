@@ -16,7 +16,7 @@
   <img id="background-image" th:src="@{../images/tempbackground.png}">
 </div>
   <div class="form-popup" id="myEditForm">
-    <form action="/deleteuser" method="post">
+    <form action="/deleteuser" method="post" class="delete-user-form">
       <input type="hidden" name="user_id" th:value="${oneuser.user_id}">
       <input id="delete-user" type="submit" value="Delete user"></a>
     </form>

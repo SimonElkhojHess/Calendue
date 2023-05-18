@@ -1,5 +1,7 @@
-
-
+html
+{
+    overflow: hidden;
+}
 .form-popup {
     display: none;
     position: fixed;

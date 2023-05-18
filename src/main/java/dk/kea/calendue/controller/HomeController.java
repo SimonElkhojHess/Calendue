@@ -204,7 +204,7 @@ public class HomeController {
     }
 
     @PostMapping("/deleteuser")
-    public String deleteUser(@RequestParam("user_id")int userID, Model model)
+    public String deleteUser(@RequestParam("user_id")int userID)
     {
         userRepo.deleteUser(userID);
 
