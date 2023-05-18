@@ -202,4 +202,12 @@ public class HomeController {
 
         return "redirect:/manage";
     }
+
+    @PostMapping("/deleteuser")
+    public String deleteUser(@RequestParam("user_id")int userID, Model model)
+    {
+        userRepo.deleteUser(userID);
+
+        return "redirect:/manage";
+    }
 }
