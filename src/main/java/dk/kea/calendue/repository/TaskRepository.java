@@ -122,7 +122,7 @@ public class TaskRepository
             final String SQL_QUERY =
                     "SELECT * FROM calendue.task " +
                     "WHERE subproject_id =" + subproject_id +
-                    "AND task_id IN" +
+                    " AND task_id IN" +
                     ("SELECT task_id" +
                             "FROM calendue.task_user " +
                             "WHERE user_id =" + user_id);

@@ -143,7 +143,7 @@
 
 #assign-form
 {
-    grid-column: 9/9;
+    grid-column: 9/11;
     grid-row:2/4;
 }
 
@@ -154,23 +154,25 @@ input[type=text]
 
 #assign-email
 {
-    margin:20px 0 8px 15px;
+    margin:2px 0 8px 15px;
     height:1.5rem;
-    width:9rem;
+    width:12rem;
     border-radius: 5% / 50%;
+    padding:0 8px;
 }
 
 #assign-form label
 {
     color:white;
-    margin: 2px 0 5px 15px;
+    margin: 2px 0 5px 20px;
 }
 
 #assign-roles
 {
     margin: 2px 0 5px 15px;
     border-radius: 5% / 50%;
-    width:9rem;
+    width: 12rem;
+    height: 1.5rem;
 }
 
 #assign-project-button
@@ -178,7 +180,6 @@ input[type=text]
     margin: 5px 0 0 15px;
     height:1.5rem;
     width:7.5rem;
-    padding-top:5px;
     text-align: center;
     background-color: #8ED0AB;
     border-radius:10px 10px 10px 10px;
@@ -194,7 +195,7 @@ input[type=text]
     font-weight: bold;
     color: #ffffff;
     font-size: 20px;
-    }
+}
 
 #project-participants
 {
@@ -244,6 +245,102 @@ input[type=text]
     text-align: center;
 }
 
+.open-editroles-button
+{
+    grid-column: 9/9;
+    grid-row: 3/4;
+    height:1.5rem;
+    width:7.5rem;
+    background-color: #8ED0AB;
+    border-radius:10px 10px 10px 10px;
+    margin: 5px 0 0 15px;
+    cursor:pointer;
+}
+.editroles-popup
+{
+    display:none;
+    position:fixed;
+    top:25%;
+    left:35%;
+    height:500px;
+    width:600px;
+    background-color: #8ba6ce;
+    z-index:9000;
+}
+.editroles-popup h2
+{
+    margin: 30px 0 0 25px;
+}
+.editroles-popup-outerbox
+{
+    border-style: groove;
+    height: 350px;
+    width:550px;
+    margin:30px 0px 0px 20px;
+    background-color: white;
+}
+
+#editroles-popup-user-object
+{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 2.5rem;
+    margin:10px 10px 0px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #8ED0AB;
+    box-shadow: 2px 4px 2px #727391;
+}
+#editroles-popup-user-fullname
+{
+    margin-left:8px;
+    grid-column: 1/3;
+    grid-row: 1/2;
+}
+#editroles-popup-user-email
+{
+    margin-left:8px;
+    grid-column: 1/3;
+    grid-row: 2/3;
+}
+
+#editroles-popup-user-role
+{
+    margin:10px 5px 0 0;
+    grid-column: 3/5;
+    grid-row:1/3;
+}
+
+#edit-roles
+{
+    border-radius: 5% / 50%;
+}
+
+#editroles-popup-submit-button
+{
+    width: 4rem;
+    margin-left: 10px;
+    background-color: #8ba6ce;
+    border-radius: 10% / 50%;
+    cursor:pointer;
+}
+.close-editroles-button
+{
+    height:1.5rem;
+    width:7rem;
+    background-color: #8ED0AB;
+    border-radius: 10px 10px 10px 10px;
+    margin: 5px 30px 0 0;
+    float:right;
+    cursor:pointer;
+}
+
+
+
+
+
+
+
 #create-subproject-form
 {
     grid-column: 1/3;
@@ -267,7 +364,6 @@ input[type=text]
     background-color: #8ED0AB;
     cursor: pointer;
 }
-
 
 
 .subproject-outerbox
