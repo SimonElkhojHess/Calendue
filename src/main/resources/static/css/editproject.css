@@ -1,0 +1,47 @@
+.edit-form-popup {
+    display: none;
+    position: fixed;
+    left:25%;
+    top:15%;
+    height:33rem;
+    width:50rem;
+    background-color: white;
+    border: 3px solid #1d3c65;
+    z-index: 9;
+    font-family: "Calibri Light";
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 18px;
+
+}
+
+#projectDescription
+{
+    min-height: 5rem;
+}
+
+.edit-form-popup input, .edit-form-popup textarea
+{
+    min-width: 40rem;
+    font-family: "Calibri";
+    font-size: 16px;
+
+}
+
+.edit-form-popup button
+{
+    padding:1px 3px 1px 3px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #8ED0AB;
+    height:2rem;
+    width:auto;
+    margin-top: 10px;
+    cursor:pointer;
+    text-align: center;
+}
+
+#edit-button
+{
+    margin-right: 45px;
+}
+
