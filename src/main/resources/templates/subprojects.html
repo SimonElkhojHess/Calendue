@@ -91,14 +91,26 @@
     <form action="/editproject" method="post">
 
       <input id="projectID" name="projectID" type="hidden" th:value="${project.getProject_id}">
-
+      <label for="projectName"><b>Project name</b></label><br>
       <input id="projectName" name="projectName" type="text" placeholder="Project name" th:value="${project.getProject_name}">
-      <input id="projectDescription" name="projectDescription" type="text" placeholder="Project description" th:value="${project.getProject_description}">
+      <br><br>
+      <label for="projectDescription"><b>Project description</b></label><br>
+      <textarea id="projectDescription" name="projectDescription" type="text" placeholder="Project description" th:text="${project.getProject_description}"></textarea>
+      <br><br>
+      <label for="projectStart"><b>Project start date</b></label><br>
       <input id="projectStart" name="projectStart" type="text" placeholder="Project start date" th:value="${project.getProject_start}">
+      <br><br>
+      <label for="projectDeadline"><b>Project deadline</b></label><br>
       <input id="projectDeadline" name="projectDeadline" type="text" placeholder="Project deadline" th:value="${project.getProject_deadline}">
+      <br><br>
+      <label for="projectHours"><b>Project hours</b></label><br>
       <input id="projectHours" name="projectHours" type="text" placeholder="Project hours" th:value="${project.getProject_hours}">
+      <br><br>
+      <label for="projectStatus"><b>Project status</b></label><br>
       <input id="projectStatus" name="projectStatus" type="text" placeholder="Project status" th:value="${project.getProject_status}">
-      <input id="edit-button" type="submit" value="Update">
+      <br><br>
+      <button id="edit-button" type="submit">Update</button>
+      <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
 
     </form>
   </div>
