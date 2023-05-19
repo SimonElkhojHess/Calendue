@@ -202,10 +202,10 @@ input[type=text]
     grid-row: 1/5;
     margin:40px 0 0 0;
     height:80%;
-    background-color: #a2e9e9;
+    background-color: white;
     color: black;
     border-radius: 5px 5px 5px 5px;
-    border: 4px inset #a2e9e9;
+    border: 4px inset #c0e1e1;
 }
 
 #assignment-object
@@ -217,7 +217,7 @@ input[type=text]
     margin: 5px 0 10px 10px;
     height:2.5rem;
     border-radius: 10px 10px 10px 10px;
-    background-color: #8ED0AB;
+    background-color: #a2e9e9;
     box-shadow: 2px 4px 2px #727391;
 }
 
@@ -293,7 +293,7 @@ input[type=text]
     height:25rem;
     width:20rem;
     font-size:18px;
-    background-color:#8ED0AB;
+    background-color:#a2e9e9;
     border-radius:10px 10px 10px 10px;
     box-shadow: 10px 10px 5px #727391;
     transition: transform 200ms ease-in-out;
@@ -366,6 +366,6 @@ input[type=text]
 
 .subproject-outerbox
 {
-    background-color: #a2e9e9;
+    background-color: white;
 }
 
