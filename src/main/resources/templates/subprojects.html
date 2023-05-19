@@ -38,9 +38,11 @@
       <span id="manhours-total" th:text="${project.project_hours}"></span>
     </div>
     <a id="edit-project-button" href="/editproject" th:href="@{'/editproject/'+${project.project_id}}" th:if="${session.project_role == 'Project Leader'}"><div>Edit project</div></a>
-    <div id="assign-form">
+
+    <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
       <form action="/assignproject" method="post">
         <input name="projectId" type="hidden" th:value="${project.getProject_id}">
+        <label for="assign-email">Enter E-mail</label>
         <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail..." required>
 
         <datalist id="email-box" size="5">
@@ -55,6 +57,31 @@
         <input id="assign-project-button" type="submit" value="Assign">
       </form>
     </div>
+
+    <button class="open-editroles-button" onclick="openCreateForm()" th:if="${session.project_role == 'Project Leader'}">Edit Participants</button>
+    <div class="editroles-popup" id="myEditRoleForm">
+      <h2>Edit Participants</h2>
+      <div class="editroles-popup-outerbox">
+        <div id="editroles-popup-user-object" th:each="user : ${assignedusers}">
+          <div id="editroles-popup-user-fullname" th:text="${user.getFull_name}">Full name</div>
+          <div id="editroles-popup-user-email" th:text="${user.getEmail}">Email adress</div>
+          <div id="editroles-popup-user-role">
+            <form action="/editrole" method="post">
+              <input type="hidden" name="user_id" th:value="${user.getUser_id}">
+              <input type="hidden" name="project_id" th:value="${project.getProject_id}">
+              <select id="edit-roles" name="role">
+                <option value="Developer" th:selected="${user.getRole == 'Developer'}">Developer</option>
+                <option value="Project Leader" th:selected="${user.getRole == 'Project Leader'}">Project Leader</option>
+                <input id="editroles-popup-submit-button" type="submit" value="Submit">
+              </select>
+            </form>
+          </div>
+        </div>
+      </div>
+      <button class="close-editroles-button" onclick="closeCreateForm()">Close</button>
+    </div>
+
+
 
       <div id="create-subproject-form">
         <form action="/createsubproject" method="post">
@@ -88,7 +115,16 @@
   </div>
   </div>
 </div>
+<script>
+  function openCreateForm() {
+    document.getElementById("myEditRoleForm").style.display = "block";
+  }
 
+  function closeCreateForm() {
+    document.getElementById("myEditRoleForm").style.display = "none";
+  }
+
+</script>
 </body>
 <footer th:insert="~{fragments/navigation.html :: footer}"></footer>
 </html>

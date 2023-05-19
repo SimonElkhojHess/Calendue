@@ -128,8 +128,8 @@ public class HomeController {
         model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
         model.addAttribute("all_users", userRepo.getAllUsers());
 
-        //int tempID = (int) session.getAttribute("user_id");
-        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID,project_id));
+        int tempID = (int) session.getAttribute("user_id");
+        session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
         return "subprojects";
     }
 
@@ -160,13 +160,20 @@ public class HomeController {
 
 
    @PostMapping("/assignproject")
-    public String assignUser(@RequestParam("email")String email, @RequestParam("role")String role, @RequestParam("projectId")int projectId, HttpSession session)
+    public String assignUser(@RequestParam("assign-email")String email, @RequestParam("role")String role, @RequestParam("projectId")int projectId, HttpSession session)
    {
        int assignuserId = userRepo.getUserIDFromEmail(email);
        project_userRepo.setRole(projectId, assignuserId, role);
        return "redirect:/project/" + projectId;
-
    }
+
+   @PostMapping("/editrole")
+   public String editRole(@RequestParam("user_id")int user_id, @RequestParam("project_id")int project_id, @RequestParam("role")String role)
+   {
+        project_userRepo.updateRole(project_id, user_id, role);
+        return "redirect:/project/" + project_id;
+   }
+
 
     @GetMapping("/manage")
     public String showManageUsers(HttpSession session, Model model)
