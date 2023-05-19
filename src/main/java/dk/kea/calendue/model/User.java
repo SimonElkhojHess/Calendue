@@ -2,17 +2,47 @@ package dk.kea.calendue.model;
 
 public class User
 {
-    int user_id;
-    String username;
-    String email;
-    int is_admin;
-    String full_name;
-    String role;
+    private int user_id;
+    private String username;
+    private String email;
+    private int is_admin;
+    private String full_name;
+    private String role;
+
+    private String password;
+
 
     public User(int user_id, String username, String email, int is_admin)
     {
         this.user_id = user_id;
         this.username = username;
+        this.email = email;
+        this.is_admin = is_admin;
+    }
+    public User(int user_id, String username, String email, int is_admin, String full_name)
+    {
+        this.user_id = user_id;
+        this.username = username;
+        this.email = email;
+        this.is_admin = is_admin;
+        this.full_name = full_name;
+    }
+    public User(int user_id, String username,String full_name, String password, String email, int is_admin)
+    {
+        this.user_id = user_id;
+        this.username = username;
+        this.full_name = full_name;
+        this.password = password;
+        this.email = email;
+        this.is_admin = is_admin;
+
+    }
+
+    public User(String username, String full_name, String password, String email, int is_admin)
+    {
+        this.username = username;
+        this.full_name = full_name;
+        this.password = password;
         this.email = email;
         this.is_admin = is_admin;
     }
@@ -26,7 +56,11 @@ public class User
         this.role = role;
     }
 
+
+
+
     public User(){}
+
 
     public String getFull_name() {
         return full_name;
@@ -82,6 +116,11 @@ public class User
     public void setIs_admin(int is_admin)
     {
         this.is_admin = is_admin;
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 
     @Override

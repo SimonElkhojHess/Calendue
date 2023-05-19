@@ -158,11 +158,65 @@ public class HomeController {
         return "myprojects";
     }
 
+
    @PostMapping("/assignproject")
     public String assignUser(@RequestParam("email")String email, @RequestParam("role")String role, @RequestParam("projectId")int projectId, HttpSession session)
+   {
+       int assignuserId = userRepo.getUserIDFromEmail(email);
+       project_userRepo.setRole(projectId, assignuserId, role);
+       return "redirect:/project/" + projectId;
+
+   }
+
+    @GetMapping("/manage")
+    public String showManageUsers(HttpSession session, Model model)
     {
-        int assignuserId = userRepo.getUserIDFromEmail(email);
-        project_userRepo.setRole(projectId, assignuserId, role);
-        return "redirect:/project/" + projectId;
+        model.addAttribute("userlist", userRepo.getAllUsersForAdmin());
+        return "manageusers";
+    }
+
+    @GetMapping("/editusers/{id}")
+    public String showEditUsers(@PathVariable("id")int tempId, Model model)
+    {
+        model.addAttribute("oneuser", userRepo.getOneUser(tempId));
+        return "editusers";
+    }
+
+    @PostMapping("/edituser")
+    public String editUser(@RequestParam("user_id") int user_id, @RequestParam("edit-username")String username, @RequestParam("edit-password")String password, @RequestParam("edit-email")String email, @RequestParam("edit-admin-privilege")int is_admin, @RequestParam("edit-full_name")String full_name)
+    {
+        if(password.length() > 0){
+            password = userRepo.encodePassword(password);
+        }
+        else
+        {
+            password = "noEdit";
+        }
+        User user = new User(user_id, username, full_name, password, email, is_admin);
+        userRepo.editUser(user);
+
+        return "redirect:/manage";
+    }
+
+    @PostMapping("/createuser")
+    public String createUser(@RequestParam("create-username") String username, @RequestParam("create-full_name")String fullname, @RequestParam("create-password")String password, @RequestParam("create-email")String email, @RequestParam("create-admin-privilege")int is_admin)
+    {
+        if(is_admin != 1)
+        {
+            is_admin = 0;
+        }
+        password = userRepo.encodePassword(password);
+        User user = new User(username, fullname, password, email, is_admin);
+        userRepo.createUser(user);
+
+        return "redirect:/manage";
+    }
+
+    @PostMapping("/deleteuser")
+    public String deleteUser(@RequestParam("user_id")int userID)
+    {
+        userRepo.deleteUser(userID);
+
+        return "redirect:/manage";
     }
 }

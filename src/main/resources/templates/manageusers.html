@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage users</title>
+    <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+    <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+    <link rel="stylesheet" th:href="@{../css/manageusers.css}" href="../static/css/manageusers.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+
+    <div class="outer-container">
+        <div class="create-project">
+            <button class="open-create-button" onclick="openCreateForm()">Create User</button>
+        </div>
+
+        <div class="user-list" >
+            <div class="user-object" th:each="user : ${userlist}">
+                <div class="user-object-fullname" th:text="${user.full_name}">name</div>
+                <div class="user-object-email" th:text="${user.email}"></div>
+                <div class="user-object-username">
+                    <span>Username: </span>
+                    <span th:text="${user.username}"></span>
+                </div>
+                <div class="user-object-isadmin">
+                    <span th:if="${user.is_admin == 0}">Admin: No</span>
+                    <span th:if="${user.is_admin == 1}">Admin: Yes</span>
+                </div>
+                <div class="submit-edit-button"><a th:href="@{'/editusers/'+${user.getUser_id}}">Edit user</a></div>
+            </div>
+
+
+        </div>
+
+        <div class="form-popup" id="myCreateForm">
+            <form action="/createuser" method="post" class="form-container">
+                <h1>Create User</h1>
+                <br>
+                <label for="create-username"><b>Username</b></label><br>
+                <input id="create-username" name="create-username" type="text" placeholder="Enter Username..." required>
+                <br>
+                <label for="create-full_name"><b>Full name</b></label><br>
+                <input id="create-full_name" name="create-full_name" type="text" placeholder="Enter Full name..." required>
+                <br>
+                <label for="create-password"><b>Password</b></label><br>
+                <input id="create-password" name="create-password" type="password" placeholder="Enter Password..." required>
+                <br>
+                <label for="create-email"><b>Email</b></label><br>
+                <input id="create-email" name="create-email" type="text" placeholder="Enter Email..." required>
+                <br>
+                <p><b>Give admin privileges?</b></p>
+                <input id="create-admin-privilege-yes" name="create-admin-privilege" type="radio" value="1">
+                <label for="create-admin-privilege-yes"><b>Yes</b></label>
+                <input id="create-admin-privilege-no" name="create-admin-privilege" type="radio" value="0" checked>
+                <label for="create-admin-privilege-no"><b>No</b></label>
+                <br>
+                <button class="submit-create-button" type="submit" >Create user</button>
+                <button class="btn cancel" type="button" onclick="closeCreateForm()">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+
+
+<script>
+    function openCreateForm() {
+        document.getElementById("myCreateForm").style.display = "block";
+    }
+
+    function closeCreateForm() {
+        document.getElementById("myCreateForm").style.display = "none";
+    }
+
+</script>
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+</html>

@@ -24,9 +24,9 @@
                 <a style="color:#fa2727; font-weight: bolder; margin-left: 8px;" th:if="${session.wronglogin == true}">Incorrect username or password </a>
                 <form action="/login" method="post">
                     <br>
-                    <input id="username-field" name="username" type="text" placeholder="Enter username...">
+                    <input id="username-field" name="username" type="text" placeholder="Enter username..." required>
                     <br>
-                    <input id="password-field" name="password" type="password" placeholder="Enter password...">
+                    <input id="password-field" name="password" type="password" placeholder="Enter password..." required>
                     <br>
                     <input id="submit-button" type="submit" value="Login">
                 </form>
