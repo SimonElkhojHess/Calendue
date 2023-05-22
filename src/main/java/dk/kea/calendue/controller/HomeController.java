@@ -191,6 +191,13 @@ public class HomeController {
         return "redirect:/project/" + project_id;
    }
 
+   @GetMapping("/projectassignment/delete/{user_id}/{project_id}")
+   public String deleteProjectAssignment(@PathVariable("user_id")int user_id, @PathVariable("project_id")int project_id)
+   {
+       project_userRepo.deleteProjectAssignment(user_id, project_id);
+
+       return "redirect:/project/"+project_id;
+   }
 
     @GetMapping("/manage")
     public String showManageUsers(HttpSession session, Model model)

@@ -108,7 +108,6 @@ public class Project_userRepository {
             {
                 exists = true;
             }
-
         }
         catch(SQLException e)
         {
@@ -116,5 +115,23 @@ public class Project_userRepository {
             System.out.println("Could not look for project-user assignment");
         }
         return exists;
+    }
+
+    public void deleteProjectAssignment(int userId, int projectId)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "DELETE FROM calendue.project_user " +
+                    "WHERE user_id = " + userId +
+                    " AND project_id = " + projectId;
+            statement.executeUpdate(SQL_QUERY);
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not delete project-user assignment");
+        }
     }
 }

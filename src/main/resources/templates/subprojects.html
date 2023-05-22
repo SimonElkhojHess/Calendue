@@ -77,6 +77,11 @@
               </select>
             </form>
           </div>
+          <div id="editroles-popup-user-delete">
+            <a  id="editroles-popup-user-delete-alink" th:href="@{'/projectassignment/delete/' + ${user.user_id} + '/' + ${project.project_id}}">
+              <p style="font-size:14px; margin:3px 0 0 5px; overflow:hidden; font-weight: bold;">Remove</p>
+            </a>
+          </div>
         </div>
       </div>
       <button class="close-editroles-button" onclick="closeCreateForm()">Close</button>
