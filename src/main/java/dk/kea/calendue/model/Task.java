@@ -15,6 +15,9 @@ public class Task
     private int task_priority;
     private String task_status;
 
+    public Task()
+    {}
+
     public Task(int task_id, int subproject_id, String task_name, String task_description, String task_comment, String task_start, int task_hours, int task_priority, String task_status)
     {
         this.task_id = task_id;

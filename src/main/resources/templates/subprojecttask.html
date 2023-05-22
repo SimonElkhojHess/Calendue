@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+  <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+  <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+  <link rel="stylesheet" th:href="@{../css/subprojecttask.css}" href="../static/css/subprojecttask.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+<div class="outer-box">
+    <div class="grid-box">
+        <div id="subproject-name" th:text="${subproject.subproject_name}">Project name</div>
+        <div id="subproject-desc" th:text="${subproject.subproject_description}">Project description</div>
+
+        <div id="subproject-deadline">
+            <span id="deadline-headline">Deadline: <br></span>
+            <span id="deadline-date" th:text="${subproject.subproject_deadline}"></span>
+        </div>
+
+        <div id="subproject-status">
+            <span id="status-headline">Status: <br></span>
+            <span id="status-current" th:text="${subproject.subproject_status}"></span>
+        </div>
+
+
+        <div id="subproject-hours">
+            <span id="manhours-headline">Total man-hours: <br></span>
+            <span id="manhours-total" th:text="${subproject.subproject_hours}"></span>
+        </div>
+        <button id="edit-subproject-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Subproject</button>
+
+        <!-- <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
+            <form action="/assignproject" method="post">
+                <input name="projectId" type="hidden" th:value="${project.getProject_id}">
+                <label for="assign-email">Enter E-mail</label>
+                <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail..." required>
+
+                <datalist id="email-box" size="5">
+                    <option th:each="users : ${all_users}" th:value="${users.email}">
+                    </option>
+                </datalist>
+                <label for="assign-roles">Assign a role:</label>
+                <select id="assign-roles" name="role">
+                    <option value="Developer" selected>Developer</option>
+                    <option value="Project Leader">Project Leader</option>
+                </select>
+                <input id="assign-project-button" type="submit" value="Assign">
+            </form>
+        </div> -->
+
+        <!-- <button class="open-editroles-button" onclick="openCreateForm()" th:if="${session.project_role == 'Project Leader'}">Edit Participants</button>
+        <div class="editroles-popup" id="myEditRoleForm">
+            <h2>Edit Participants</h2>
+            <div class="editroles-popup-outerbox">
+                <div id="editroles-popup-user-object" th:each="user : ${assignedusers}">
+                    <div id="editroles-popup-user-fullname" th:text="${user.getFull_name}">Full name</div>
+                    <div id="editroles-popup-user-email" th:text="${user.getEmail}">Email adress</div>
+                    <div id="editroles-popup-user-role">
+                        <form action="/editrole" method="post">
+                            <input type="hidden" name="user_id" th:value="${user.getUser_id}">
+                            <input type="hidden" name="project_id" th:value="${project.getProject_id}">
+                            <select id="edit-roles" name="role">
+                                <option value="Developer" th:selected="${user.getRole == 'Developer'}">Developer</option>
+                                <option value="Project Leader" th:selected="${user.getRole == 'Project Leader'}">Project Leader</option>
+                                <input id="editroles-popup-submit-button" type="submit" value="Submit">
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <button class="close-editroles-button" onclick="closeCreateForm()">Close</button>
+        </div> -->
+
+
+
+        <div id="create-task-form">
+            <form action="/createtask" method="post">
+                <input name="subprojectId" type="hidden" th:value="${subproject.getSubproject_id}">
+                <input id="create-task-name" name="taskName" type="text" placeholder="Task title...">
+                <input id="create-task-button" type="submit" value="Create task" required>
+            </form>
+        </div>
+
+        <!-- Lav om til at det er dem der er assigned til task, som bliver listet -->
+        <div id="subproject-participants">
+            <div id="assignment-object" th:each="user : ${assignedusers}">
+                <div id="assigned-user-fullname" th:text="${user.full_name}"></div>
+                <div id="assigned-user-role" th:text="${user.role}"></div>
+                <div id="assigned-user-email" th:text="${user.email}"></div>
+            </div>
+        </div>
+        <div id="participants-headline">Participants in the subproject</div>
+    </div>
+
+    <div class="task-outerbox">
+        <div th:each="task : ${tasks}">
+            <a href="/allsubprojecttasks" th:href="@{'/task/'+${task.getTask_id}}">
+            <div class="task-element">
+                <div id="task-name" th:text="${task.task_name}"></div>
+            <div id="task_priority-title">Priority:</div>
+            <div id="task_priority" th:text="${task.task_priority}"></div>
+            <div id="task_start-title">Start date:</div>
+            <div id="task_start" th:text="${task.task_start}"></div>
+            <div id="task_status-title">Status:</div>
+            <div id="task_status" th:text="${task.task_status}"></div>
+            <div id="task_description-title">Description:</div>
+            <div id="task_description" th:text="${task.task_description}"></div>
+            </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="edit-form-popup" id="editForm">
+        <form action="/editsubproject" method="post">
+
+            <input id="subprojectID" name="subprojectID" type="hidden" th:value="${subproject.getSubproject_id}">
+            <label for="subprojectName"><b>Subproject name</b></label><br>
+            <input id="subprojectName" name="subprojectName" type="text" placeholder="Subproject name" th:value="${subproject.getSubproject_name}">
+            <br><br>
+            <label for="subprojectDescription"><b>Subproject description</b></label><br>
+            <textarea id="subprojectDescription" name="subprojectDescription" type="text" placeholder="Subproject description" th:text="${subproject.getSubproject_description}"></textarea>
+            <br><br>
+            <label for="subprojectDeadline"><b>Subproject deadline</b></label><br>
+            <input id="subprojectDeadline" name="subprojectDeadline" type="text" placeholder="Subproject deadline" th:value="${subproject.getSubproject_deadline}">
+            <br><br>
+            <label for="subprojectHours"><b>Subproject hours</b></label><br>
+            <input id="subprojectHours" name="subprojectHours" type="text" placeholder="Subproject hours" th:value="${subproject.getSubproject_hours}">
+            <br><br>
+            <label for="subprojectStatus"><b>Subproject status</b></label><br>
+            <input id="subprojectStatus" name="subprojectStatus" type="text" placeholder="Subproject status" th:value="${subproject.getSubproject_status}">
+            <br><br>
+            <button id="edit-button" type="submit">Update</button>
+            <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
+
+        </form>
+    </div>
+</div>
+<script>
+    function openCreateForm() {
+        document.getElementById("myEditRoleForm").style.display = "block";
+    }
+
+    function closeCreateForm() {
+        document.getElementById("myEditRoleForm").style.display = "none";
+    }
+
+
+
+
+
+    function openEditForm()
+    {
+        document.getElementById("editForm").style.display = "block";
+    }
+
+    function closeEditForm()
+    {
+        document.getElementById("editForm").style.display = "none";
+    }
+
+</script>
+</body>
+
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+
+</html>

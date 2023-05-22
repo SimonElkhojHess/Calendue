@@ -1,6 +1,7 @@
 package dk.kea.calendue.controller;
 
 import dk.kea.calendue.model.Project;
+import dk.kea.calendue.model.Task;
 import dk.kea.calendue.model.User;
 import dk.kea.calendue.repository.*;
 import dk.kea.calendue.repository.ProjectRepository;
@@ -248,4 +249,58 @@ public class HomeController {
 
         return "redirect:/project/" + tempID;
     }
+
+    @GetMapping("/subproject/{id}")
+    public String showSubproject(@PathVariable("id")int subproject_id, HttpSession session, Model model)
+    {
+        /*if (session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }*/
+        model.addAttribute("subproject", subprojectRepo.getOneSubproject(subproject_id));
+        model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
+        //model.addAttribute("assignedusers", userRepo.getUsersOnProject(subproject_id));
+        //model.addAttribute("all_users", userRepo.getAllUsers());
+
+        //int tempID = (int) session.getAttribute("user_id");
+
+        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
+
+        return "subprojecttask";
+    }
+
+    @PostMapping("/createtask")
+    public String createTask(@RequestParam("taskName") String task_name, HttpSession session)
+    {
+        Task tempTask = new Task();
+
+        tempTask.setTask_name(task_name);
+
+        taskRepo.createTask(tempTask);
+
+        int tempTaskID = taskRepo.getMaxTaskId();
+
+
+        return "redirect:/task/" + tempTaskID;
+    }
+
+    @GetMapping("/task/{id}")
+    public String showTask(@PathVariable("id")int task_id, HttpSession session, Model model)
+    {
+        /*if (session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }*/
+        //model.addAttribute("subproject", subprojectRepo.getOneSubproject(subproject_id));
+        //model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
+        //model.addAttribute("assignedusers", userRepo.getUsersOnProject(subproject_id));
+        //model.addAttribute("all_users", userRepo.getAllUsers());
+
+        //int tempID = (int) session.getAttribute("user_id");
+
+        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
+
+        return "task";
+    }
+
 }

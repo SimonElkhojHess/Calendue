@@ -1,15 +1,13 @@
 package dk.kea.calendue.repository;
 
+import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Task;
 import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.tags.form.SelectTag;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,6 +151,52 @@ public class TaskRepository
         }
         return tList;
     }
+
+    public void createTask(Task task)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String CREATE_QUERY =
+                    "INSERT INTO calendue.task(task_name) VALUES (?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setString(1, task.getTask_name());
+
+            preparedStatement.executeUpdate();
+
+
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not create new task");
+        }
+    }
+
+    public int getMaxTaskId()
+    {
+        int tempTaskID = -99;
+        try{
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT MAX(task_id) FROM calendue.task";
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+            if(resultSet.next())
+            {
+                tempTaskID = resultSet.getInt(1);
+            }
+
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not find max task id ");
+        }
+
+        return tempTaskID;
+    }
+
 
 
 }
