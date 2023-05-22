@@ -162,6 +162,18 @@ public class HomeController {
         return "myprojects";
     }
 
+    @GetMapping("/mytasks")
+    public String showMyTasks(Model model, HttpSession session)
+    {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
+        int user_id = (int) session.getAttribute("user_id");
+        model.addAttribute("allmytasklist", taskRepo.getMyTasks(user_id));
+        session.setAttribute("currentpage", "/mytasks");
+        return "mytasks";
+    }
 
 
    @PostMapping("/assignproject")

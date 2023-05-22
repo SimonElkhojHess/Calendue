@@ -50,7 +50,8 @@
                        <span>Start date</span>
                    </div>
                    <div class="deadline-box">
-                       <span>Deadline</span>
+                       <span th:if="${session.currentpage != '/mytasks'}">Deadline</span>
+                       <span th:if="${session.currentpage == '/mytasks'}">Hours</span>
                    </div>
                </div>
            </div>
@@ -89,6 +90,23 @@
         </a>
     </div>
 
+    <div th:if="${session.currentpage == '/mytasks'}" th:each="task : ${allmytasklist}">
+        <a href="/mytask" th:href="@{'/task/' + ${task.task_id}}">
+            <div class="project-box">
+
+                <div class="project-title">
+                    <span th:text="${task.getTask_name}">*Task from database*</span>
+                </div>
+                <div class="project-start">
+                    <span th:text="${task.getTask_start}">*Task from database*</span>
+                </div>
+                <div class="project-deadline">
+                    <span th:text="${task.getTask_hours}">*Task from database*</span>
+                </div>
+
+            </div>
+        </a>
+    </div>
 </div>
 </body>
 

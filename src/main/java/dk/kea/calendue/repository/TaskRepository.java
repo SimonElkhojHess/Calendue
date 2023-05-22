@@ -36,11 +36,11 @@ public class TaskRepository
             Statement statement = connection.createStatement();
             final String SQL_QUERY =
 
-                    "SELECT * FROM calendue.task " +
-                            "WHERE task_id IN" +
-                    ("SELECT task_id " +
-                            "FROM calendue.task_user " +
-                            "WHERE user_id =" + user_id);
+                    "SELECT t.* " +
+                            "FROM calendue.task t JOIN calendue.task_user u " +
+                                "WHERE t.task_id = u.task_id" +
+                                    " AND u.user_id = "+user_id+
+                                        " ORDER BY t.task_start, t.task_priority DESC";
 
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
 
