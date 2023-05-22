@@ -202,7 +202,9 @@ public class UserRepository
         try
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
-            String SEARCH_QUERY = "SELECT user_id" + " FROM calendue.user" + " WHERE email = ?";
+            String SEARCH_QUERY = "SELECT user_id"
+                    + " FROM calendue.user"
+                    + " WHERE email = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
 
@@ -214,7 +216,8 @@ public class UserRepository
             {
                 assignuserId = resultSet.getInt(1);
             }
-        } catch (SQLException e)
+        }
+        catch (SQLException e)
         {
             e.printStackTrace();
             System.out.println("Could not get user ID from email");
@@ -222,6 +225,32 @@ public class UserRepository
 
         return assignuserId;
 
+    }
+
+    public boolean doesEmailExist(String email)
+    {
+        boolean exists = false;
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String SQL_QUERY = "SELECT COUNT(email) FROM calendue.user WHERE email = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_QUERY);
+
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int emailCounter = resultSet.getInt(1);
+            if(emailCounter > 0)
+            {
+                exists = true;
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not look for existing email");
+        }
+        return exists;
     }
 
     //Get all users for admin method

@@ -39,17 +39,17 @@
       <span id="manhours-total" th:text="${project.project_hours}"></span>
     </div>
     <button id="edit-project-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Project</button>
-
+    <a id="assign-project-error" th:if="${session.assign_project_error == true}">Incorrect e-mail</a>
     <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
       <form action="/assignproject" method="post">
         <input name="projectId" type="hidden" th:value="${project.getProject_id}">
         <label for="assign-email">Enter E-mail</label>
         <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail..." required>
-
         <datalist id="email-box" size="5">
              <option th:each="users : ${all_users}" th:value="${users.email}">
              </option>
         </datalist>
+
         <label for="assign-roles">Assign a role:</label>
         <select id="assign-roles" name="role">
           <option value="Developer" selected>Developer</option>

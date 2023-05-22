@@ -121,10 +121,10 @@ public class HomeController {
     @GetMapping("/project/{id}")
     public String showProject(@PathVariable("id")int project_id, HttpSession session, Model model)
     {
-        /*if (session.getAttribute("user_id") == null)
+        if (session.getAttribute("user_id") == null)
         {
             return "redirect:/login";
-        }*/
+        }
         model.addAttribute("project", projectRepo.getOneProject(project_id));
         model.addAttribute("subprojects", subprojectRepo.getAllSubprojects(project_id));
         model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
@@ -167,8 +167,20 @@ public class HomeController {
    @PostMapping("/assignproject")
     public String assignUser(@RequestParam("assign-email")String email, @RequestParam("role")String role, @RequestParam("projectId")int projectId, HttpSession session)
    {
-       int assignuserId = userRepo.getUserIDFromEmail(email);
-       project_userRepo.setRole(projectId, assignuserId, role);
+       if(userRepo.doesEmailExist(email))
+       {
+           session.setAttribute("assign_project_error", false);
+           int assignuserId = userRepo.getUserIDFromEmail(email);
+
+           if(!project_userRepo.doesAssignmentExist(assignuserId, projectId))
+           {
+               project_userRepo.setRole(projectId, assignuserId, role);
+           }
+       }
+       else
+       {
+           session.setAttribute("assign_project_error", true);
+       }
        return "redirect:/project/" + projectId;
    }
 

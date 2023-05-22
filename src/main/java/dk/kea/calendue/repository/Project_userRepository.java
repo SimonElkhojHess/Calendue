@@ -88,4 +88,17 @@ public class Project_userRepository {
         return tempProjectID;
     }*/
 
+    public boolean doesAssignmentExist(int userId, int projectId)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not look for project-user assignment");
+        }
+    }
 }
