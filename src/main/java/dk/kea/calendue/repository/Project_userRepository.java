@@ -90,9 +90,24 @@ public class Project_userRepository {
 
     public boolean doesAssignmentExist(int userId, int projectId)
     {
+        boolean exists = false;
         try
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY =
+                    "SELECT COUNT(user_id)" +
+                        " FROM calendue.project_user" +
+                            " WHERE user_id = " + userId +
+                                " AND project_id = " + projectId;
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            resultSet.next();
+            int existCounter = resultSet.getInt(1);
+            if(existCounter > 0)
+            {
+                exists = true;
+            }
 
         }
         catch(SQLException e)
@@ -100,5 +115,6 @@ public class Project_userRepository {
             e.printStackTrace();
             System.out.println("Could not look for project-user assignment");
         }
+        return exists;
     }
 }
