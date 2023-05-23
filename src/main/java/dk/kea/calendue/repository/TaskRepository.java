@@ -198,5 +198,34 @@ public class TaskRepository
     }
 
 
+    public Task getOneTask(int taskId)
+    {
+        Task task = new Task();
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT task_name, task_description, task_comment, task_start, task_hours, task_priority, task_status" +
+                                        " FROM calendue.task WHERE task_id = " + taskId;
 
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+            if(resultSet.next())
+            {
+                task.setTask_name(resultSet.getString(1));
+                task.setTask_description(resultSet.getString(2));
+                task.setTask_comment(resultSet.getString(3));
+                task.setTask_start(resultSet.getString(4));
+                task.setTask_hours(resultSet.getInt(5));
+                task.setTask_priority(resultSet.getInt(6));
+                task.setTask_status(resultSet.getString(7));
+            }
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not find specific task");
+        }
+
+        return task;
+    }
 }

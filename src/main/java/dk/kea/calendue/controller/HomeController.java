@@ -25,9 +25,10 @@ public class HomeController {
     private SubprojectRepository subprojectRepo;
     private TaskRepository taskRepo;
     private Project_userRepository project_userRepo;
+    private Task_userRepository task_userRepo;
 
 
-    public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo, Project_userRepository project_userRepo)
+    public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo, Project_userRepository project_userRepo, Task_userRepository task_userRepo)
 
     {
         this.userRepo = userRepo;
@@ -35,6 +36,13 @@ public class HomeController {
         this.subprojectRepo = subprojectRepo;
         this.taskRepo = taskRepo;
         this.project_userRepo = project_userRepo;
+        this.task_userRepo = task_userRepo;
+    }
+
+    @GetMapping("/")
+    public String redirectLogin()
+    {
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -291,14 +299,11 @@ public class HomeController {
         {
             return "redirect:/login";
         }*/
-        //model.addAttribute("subproject", subprojectRepo.getOneSubproject(subproject_id));
+        model.addAttribute("task", taskRepo.getOneTask(task_id));
+        model.addAttribute("assignedusers", task_userRepo.getUsersOnTask(task_id));
+        model.addAttribute("all_users", userRepo.getAllUsers());
         //model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
-        //model.addAttribute("assignedusers", userRepo.getUsersOnProject(subproject_id));
-        //model.addAttribute("all_users", userRepo.getAllUsers());
-
         //int tempID = (int) session.getAttribute("user_id");
-
-        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
 
         return "task";
     }
