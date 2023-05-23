@@ -59,6 +59,7 @@ public class Task_userRepository
     {
         ArrayList<User> userList = new ArrayList<>();
         ArrayList<User> removeDuplicates = new ArrayList<>();
+        ArrayList<User> userList2 = new ArrayList<>();
         try
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
@@ -82,14 +83,16 @@ public class Task_userRepository
                 user.setFull_name(resultSet.getString(4));
                 userList.add(user);
             }
-            
-            for(int i = 0; i<userList.size();i++)
+            HashSet h = new HashSet(userList);
+            userList2 = new ArrayList<>(h);
+
+            /*  for(int i = 0; i<userList.size();i++)
             {
                 if(!removeDuplicates.contains(userList.get(i)))
                 {
                     removeDuplicates.add(userList.get(i));
                 }
-            }
+            } */
         }
         catch (SQLException e)
         {
@@ -97,6 +100,6 @@ public class Task_userRepository
             System.out.println("Could not get users on subproject");
         }
 
-        return removeDuplicates;
+        return userList2;
     }
 }
