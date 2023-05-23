@@ -257,6 +257,32 @@ public class TaskRepository
         }
     }
 
+    public int getProjectIdFromTaskId(int taskId)
+    {
+        int projectId = 0;
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY=
+                    "SELECT s.project_id " +
+                            "FROM calendue.task t JOIN calendue.subproject s" +
+                            " WHERE t.task_id = "+ taskId +
+                            " AND t.subproject_id = s.subproject_id";
 
+            ResultSet resultset = statement.executeQuery(SQL_QUERY);
+
+            if(resultset.next())
+            {
+                projectId = resultset.getInt(1);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get project id from task id");
+        }
+        return projectId;
+    }
 
 }

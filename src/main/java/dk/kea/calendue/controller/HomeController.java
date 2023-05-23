@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class HomeController {
 
@@ -299,8 +302,16 @@ public class HomeController {
         {
             return "redirect:/login";
         }
+        int tempProjectId = taskRepo.getProjectIdFromTaskId(task_id);
+        ArrayList<User> newList = (ArrayList<User>) task_userRepo.getUsersOnTask(task_id);
+        for(int i = 0; i < newList.size(); i++)
+        {
+            int tempUser_id = newList.get(i).getUser_id();
+            String newRole = projectRepo.getUserProjectAssignment(tempUser_id, tempProjectId);
+            newList.get(i).setRole(newRole);
+        }
         model.addAttribute("task", taskRepo.getOneTask(task_id));
-        model.addAttribute("assignedusers", task_userRepo.getUsersOnTask(task_id));
+        model.addAttribute("assignedusers", newList);
         model.addAttribute("all_users", userRepo.getAllUsers());
         //model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
         //int tempID = (int) session.getAttribute("user_id");
@@ -311,7 +322,17 @@ public class HomeController {
     public String assigntToTask(@RequestParam("task-id")int taskId, @RequestParam("assign-email")String email, HttpSession session)
     {
         int tempUserId = userRepo.getUserIDFromEmail(email);
-        task_userRepo.assignUserToTask(taskId, tempUserId);
+        int tempProjectId = taskRepo.getProjectIdFromTaskId(taskId);
+
+        if (project_userRepo.doesAssignmentExist(tempUserId, tempProjectId))
+        {
+            task_userRepo.assignUserToTask(taskId, tempUserId);
+            session.setAttribute("emailerror", false);
+        }
+        else
+        {
+            session.setAttribute("emailerror", true);
+        }
 
         return "redirect:/task/"+taskId;
     }
