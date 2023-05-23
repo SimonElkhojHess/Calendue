@@ -12,7 +12,7 @@
     grid-template-rows: repeat(4, 1fr);
     width:100%;
     height: 25rem;
-    background-color: #1d3c65;
+    background-color: #526a7a;
 }
 
 .grid-box div
@@ -134,8 +134,9 @@
     width:7.5rem;
     padding-top:5px;
     text-align: center;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;
+    border:1px solid black;
     color:black;
     cursor:pointer;
     z-index:10;
@@ -180,7 +181,7 @@ input[type=text]
     width:7.5rem;
     padding-top:5px;
     text-align: center;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;
     color:black;
     cursor:pointer;
@@ -217,7 +218,8 @@ input[type=text]
     margin: 5px 0 10px 10px;
     height:2.5rem;
     border-radius: 10px 10px 10px 10px;
-    background-color: #a2e9e9;
+    border:1px solid black;
+    background-color: white;
     box-shadow: 2px 4px 2px #727391;
 }
 
@@ -264,7 +266,7 @@ input[type=text]
     height: 1.5rem;
     width: 7.5rem;
     border-radius:10px 10px 10px 10px;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     cursor: pointer;
 }
 
@@ -293,7 +295,8 @@ input[type=text]
     height:25rem;
     width:20rem;
     font-size:18px;
-    background-color:#a2e9e9;
+    background-color:white;
+    border:1px solid black;
     border-radius:10px 10px 10px 10px;
     box-shadow: 10px 10px 5px #727391;
     transition: transform 200ms ease-in-out;

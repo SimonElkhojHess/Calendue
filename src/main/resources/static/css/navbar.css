@@ -14,7 +14,7 @@
     height:4rem;
     grid-template-columns: repeat(12, auto);
     align-content: space-evenly;
-    background-color: #c2ebf6;
+    background-color: #b0d4de;
     font-family: 'Poiret One', cursive;
     font-weight: bold;
     font-size: 1.5rem;
@@ -23,7 +23,7 @@
 
 .navbar a:hover
 {
-    color: #255188;
+    color: #5f85b4;
     text-decoration: underline;
 }
 .navbar div
