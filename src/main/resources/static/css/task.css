@@ -75,7 +75,12 @@
     font-weight: bold;
     color: #ffffff;
 }
-
+#task-status-current
+{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+}
 #task-start
 {
     grid-column: 5/7;

@@ -308,10 +308,21 @@ public class HomeController {
     }
 
     @PostMapping("/assigntask")
-    public String assigntToTask(@RequestParam("task-id")String taskId, HttpSession session)
+    public String assigntToTask(@RequestParam("task-id")int taskId, @RequestParam("assign-email")String email, HttpSession session)
     {
+        int tempUserId = userRepo.getUserIDFromEmail(email);
+        task_userRepo.assignUserToTask(taskId, tempUserId);
 
         return "redirect:/task/"+taskId;
     }
+
+    @PostMapping("/edittask")
+    public String editTask(@RequestParam("taskId")int taskId, @RequestParam("taskName")String taskName, @RequestParam("taskDescription")String taskDescription, @RequestParam("taskStart")String taskStart, @RequestParam("taskPriority")int taskPriority, @RequestParam("taskHours")int taskHours, @RequestParam("taskStatus")String taskStatus, HttpSession session)
+    {
+        Task task = new Task(taskId, taskName, taskDescription, taskStart, taskHours, taskPriority, taskStatus);
+        taskRepo.editTask(task);
+        return "redirect:/task/" + taskId;
+    }
+
 
 }

@@ -197,7 +197,6 @@ public class TaskRepository
         return tempTaskID;
     }
 
-
     public Task getOneTask(int taskId)
     {
         Task task = new Task();
@@ -229,4 +228,35 @@ public class TaskRepository
 
         return task;
     }
+
+    public void editTask(Task task)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String UPDATE_QUERY =
+                        "UPDATE calendue.task " +
+                            "SET task_name=?, task_description=?, task_start=?, task_hours=?, task_priority=?, task_status=? " +
+                                "WHERE task_id = " + task.getTask_id();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, task.getTask_name());
+            preparedStatement.setString(2, task.getTask_description());
+            preparedStatement.setString(3, task.getTask_start());
+            preparedStatement.setInt(4, task.getTask_hours());
+            preparedStatement.setInt(5, task.getTask_priority());
+            preparedStatement.setString(6, task.getTask_status());
+
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit task");
+        }
+    }
+
+
+
 }
