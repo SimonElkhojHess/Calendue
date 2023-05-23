@@ -267,7 +267,7 @@ public class HomeController {
         }*/
         model.addAttribute("subproject", subprojectRepo.getOneSubproject(subproject_id));
         model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
-        //model.addAttribute("assignedusers", userRepo.getUsersOnProject(subproject_id));
+        model.addAttribute("assignedusers", task_userRepo.getUsersOnSubproject(subproject_id));
         //model.addAttribute("all_users", userRepo.getAllUsers());
 
         //int tempID = (int) session.getAttribute("user_id");
