@@ -158,13 +158,13 @@ public class TaskRepository
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
             final String CREATE_QUERY =
-                    "INSERT INTO calendue.task(task_name) VALUES (?)";
+                    "INSERT INTO calendue.task(subproject_id, task_name) VALUES (?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
 
-            preparedStatement.setString(1, task.getTask_name());
+            preparedStatement.setInt(1, task.getSubproject_id());
+            preparedStatement.setString(2, task.getTask_name());
 
             preparedStatement.executeUpdate();
-
 
         } catch(SQLException e)
         {
@@ -201,6 +201,7 @@ public class TaskRepository
     public Task getOneTask(int taskId)
     {
         Task task = new Task();
+        task.setTask_id(taskId);
         try
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);

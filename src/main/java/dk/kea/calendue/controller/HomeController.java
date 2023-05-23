@@ -278,12 +278,12 @@ public class HomeController {
     }
 
     @PostMapping("/createtask")
-    public String createTask(@RequestParam("taskName") String task_name, HttpSession session)
+    public String createTask(@RequestParam("taskName") String task_name, @RequestParam("subprojectId")int subproject_id, HttpSession session)
     {
         Task tempTask = new Task();
 
         tempTask.setTask_name(task_name);
-
+        tempTask.setSubproject_id(subproject_id);
         taskRepo.createTask(tempTask);
 
         int tempTaskID = taskRepo.getMaxTaskId();
@@ -295,17 +295,23 @@ public class HomeController {
     @GetMapping("/task/{id}")
     public String showTask(@PathVariable("id")int task_id, HttpSession session, Model model)
     {
-        /*if (session.getAttribute("user_id") == null)
+        if (session.getAttribute("user_id") == null)
         {
             return "redirect:/login";
-        }*/
+        }
         model.addAttribute("task", taskRepo.getOneTask(task_id));
         model.addAttribute("assignedusers", task_userRepo.getUsersOnTask(task_id));
         model.addAttribute("all_users", userRepo.getAllUsers());
         //model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
         //int tempID = (int) session.getAttribute("user_id");
-
         return "task";
+    }
+
+    @PostMapping("/assigntask")
+    public String assigntToTask(@RequestParam("task-id")String taskId, HttpSession session)
+    {
+
+        return "redirect:/task/"+taskId;
     }
 
 }

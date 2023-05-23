@@ -17,19 +17,24 @@
         <div id="task-name" th:text="${task.task_name}">Task name</div>
         <div id="task-desc" th:text="${task.task_description}">Task description</div>
 
-        <div id="task-deadline">
-            <span id="priority-headline">Priority: <br></span>
-            <span id="priority-value" th:text="${task.task_priority}"></span>
+        <div id="task-start">
+            <span id="task-start-headline">Start: <br></span>
+            <span id="task-start-date" th:text="${task.task_start}"></span>
+        </div>
+
+        <div id="task-priority">
+            <span id="task-priority-headline">Priority: <br></span>
+            <span id="task-priority-value" th:text="${task.task_priority}"></span>
         </div>
 
         <div id="task-status">
-            <span id="status-headline">Status: <br></span>
-            <span id="status-current" th:text="${task.task_status}"></span>
+            <span id="task-status-headline">Status: <br></span>
+            <span id="task-status-current" th:text="${task.task_status}"></span>
         </div>
 
         <div id="task-hours">
-            <span id="manhours-headline">Total man-hours: <br></span>
-            <span id="manhours-total" th:text="${task.task_hours}"></span>
+            <span id="task-manhours-headline">Total man-hours: <br></span>
+            <span id="task-manhours-total" th:text="${task.task_hours}"></span>
         </div>
         <button id="edit-task-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Task</button>
         <div id="task-participants">
@@ -40,7 +45,24 @@
             </div>
         </div>
         <div id="participants-headline">Participants on the task</div>
+
+        <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
+            <form action="/assigntask" method="post">
+                <input name="task-id" type="hidden" th:value="${task.getTask_id}">
+                <label for="assign-email">Enter E-mail</label>
+                <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail..." required>
+
+                <datalist id="email-box" size="5">
+                    <option th:each="users : ${all_users}" th:value="${users.email}">
+                    </option>
+                </datalist>
+                <input id="assign-project-button" type="submit" value="Assign">
+            </form>
+        </div>
     </div>
+
+
+
 </div>
 
 <div class="edit-form-popup" id="editForm">
@@ -52,8 +74,11 @@
     <label for="taskDescription"><b>Task description</b></label><br>
     <textarea id="taskDescription" name="taskDescription" type="text" placeholder="Task description" th:text="${task.getTask_description}"></textarea>
     <br><br>
-    <label for="taskDeadline"><b>Task deadline</b></label><br>
-    <input id="taskDeadline" name="taskDeadline" type="text" placeholder="Task deadline" th:value="${task.getTask_deadline}">
+    <label for="taskStart"><b>Task start</b></label><br>
+    <input id="taskStart" name="taskStart" type="text" placeholder="Task start" th:value="${task.getTask_start}">
+    <br><br>
+    <label for="taskPriority"><b>Task priority</b></label><br>
+    <input id="taskPriority" name="taskPriority" type="text" placeholder="Task priority" th:value="${task.getTask_priority}">
     <br><br>
     <label for="taskHours"><b>Task hours</b></label><br>
     <input id="taskHours" name="taskHours" type="text" placeholder="Task hours" th:value="${task.getTask_hours}">
