@@ -59,10 +59,20 @@
                 <input id="assign-project-button" type="submit" value="Assign">
             </form>
         </div>
+        <div id="task-comment-outerbox">
+            <button id="open-comment-button" onclick="openCommentForm()">View comments</button>
+        </div>
     </div>
+</div>
 
-
-
+<div class="edit-comment-popup" id="commentForm">
+    <form action="/editcomment" method="post">
+        <h1>Comments</h1>
+        <input name="taskId" type="hidden" th:value="${task.task_id}">
+        <textarea id="taskComment" name="taskComment" type="text" placeholder="Task comment" th:text="${task.task_comment}"></textarea>
+        <button id="save-comment-button" type="submit">Save</button>
+        <button class="close-comment-form" type="button" onclick="closeCommentForm()">Cancel</button>
+    </form>
 </div>
 
 <div class="edit-form-popup" id="editForm">
@@ -92,6 +102,16 @@
 </div>
 
 <script>
+    function openCommentForm()
+    {
+        document.getElementById("commentForm").style.display = "block";
+    }
+
+    function closeCommentForm()
+    {
+        document.getElementById("commentForm").style.display = "none";
+    }
+
     function openEditForm()
     {
         document.getElementById("editForm").style.display = "block";

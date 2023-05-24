@@ -346,5 +346,10 @@ public class HomeController {
         return "redirect:/task/" + taskId;
     }
 
-
+    @PostMapping("/editcomment")
+    public String editComment(@RequestParam("taskId")int taskId, @RequestParam("taskComment")String taskComment)
+    {
+        taskRepo.editTaskComment(taskId, taskComment);
+        return "redirect:/task/" + taskId;
+    }
 }

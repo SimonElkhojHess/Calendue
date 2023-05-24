@@ -3,6 +3,7 @@ package dk.kea.calendue.repository;
 import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Task;
 import dk.kea.calendue.utility.ConnectionManager;
+import org.apache.catalina.Host;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.tags.form.SelectTag;
@@ -285,4 +286,23 @@ public class TaskRepository
         return projectId;
     }
 
+    public void editTaskComment(int taskId, String taskComment)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String SQL_QUERY = "UPDATE calendue.task SET task_comment = ? WHERE task_id = "+taskId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_QUERY);
+
+            preparedStatement.setString(1, taskComment);
+
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit task comment");
+        }
+    }
 }
