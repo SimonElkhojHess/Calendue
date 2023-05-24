@@ -38,7 +38,7 @@
       <span id="manhours-headline">Total man-hours: <br></span>
       <span id="manhours-total" th:text="${project.project_hours}"></span>
     </div>
-    <button id="edit-project-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Project</button>
+    <button id="edit-project-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader' || session.is_admin == 1}">Edit Project</button>
     <a id="assign-project-error" th:if="${session.assign_project_error == true}">Incorrect e-mail</a>
     <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
       <form action="/assignproject" method="post">
@@ -129,6 +129,11 @@
   </div>
 
   <div class="edit-form-popup" id="editForm">
+
+    <form action="/deleteproject" method="post" class="delete-project-form">
+      <input type="hidden" name="project_id" th:value="${project.project_id}">
+      <input id="delete-project" type="submit" value="Delete project"></a>
+    </form>
     <form action="/editproject" method="post">
 
       <input id="projectID" name="projectID" type="hidden" th:value="${project.getProject_id}">
