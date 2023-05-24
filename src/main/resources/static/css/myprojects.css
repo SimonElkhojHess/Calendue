@@ -1,3 +1,7 @@
+html
+{
+    overflow:hidden;
+}
 nav
 {
     position: sticky;
@@ -7,15 +11,15 @@ nav
 .outer-box
 {
     width:100%;
-    height:82vh;
+    height: auto;
     align-content: space-evenly;
 }
-
-body
+.fragment-size
 {
-    height:100vh;
-
+    overflow-y:scroll;
+    height:85.9vh;
 }
+
 
 footer
 {
