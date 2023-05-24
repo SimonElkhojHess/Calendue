@@ -266,12 +266,49 @@ input[type=text]
     position:fixed;
     top:25%;
     left:35%;
-    height:200px;
-    width:350px;
-    background-color:white;
+    height:390px;
+    width:481px;
+    background-color: white;
     border:1px solid black;
 }
+#edit-comment-form
+{
+    margin-left:10px;
+    height:95%;
+    width:95%;
+}
+#taskComment
+{
+    height:290px;
+    width: 450px;
+    border: 4px inset lightgrey;
+}
 
+.save-comment-button
+{
+    height: 1.7rem;
+    width: 5.5rem;
+    text-align: center;
+    background-color: #8ED0AB;
+    border-radius:10px 10px 10px 10px;
+    color:black;
+    cursor:pointer;
+}
+.close-comment-form
+{
+    height: 1.7rem;
+    width: 5.5rem;
+    text-align: center;
+    background-color: #8ED0AB;
+    border-radius:10px 10px 10px 10px;
+    color:black;
+    cursor:pointer;
+}
+
+#comment-popup-title
+{
+    text-align: center;
+}
 
 /*Pop-up css*/
 .edit-form-popup {
@@ -317,4 +354,127 @@ input[type=text]
 #edit-button
 {
     margin-right: 45px;
+}
+
+#assign-project-error
+{
+    grid-column:9/11;
+    grid-row:1/1;
+    color:#fa2727;
+    font-weight: bolder;
+    margin: 78px 0 0 132px;
+}
+
+.task-outerbox
+{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+    height:auto;
+    min-height: 20rem;
+    padding-bottom: 30px;
+    text-align: center;
+    justify-content: center;
+    background-color: #a2e9e9;
+}
+/*.task-element a
+{
+    grid-column:1/3;
+    grid-row:1/4;
+
+}*/
+.task-element
+{
+    display:grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows: repeat(10,1fr);
+    margin: 20px 30px 15px 15px;
+    float:left;
+    height:25rem;
+    width:20rem;
+    font-size:18px;
+    background-color:#8ED0AB;
+    border-radius:10px 10px 10px 10px;
+    box-shadow: 10px 10px 5px #727391;
+    transition: transform 200ms ease-in-out;
+    font-family: "Calibri Light";
+}
+.task-element:hover
+{
+    transform: scale(1.03);
+}
+#task-element-name
+{
+    grid-column: 1/13;
+    grid-row:1/1;
+    font-size: 25px;
+    font-weight: bold;
+    justify-self: center;
+}
+
+#task_priority-title
+{
+    grid-column: 1/4;
+    grid-row: 3/3;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+}
+
+#task_priority
+{
+    grid-column: 1/4;
+    grid-row:4/4;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px 0 10px;
+    font-weight: bold;
+}
+
+#task_start-title
+{
+    grid-column: 5/9;
+    grid-row: 3/3;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+}
+#task_start
+{
+    grid-column:5/9;
+    grid-row:4/4;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+}
+
+
+#task_status-title
+{
+    grid-column: 10/13;
+    grid-row: 3/3;
+    font-weight: bold;
+}
+
+#task_status
+{
+    grid-column: 9/13;
+    grid-row: 4/4;
+    font-weight: bold;
+}
+
+#task_description-title
+{
+    grid-column: 1/13;
+    grid-row: 5/5;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+#task_description
+{
+    grid-column: 1/13;
+    grid-row: 6/11;
+    padding-left: 10px;
+    padding-right: 10px;
 }

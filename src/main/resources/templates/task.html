@@ -37,6 +37,7 @@
             <span id="task-manhours-total" th:text="${task.task_hours}"></span>
         </div>
         <button id="edit-task-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Task</button>
+        <a id="assign-project-error" th:if="${session.emailerror == true}">User is not assigned to this project</a>
         <div id="task-participants">
             <div id="assignment-object" th:each="user : ${assignedusers}">
                 <div id="assigned-user-fullname" th:text="${user.full_name}"></div>
@@ -63,14 +64,35 @@
             <button id="open-comment-button" onclick="openCommentForm()">View comments</button>
         </div>
     </div>
+
+    <div class="task-outerbox">
+        <div th:each="tasks : ${tasks}">
+            <a href="/allsubprojecttasks" th:href="@{'/task/'+${tasks.getTask_id}}">
+                <div class="task-element" th:styleappend="${task.task_id == tasks.task_id ? 'border:2px solid red' : 'border:none'}">
+                    <div id="task-element-name" th:text="${tasks.task_name}"></div>
+                    <div id="task_priority-title">Priority:</div>
+                    <div id="task_priority" th:text="${tasks.task_priority}"></div>
+                    <div id="task_start-title">Start date:</div>
+                    <div id="task_start" th:text="${tasks.task_start}"></div>
+                    <div id="task_status-title">Status:</div>
+                    <div id="task_status" th:text="${tasks.task_status}"></div>
+                    <div id="task_description-title">Description:</div>
+                    <div id="task_description" th:text="${tasks.task_description}"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
 </div>
 
 <div class="edit-comment-popup" id="commentForm">
-    <form action="/editcomment" method="post">
-        <h1>Comments</h1>
+    <form id="edit-comment-form" action="/editcomment" method="post">
+        <h2 id="comment-popup-title">Comments</h2>
         <input name="taskId" type="hidden" th:value="${task.task_id}">
-        <textarea id="taskComment" name="taskComment" type="text" placeholder="Task comment" th:text="${task.task_comment}"></textarea>
-        <button id="save-comment-button" type="submit">Save</button>
+        <textarea id="taskComment" name="taskComment" type="text" placeholder="Task comment" th:text="${task.task_comment}"></textarea><br>
+        <button class="save-comment-button" type="submit">Save</button>
         <button class="close-comment-form" type="button" onclick="closeCommentForm()">Cancel</button>
     </form>
 </div>

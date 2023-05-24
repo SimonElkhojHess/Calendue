@@ -55,7 +55,7 @@ public class Task_userRepository
         return userList;
     }
 
-<<<<<<< HEAD
+
     public List<User> getUsersOnSubproject(int subprojectID)
     {
         ArrayList<User> userList = new ArrayList<>();
@@ -95,7 +95,7 @@ public class Task_userRepository
 
         return userList;
     }
-=======
+
     public void assignUserToTask(int taskId, int userId)
     {
         try{
@@ -115,6 +115,33 @@ public class Task_userRepository
         }
     }
 
+    public boolean doesTaskAssignmentExist(int taskId, int tempUserId)
+    {
+        boolean exists = false;
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT COUNT(user_id)" +
+                    " FROM calendue.task_user" +
+                    " WHERE user_id = " + tempUserId +
+                    " AND task_id = " + taskId;
 
->>>>>>> US004
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            resultSet.next();
+            int existCounter = resultSet.getInt(1);
+            if(existCounter > 0)
+            {
+                exists = true;
+            }
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not tell if user is assigned to task");
+        }
+        return exists;
+
+    }
+
 }

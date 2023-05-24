@@ -342,29 +342,33 @@ public class HomeController {
             newList.get(i).setRole(newRole);
         }
         model.addAttribute("task", taskRepo.getOneTask(task_id));
+        Task task = (Task) model.getAttribute("task");
+        int subproject_id = task.getSubproject_id();
+        model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
         model.addAttribute("assignedusers", newList);
         model.addAttribute("all_users", userRepo.getAllUsers());
-        //model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
-        //int tempID = (int) session.getAttribute("user_id");
+
         return "task";
     }
 
     @PostMapping("/assigntask")
-    public String assigntToTask(@RequestParam("task-id")int taskId, @RequestParam("assign-email")String email, HttpSession session)
+    public String assignToTask(@RequestParam("task-id")int taskId, @RequestParam("assign-email")String email, HttpSession session)
     {
         int tempUserId = userRepo.getUserIDFromEmail(email);
         int tempProjectId = taskRepo.getProjectIdFromTaskId(taskId);
 
-        /*FJERN UDKOMMENTERING EFTER MERGE IND I MAIN. METODE LIGGER PÅ MAIN BRANCH
-        if (project_userRepo.doesAssignmentExist(tempUserId, tempProjectId))
+        if(project_userRepo.doesAssignmentExist(tempUserId, tempProjectId))
         {
-            task_userRepo.assignUserToTask(taskId, tempUserId);
-            session.setAttribute("emailerror", false);
+            if(!task_userRepo.doesTaskAssignmentExist(taskId, tempUserId))
+            {
+                task_userRepo.assignUserToTask(taskId, tempUserId);
+                session.setAttribute("emailerror", false);
+            }
         }
         else
         {
             session.setAttribute("emailerror", true);
-        }*/
+        }
 
         return "redirect:/task/"+taskId;
     }
@@ -380,7 +384,9 @@ public class HomeController {
     @PostMapping("/editcomment")
     public String editComment(@RequestParam("taskId")int taskId, @RequestParam("taskComment")String taskComment)
     {
-        taskRepo.editTaskComment(taskId, taskComment);
+        if(taskComment.length() < 1000) {
+            taskRepo.editTaskComment(taskId, taskComment);
+        }
         return "redirect:/task/" + taskId;
     }
 }
