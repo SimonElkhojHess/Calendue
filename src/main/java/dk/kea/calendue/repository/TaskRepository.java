@@ -206,7 +206,7 @@ public class TaskRepository
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
-            final String SQL_QUERY = "SELECT task_name, task_description, task_comment, task_start, task_hours, task_priority, task_status" +
+            final String SQL_QUERY = "SELECT task_name, task_description, task_comment, task_start, task_hours, task_priority, task_status, subproject_id" +
                                         " FROM calendue.task WHERE task_id = " + taskId;
 
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
@@ -220,6 +220,7 @@ public class TaskRepository
                 task.setTask_hours(resultSet.getInt(5));
                 task.setTask_priority(resultSet.getInt(6));
                 task.setTask_status(resultSet.getString(7));
+                task.setSubproject_id(resultSet.getInt(8));
             }
         } catch(SQLException e)
         {
@@ -229,7 +230,6 @@ public class TaskRepository
 
         return task;
     }
-
 
     public void editTask(Task task)
     {
@@ -306,4 +306,6 @@ public class TaskRepository
             System.out.println("Could not edit task comment");
         }
     }
+
+
 }
