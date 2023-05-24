@@ -154,11 +154,28 @@
       <label for="projectDeadline"><b>Project deadline</b></label><br>
       <input id="projectDeadline" name="projectDeadline" type="text" placeholder="dd/mm/yyyy" th:value="${project.getProject_deadline}">
       <br><br>
-      <label for="projectHours"><b>Project hours</b></label><br>
+
+      <div class="label-box">
+        <div id="projectHour-title">
+      <label for="projectHours"><b>Project hours</b></label>
+        </div>
+        <div id="projectStatus-title">
+        <label for="projectStatus"><b>Project status</b></label>
+        </div>
+
+      </div>
+      <div class="hours-status-box">
       <input id="projectHours" name="projectHours" type="text" placeholder="Use only integers" th:value="${project.getProject_hours}">
-      <br><br>
-      <label for="projectStatus"><b>Project status</b></label><br>
-      <input id="projectStatus" name="projectStatus" type="text" placeholder="Project status" th:value="${project.getProject_status}">
+
+      <select id="projectStatus" name="projectStatus" >
+        <option disabled selected value>Select an option</option>
+        <option value="To do" th:selected="${project.getProject_status == 'To do'}">To do</option>
+        <option value="In progress" th:selected="${project.getProject_status == 'In progress'}">In progress</option>
+        <option value="Done" th:selected="${project.getProject_status == 'Done'}">Done</option>
+        <option value="Paused" th:selected="${project.getProject_status == 'Paused'}">Paused</option>
+      </select>
+      </div>
+      <!--<input id="projectStatus" name="projectStatus" type="text" placeholder="Project status" th:value="${project.getProject_status}">-->
       <br><br>
       <button id="edit-button" type="submit">Update</button>
       <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>

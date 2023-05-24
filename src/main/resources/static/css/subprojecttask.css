@@ -342,7 +342,7 @@
 
 .edit-form-popup input, .edit-form-popup textarea
 {
-    min-width: 40rem;
+    width: 40rem;
     font-family: "Calibri";
     font-size: 16px;
 
@@ -381,5 +381,22 @@
     margin-right: 6px;
     margin-top: 6px;
 
+}
+
+.hours-status-box, .label-box
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#subprojectHours
+{
+    height: auto;
+    width: 4rem;
+}
+
+#subprojectStatus-title
+{
+    margin-right: 2rem;
 }
 
