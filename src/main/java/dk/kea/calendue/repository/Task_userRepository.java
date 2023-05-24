@@ -55,7 +55,6 @@ public class Task_userRepository
         return userList;
     }
 
-<<<<<<< HEAD
     public List<User> getUsersOnSubproject(int subprojectID)
     {
         ArrayList<User> userList = new ArrayList<>();
@@ -95,7 +94,6 @@ public class Task_userRepository
 
         return userList;
     }
-=======
     public void assignUserToTask(int taskId, int userId)
     {
         try{
@@ -116,5 +114,4 @@ public class Task_userRepository
     }
 
 
->>>>>>> US004
 }
