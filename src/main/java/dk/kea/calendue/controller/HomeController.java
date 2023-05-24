@@ -383,4 +383,12 @@ public class HomeController {
         taskRepo.editTaskComment(taskId, taskComment);
         return "redirect:/task/" + taskId;
     }
+
+    @GetMapping("/deleteproject/{id}")
+    public String deleteProject(@PathVariable("id") int projectID)
+    {
+        projectRepo.deleteProject(projectID);
+        return "redirect:/homepage";
+
+    }
 }
