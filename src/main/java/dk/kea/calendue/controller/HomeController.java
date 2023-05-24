@@ -324,6 +324,7 @@ public class HomeController {
         int tempUserId = userRepo.getUserIDFromEmail(email);
         int tempProjectId = taskRepo.getProjectIdFromTaskId(taskId);
 
+        /*FJERN UDKOMMENTERING EFTER MERGE IND I MAIN. METODE LIGGER PÅ MAIN BRANCH
         if (project_userRepo.doesAssignmentExist(tempUserId, tempProjectId))
         {
             task_userRepo.assignUserToTask(taskId, tempUserId);
@@ -332,7 +333,7 @@ public class HomeController {
         else
         {
             session.setAttribute("emailerror", true);
-        }
+        }*/
 
         return "redirect:/task/"+taskId;
     }
