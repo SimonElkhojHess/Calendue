@@ -1,5 +1,7 @@
 package dk.kea.calendue.model;
 
+import java.util.Objects;
+
 public class User
 {
     private int user_id;
@@ -133,5 +135,18 @@ public class User
                 ", full_name='" + full_name + '\'' +
                 ", role='" + role + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        /*if (this == o) return true;*/
+        if (!(o instanceof User)) return false;
+        User otherUser = (User) o;
+        return this.user_id == otherUser.user_id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user_id);
     }
 }
