@@ -401,12 +401,7 @@ input[type=text]
     text-align: center;
     justify-content: center;
 }
-/*.subproject-element a
-{
-    grid-column:1/3;
-    grid-row:1/4;
 
-}*/
 .subproject-element
 {
     display:grid;
@@ -448,10 +443,6 @@ input[type=text]
 {
     grid-column: 1/13;
     grid-row:6/11;
-    /*display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;*/
     padding: 0 10px 0 10px;
 
 }

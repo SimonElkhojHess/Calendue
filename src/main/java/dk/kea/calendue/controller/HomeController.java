@@ -143,6 +143,7 @@ public class HomeController {
         model.addAttribute("all_users", userRepo.getAllUsers());
 
         int tempID = (int) session.getAttribute("user_id");
+        session.setAttribute("projectID", project_id);
 
         session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
 
@@ -276,7 +277,6 @@ public class HomeController {
     @GetMapping("/editproject/{id}")
     public String showEditProject(@PathVariable("id") int project_ID, HttpSession session, Model model)
     {
-        session.setAttribute("projectID", project_ID);
         Project editProject = projectRepo.getOneProject(project_ID);
         model.addAttribute("project", editProject);
         return "editproject";
@@ -389,6 +389,16 @@ public class HomeController {
     {
         projectRepo.deleteProject(projectID);
         return "redirect:/homepage";
+
+    }
+
+    @GetMapping("/deletesubproject/{id}")
+    public String deleteSubproject(@PathVariable("id") int subprojectID, HttpSession session)
+    {
+        subprojectRepo.deleteSubproject(subprojectID);
+        int tempID = (int) session.getAttribute("projectID");
+
+        return "redirect:/project/" + tempID;
 
     }
 }

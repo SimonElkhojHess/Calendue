@@ -132,4 +132,22 @@ public class SubprojectRepository
         }
         return tempSubproject;
     }
+
+    public void deleteSubproject(int subprojectID)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String DELETE_QUERY = "DELETE FROM calendue.subproject WHERE subproject_id =" + subprojectID;
+
+            statement.executeUpdate(DELETE_QUERY);
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not delete subproject");
+        }
+    }
 }
