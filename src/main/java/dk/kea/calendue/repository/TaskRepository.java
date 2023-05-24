@@ -3,6 +3,7 @@ package dk.kea.calendue.repository;
 import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Task;
 import dk.kea.calendue.utility.ConnectionManager;
+import org.apache.catalina.Host;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.tags.form.SelectTag;
@@ -197,7 +198,6 @@ public class TaskRepository
         return tempTaskID;
     }
 
-
     public Task getOneTask(int taskId)
     {
         Task task = new Task();
@@ -231,5 +231,79 @@ public class TaskRepository
     }
 
 
+    public void editTask(Task task)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String UPDATE_QUERY =
+                        "UPDATE calendue.task " +
+                            "SET task_name=?, task_description=?, task_start=?, task_hours=?, task_priority=?, task_status=? " +
+                                "WHERE task_id = " + task.getTask_id();
 
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, task.getTask_name());
+            preparedStatement.setString(2, task.getTask_description());
+            preparedStatement.setString(3, task.getTask_start());
+            preparedStatement.setInt(4, task.getTask_hours());
+            preparedStatement.setInt(5, task.getTask_priority());
+            preparedStatement.setString(6, task.getTask_status());
+
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit task");
+        }
+    }
+
+    public int getProjectIdFromTaskId(int taskId)
+    {
+        int projectId = 0;
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY=
+                    "SELECT s.project_id " +
+                            "FROM calendue.task t JOIN calendue.subproject s" +
+                            " WHERE t.task_id = "+ taskId +
+                            " AND t.subproject_id = s.subproject_id";
+
+            ResultSet resultset = statement.executeQuery(SQL_QUERY);
+
+            if(resultset.next())
+            {
+                projectId = resultset.getInt(1);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get project id from task id");
+        }
+        return projectId;
+    }
+
+    public void editTaskComment(int taskId, String taskComment)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String SQL_QUERY = "UPDATE calendue.task SET task_comment = ? WHERE task_id = "+taskId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_QUERY);
+
+            preparedStatement.setString(1, taskComment);
+
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit task comment");
+        }
+    }
 }

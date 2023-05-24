@@ -75,7 +75,12 @@
     font-weight: bold;
     color: #ffffff;
 }
-
+#task-status-current
+{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+}
 #task-start
 {
     grid-column: 5/7;
@@ -235,6 +240,38 @@ input[type=text]
     color:black;
     cursor:pointer;
 }
+
+#task-comment-outerbox
+{
+    display:flex;
+    grid-row: 4/5;
+    grid-column: 1/5;
+    margin: 30px 0 0 15px;
+}
+
+#open-comment-button
+{
+    height: 1.7rem;
+    width: 7.5rem;
+    text-align: center;
+    background-color: #8ED0AB;
+    border-radius:10px 10px 10px 10px;
+    color:black;
+    cursor:pointer;
+}
+
+.edit-comment-popup
+{
+    display:none;
+    position:fixed;
+    top:25%;
+    left:35%;
+    height:200px;
+    width:350px;
+    background-color:white;
+    border:1px solid black;
+}
+
 
 /*Pop-up css*/
 .edit-form-popup {

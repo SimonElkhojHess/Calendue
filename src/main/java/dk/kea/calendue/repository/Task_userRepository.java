@@ -55,6 +55,7 @@ public class Task_userRepository
         return userList;
     }
 
+<<<<<<< HEAD
     public List<User> getUsersOnSubproject(int subprojectID)
     {
         ArrayList<User> userList = new ArrayList<>();
@@ -94,4 +95,26 @@ public class Task_userRepository
 
         return userList;
     }
+=======
+    public void assignUserToTask(int taskId, int userId)
+    {
+        try{
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String SQL_QUERY = "INSERT INTO calendue.task_user(task_id, user_id) VALUES (?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_QUERY);
+
+            preparedStatement.setInt(1, taskId);
+            preparedStatement.setInt(2, userId);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not assign user to task");
+        }
+    }
+
+
+>>>>>>> US004
 }

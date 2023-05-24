@@ -30,6 +30,16 @@ public class Task
         this.task_priority = task_priority;
         this.task_status = task_status;
     }
+    public Task(int task_id, String task_name, String task_description, String task_start, int task_hours, int task_priority, String task_status)
+    {
+        this.task_id = task_id;
+        this.task_name = task_name;
+        this.task_description = task_description;
+        this.task_start = task_start;
+        this.task_hours = task_hours;
+        this.task_priority = task_priority;
+        this.task_status = task_status;
+    }
 
     public int getTask_id()
     {
