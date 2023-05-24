@@ -20,7 +20,7 @@
     color: black;
 }
 
-#project-name
+#subproject-name
 {
     font-size: 40px;
     color:white;
@@ -29,7 +29,7 @@
     margin-left:7px;
 }
 
-#project-desc
+#subproject-desc
 {
     background-color: #A2E9E9;
     color: black;
@@ -42,7 +42,7 @@
     padding: 3px 0 0 3px;
 }
 
-#project-start
+/*#project-start
 {
     grid-column: 5/7;
     grid-row: 2/3;
@@ -60,9 +60,9 @@
     color: white;
     font-size: 30px;
     font-weight: bold;
-}
+}*/
 
-#project-deadline
+#subproject-deadline
 {
     grid-column: 5/7;
     grid-row: 3/4;
@@ -109,7 +109,7 @@
     font-weight: bold;
 }
 
-#project-status
+#subproject-status
 {
     grid-column: 5/7;
     grid-row:1/2;
@@ -117,7 +117,7 @@
     color: white;
 }
 
-#project-hours
+#subproject-hours
 {
     grid-column:5/7;
     grid-row:4/4;
@@ -125,7 +125,7 @@
     color: white;
 }
 
-#edit-project-button
+#edit-subproject-button
 {
     grid-column: 9/9;
     grid-row:1/1;
@@ -141,16 +141,7 @@
     z-index:10;
 }
 
-#assign-project-error
-{
-    grid-column:9/11;
-    grid-row:1/1;
-    color:#fa2727;
-    font-weight: bolder;
-    margin: 78px 0 0 132px;
-}
-
-#assign-form
+/*#assign-form
 {
     grid-column: 9/11;
     grid-row:2/4;
@@ -194,11 +185,11 @@ input[type=text]
     border-radius:10px 10px 10px 10px;
     color:black;
     cursor:pointer;
-}
+}*/
 
 #participants-headline
 {
-    grid-column: 7/9;
+    grid-column: 7/10;
     grid-row: 1/1;
     padding-top:10px;
     font-weight: bold;
@@ -206,7 +197,7 @@ input[type=text]
     font-size: 20px;
 }
 
-#project-participants
+#subproject-participants
 {
     grid-column: 7/9;
     grid-row: 1/5;
@@ -254,7 +245,7 @@ input[type=text]
     text-align: center;
 }
 
-.open-editroles-button
+/*.open-editroles-button
 {
     grid-column: 9/9;
     grid-row: 3/4;
@@ -333,20 +324,6 @@ input[type=text]
     border-radius: 10% / 50%;
     cursor:pointer;
 }
-#editroles-popup-user-delete
-{
-    grid-column: 5/6;
-    grid-row:1/3;
-    margin: 10px 0 0 25px;
-    background-color:#8ba6ce;
-    border-radius: 10% / 50%;
-    border:1px solid black;
-    font-size:14px;
-    width: 60px;
-    height: 20px;
-    cursor: pointer;
-}
-
 .close-editroles-button
 {
     height:1.5rem;
@@ -357,29 +334,29 @@ input[type=text]
     float:right;
     cursor:pointer;
 }
+*/
 
 
 
 
 
 
-
-#create-subproject-form
+#create-task-form
 {
-    grid-column: 1/4;
+    grid-column: 1/3;
     grid-row: 4/4;
     margin: 35px 0 0 15px;
     height:2rem;
     padding-top:5px;
     color:black;
 }
-#create-subproject-name
+#create-task-name
 {
     height:1.5rem;
     border-radius: 5% / 50%;
 }
 
-#create-subproject-button
+#create-task-button
 {
     height: 1.5rem;
     width: 7.5rem;
@@ -389,7 +366,7 @@ input[type=text]
 }
 
 
-.subproject-outerbox
+.task-outerbox
 {
     display: flex;
     flex-wrap: wrap;
@@ -400,13 +377,13 @@ input[type=text]
     text-align: center;
     justify-content: center;
 }
-/*.subproject-element a
+/*.task-element a
 {
     grid-column:1/3;
     grid-row:1/4;
 
 }*/
-.subproject-element
+.task-element
 {
     display:grid;
     grid-template-columns: repeat(12,1fr);
@@ -422,73 +399,137 @@ input[type=text]
     transition: transform 200ms ease-in-out;
     font-family: "Calibri Light";
 }
-.subproject-element:hover
+.task-element:hover
 {
     transform: scale(1.03);
 }
-#subproject-name
+#task-name
 {
     grid-column: 1/13;
     grid-row:1/1;
     font-size: 25px;
     font-weight: bold;
-    text-align: center;
+    justify-self: center;
 }
 
-#subproject_description-title
+#task_priority-title
 {
-    grid-column: 1/13;
-    grid-row: 5/5;
-    font-weight: bold;
-    padding: 0 0 0 10px;
-}
-
-#subproject_description
-{
-    grid-column: 1/13;
-    grid-row:6/11;
-    /*display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;*/
-    padding: 0 10px 0 10px;
-
-}
-
-#subproject_deadline-title
-{
-    grid-column: 1/6;
+    grid-column: 1/4;
     grid-row: 3/3;
     font-weight: bold;
     padding: 0 0 0 10px;
 }
-#subproject_deadline
+
+#task_priority
 {
-    grid-column:1/6;
+    grid-column: 1/4;
+    grid-row:4/4;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px 0 10px;
+    font-weight: bold;
+}
+
+#task_start-title
+{
+    grid-column: 5/9;
+    grid-row: 3/3;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+}
+#task_start
+{
+    grid-column:5/9;
     grid-row:4/4;
     font-weight: bold;
     padding: 0 0 0 10px;
 }
 
 
-#subproject_status-title
+#task_status-title
 {
-    grid-column: 8/12;
+    grid-column: 10/13;
     grid-row: 3/3;
     font-weight: bold;
-
 }
 
-#subproject_status
+#task_status
 {
-    grid-column: 8/12;
+    grid-column: 9/13;
     grid-row: 4/4;
     font-weight: bold;
-    float: right;
 }
 
-.subproject-outerbox
+#task_description-title
+{
+    grid-column: 1/13;
+    grid-row: 5/5;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+#task_description
+{
+    grid-column: 1/13;
+    grid-row: 6/11;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.task-outerbox
 {
     background-color: #a2e9e9;
 }
+
+/*Pop-up css*/
+.edit-form-popup {
+    display: none;
+    position: fixed;
+    left:25%;
+    top:15%;
+    height:33rem;
+    width:50rem;
+    background-color: white;
+    border: 3px solid #1d3c65;
+    z-index: 9;
+    font-family: "Calibri Light";
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 18px;
+
+}
+
+#subprojectDescription
+{
+    min-height: 5rem;
+}
+
+.edit-form-popup input, .edit-form-popup textarea
+{
+    min-width: 40rem;
+    font-family: "Calibri";
+    font-size: 16px;
+
+}
+
+.edit-form-popup button
+{
+    padding:1px 3px 1px 3px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #8ED0AB;
+    height:2rem;
+    width:auto;
+    margin-top: 10px;
+    cursor:pointer;
+    text-align: center;
+}
+
+#edit-button
+{
+    margin-right: 45px;
+}
+
 

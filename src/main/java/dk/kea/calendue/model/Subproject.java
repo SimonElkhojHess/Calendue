@@ -10,6 +10,9 @@ public class Subproject
     private int subproject_hours;
     private String subproject_status;
 
+    public Subproject()
+    {}
+
     public Subproject(int subproject_id, int project_id, String subproject_name, String subproject_description, String subproject_deadline, int subproject_hours, String subproject_status)
     {
         this.subproject_id = subproject_id;

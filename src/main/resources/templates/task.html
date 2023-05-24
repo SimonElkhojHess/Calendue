@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+    <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+    <link rel="stylesheet" th:href="@{../css/task.css}" href="../static/css/task.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+<div class="outer-box">
+    <div class="grid-box">
+        <div id="task-name" th:text="${task.task_name}">Task name</div>
+        <div id="task-desc" th:text="${task.task_description}">Task description</div>
+
+        <div id="task-start">
+            <span id="task-start-headline">Start: <br></span>
+            <span id="task-start-date" th:text="${task.task_start}"></span>
+        </div>
+
+        <div id="task-priority">
+            <span id="task-priority-headline">Priority: <br></span>
+            <span id="task-priority-value" th:text="${task.task_priority}"></span>
+        </div>
+
+        <div id="task-status">
+            <span id="task-status-headline">Status: <br></span>
+            <span id="task-status-current" th:text="${task.task_status}"></span>
+        </div>
+
+        <div id="task-hours">
+            <span id="task-manhours-headline">Total man-hours: <br></span>
+            <span id="task-manhours-total" th:text="${task.task_hours}"></span>
+        </div>
+        <button id="edit-task-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Task</button>
+        <div id="task-participants">
+            <div id="assignment-object" th:each="user : ${assignedusers}">
+                <div id="assigned-user-fullname" th:text="${user.full_name}"></div>
+                <div id="assigned-user-role" th:text="${user.role}"></div>
+                <div id="assigned-user-email" th:text="${user.email}"></div>
+            </div>
+        </div>
+        <div id="participants-headline">Participants on the task</div>
+
+        <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
+            <form action="/assigntask" method="post">
+                <input name="task-id" type="hidden" th:value="${task.getTask_id}">
+                <label for="assign-email">Enter E-mail</label>
+                <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail..." required>
+
+                <datalist id="email-box" size="5">
+                    <option th:each="users : ${all_users}" th:value="${users.email}">
+                    </option>
+                </datalist>
+                <input id="assign-project-button" type="submit" value="Assign">
+            </form>
+        </div>
+        <div id="task-comment-outerbox">
+            <button id="open-comment-button" onclick="openCommentForm()">View comments</button>
+        </div>
+    </div>
+</div>
+
+<div class="edit-comment-popup" id="commentForm">
+    <form action="/editcomment" method="post">
+        <h1>Comments</h1>
+        <input name="taskId" type="hidden" th:value="${task.task_id}">
+        <textarea id="taskComment" name="taskComment" type="text" placeholder="Task comment" th:text="${task.task_comment}"></textarea>
+        <button id="save-comment-button" type="submit">Save</button>
+        <button class="close-comment-form" type="button" onclick="closeCommentForm()">Cancel</button>
+    </form>
+</div>
+
+<div class="edit-form-popup" id="editForm">
+<form action="/edittask" method="post">
+    <input id="taskId" name="taskId" type="hidden" th:value="${task.task_id}">
+    <label for="taskName"><b>Task name</b></label><br>
+    <input id="taskName" name="taskName" type="text" placeholder="Task name" th:value="${task.getTask_name}">
+    <br><br>
+    <label for="taskDescription"><b>Task description</b></label><br>
+    <textarea id="taskDescription" name="taskDescription" type="text" placeholder="Task description" th:text="${task.getTask_description}"></textarea>
+    <br><br>
+    <label for="taskStart"><b>Task start</b></label><br>
+    <input id="taskStart" name="taskStart" type="text" placeholder="Task start" th:value="${task.getTask_start}">
+    <br><br>
+    <label for="taskPriority"><b>Task priority</b></label><br>
+    <input id="taskPriority" name="taskPriority" type="text" placeholder="Task priority" th:value="${task.getTask_priority}">
+    <br><br>
+    <label for="taskHours"><b>Task hours</b></label><br>
+    <input id="taskHours" name="taskHours" type="text" placeholder="Task hours" th:value="${task.getTask_hours}">
+    <br><br>
+    <label for="taskStatus"><b>Task status</b></label><br>
+    <input id="taskStatus" name="taskStatus" type="text" placeholder="Task status" th:value="${task.getTask_status}">
+    <br><br>
+    <button id="edit-button" type="submit">Update</button>
+    <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
+</form>
+</div>
+
+<script>
+    function openCommentForm()
+    {
+        document.getElementById("commentForm").style.display = "block";
+    }
+
+    function closeCommentForm()
+    {
+        document.getElementById("commentForm").style.display = "none";
+    }
+
+    function openEditForm()
+    {
+        document.getElementById("editForm").style.display = "block";
+    }
+
+    function closeEditForm()
+    {
+        document.getElementById("editForm").style.display = "none";
+    }
+</script>
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+</html>

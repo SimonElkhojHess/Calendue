@@ -35,9 +35,6 @@ public class Project_userRepository {
 
             preparedStatement.executeUpdate();
 
-
-
-
         } catch (SQLException e)
         {
             e.printStackTrace();

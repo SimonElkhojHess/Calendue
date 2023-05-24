@@ -1,5 +1,6 @@
 package dk.kea.calendue.repository;
 
+import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Subproject;
 import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
@@ -102,5 +103,33 @@ public class SubprojectRepository
                 System.out.println("Could not get max subproject id");
             }
             return tempSubprojectID;
+    }
+
+    public Subproject getOneSubproject(int subprojectID)
+    {
+        Subproject tempSubproject = new Subproject();
+        try {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT * FROM calendue.subproject WHERE subproject_id =" + subprojectID;
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            if(resultSet.next())
+            {
+                tempSubproject.setSubproject_id(subprojectID);
+                tempSubproject.setProject_id(resultSet.getInt(2));
+                tempSubproject.setSubproject_name(resultSet.getString(3));
+                tempSubproject.setSubproject_description(resultSet.getString(4));
+                tempSubproject.setSubproject_deadline(resultSet.getString(5));
+                tempSubproject.setSubproject_hours(resultSet.getInt(6));
+                tempSubproject.setSubproject_status(resultSet.getString(7));
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get specific subproject info");
+        }
+        return tempSubproject;
     }
 }

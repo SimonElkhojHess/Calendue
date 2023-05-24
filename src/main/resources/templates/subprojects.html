@@ -107,18 +107,25 @@
     <div id="participants-headline">Participants in the project</div>
     </div>
 
- <div class="subproject-outerbox">
-  <div class="subproject-element" th:each="subproject : ${subprojects}">
+
+  <div class="subproject-outerbox">
+  <div th:each="subproject : ${subprojects}">
     <a href="/subproject" th:href="@{'/subproject/'+${subproject.getSubproject_id}}">
+    <div class="subproject-element">
+
       <div id="subproject-name" th:text="${subproject.subproject_name}"></div>
-    </a>
+
       <div id="subproject_description-title">Description:</div>
       <div id="subproject_description" th:text="${subproject.subproject_description}"></div>
       <div id="subproject_deadline-title">Deadline:</div>
       <div id="subproject_deadline" th:text="${subproject.subproject_deadline}"></div>
       <div id="subproject_status-title">Status:</div>
       <div id="subproject_status" th:text="${subproject.subproject_status}"></div>
+
+    </div>
+    </a>
   </div>
+
   </div>
 
   <div class="edit-form-popup" id="editForm">

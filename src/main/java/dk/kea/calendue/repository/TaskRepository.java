@@ -1,15 +1,14 @@
 package dk.kea.calendue.repository;
 
+import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Task;
 import dk.kea.calendue.utility.ConnectionManager;
+import org.apache.catalina.Host;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.tags.form.SelectTag;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,5 +153,157 @@ public class TaskRepository
         return tList;
     }
 
+    public void createTask(Task task)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String CREATE_QUERY =
+                    "INSERT INTO calendue.task(subproject_id, task_name) VALUES (?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
 
+            preparedStatement.setInt(1, task.getSubproject_id());
+            preparedStatement.setString(2, task.getTask_name());
+
+            preparedStatement.executeUpdate();
+
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not create new task");
+        }
+    }
+
+    public int getMaxTaskId()
+    {
+        int tempTaskID = -99;
+        try{
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT MAX(task_id) FROM calendue.task";
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+            if(resultSet.next())
+            {
+                tempTaskID = resultSet.getInt(1);
+            }
+
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not find max task id ");
+        }
+
+        return tempTaskID;
+    }
+
+    public Task getOneTask(int taskId)
+    {
+        Task task = new Task();
+        task.setTask_id(taskId);
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT task_name, task_description, task_comment, task_start, task_hours, task_priority, task_status" +
+                                        " FROM calendue.task WHERE task_id = " + taskId;
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+
+            if(resultSet.next())
+            {
+                task.setTask_name(resultSet.getString(1));
+                task.setTask_description(resultSet.getString(2));
+                task.setTask_comment(resultSet.getString(3));
+                task.setTask_start(resultSet.getString(4));
+                task.setTask_hours(resultSet.getInt(5));
+                task.setTask_priority(resultSet.getInt(6));
+                task.setTask_status(resultSet.getString(7));
+            }
+        } catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not find specific task");
+        }
+
+        return task;
+    }
+
+
+    public void editTask(Task task)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String UPDATE_QUERY =
+                        "UPDATE calendue.task " +
+                            "SET task_name=?, task_description=?, task_start=?, task_hours=?, task_priority=?, task_status=? " +
+                                "WHERE task_id = " + task.getTask_id();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, task.getTask_name());
+            preparedStatement.setString(2, task.getTask_description());
+            preparedStatement.setString(3, task.getTask_start());
+            preparedStatement.setInt(4, task.getTask_hours());
+            preparedStatement.setInt(5, task.getTask_priority());
+            preparedStatement.setString(6, task.getTask_status());
+
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit task");
+        }
+    }
+
+    public int getProjectIdFromTaskId(int taskId)
+    {
+        int projectId = 0;
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY=
+                    "SELECT s.project_id " +
+                            "FROM calendue.task t JOIN calendue.subproject s" +
+                            " WHERE t.task_id = "+ taskId +
+                            " AND t.subproject_id = s.subproject_id";
+
+            ResultSet resultset = statement.executeQuery(SQL_QUERY);
+
+            if(resultset.next())
+            {
+                projectId = resultset.getInt(1);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get project id from task id");
+        }
+        return projectId;
+    }
+
+    public void editTaskComment(int taskId, String taskComment)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String SQL_QUERY = "UPDATE calendue.task SET task_comment = ? WHERE task_id = "+taskId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_QUERY);
+
+            preparedStatement.setString(1, taskComment);
+
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit task comment");
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package dk.kea.calendue.controller;
 
 import dk.kea.calendue.model.Project;
+import dk.kea.calendue.model.Task;
 import dk.kea.calendue.model.User;
 import dk.kea.calendue.repository.*;
 import dk.kea.calendue.repository.ProjectRepository;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class HomeController {
 
@@ -24,9 +28,10 @@ public class HomeController {
     private SubprojectRepository subprojectRepo;
     private TaskRepository taskRepo;
     private Project_userRepository project_userRepo;
+    private Task_userRepository task_userRepo;
 
 
-    public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo, Project_userRepository project_userRepo)
+    public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo, Project_userRepository project_userRepo, Task_userRepository task_userRepo)
 
     {
         this.userRepo = userRepo;
@@ -34,6 +39,13 @@ public class HomeController {
         this.subprojectRepo = subprojectRepo;
         this.taskRepo = taskRepo;
         this.project_userRepo = project_userRepo;
+        this.task_userRepo = task_userRepo;
+    }
+
+    @GetMapping("/")
+    public String redirectLogin()
+    {
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -278,5 +290,97 @@ public class HomeController {
 
 
         return "redirect:/project/" + tempID;
+    }
+
+    @GetMapping("/subproject/{id}")
+    public String showSubproject(@PathVariable("id")int subproject_id, HttpSession session, Model model)
+    {
+        /*if (session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }*/
+        model.addAttribute("subproject", subprojectRepo.getOneSubproject(subproject_id));
+        model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
+        model.addAttribute("assignedusers", task_userRepo.getUsersOnSubproject(subproject_id));
+        //model.addAttribute("all_users", userRepo.getAllUsers());
+
+        //int tempID = (int) session.getAttribute("user_id");
+
+        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
+
+        return "subprojecttask";
+    }
+
+    @PostMapping("/createtask")
+    public String createTask(@RequestParam("taskName") String task_name, @RequestParam("subprojectId")int subproject_id, HttpSession session)
+    {
+        Task tempTask = new Task();
+
+        tempTask.setTask_name(task_name);
+        tempTask.setSubproject_id(subproject_id);
+        taskRepo.createTask(tempTask);
+
+        int tempTaskID = taskRepo.getMaxTaskId();
+
+
+        return "redirect:/task/" + tempTaskID;
+    }
+
+    @GetMapping("/task/{id}")
+    public String showTask(@PathVariable("id")int task_id, HttpSession session, Model model)
+    {
+        if (session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
+        int tempProjectId = taskRepo.getProjectIdFromTaskId(task_id);
+        ArrayList<User> newList = (ArrayList<User>) task_userRepo.getUsersOnTask(task_id);
+        for(int i = 0; i < newList.size(); i++)
+        {
+            int tempUser_id = newList.get(i).getUser_id();
+            String newRole = projectRepo.getUserProjectAssignment(tempUser_id, tempProjectId);
+            newList.get(i).setRole(newRole);
+        }
+        model.addAttribute("task", taskRepo.getOneTask(task_id));
+        model.addAttribute("assignedusers", newList);
+        model.addAttribute("all_users", userRepo.getAllUsers());
+        //model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
+        //int tempID = (int) session.getAttribute("user_id");
+        return "task";
+    }
+
+    @PostMapping("/assigntask")
+    public String assigntToTask(@RequestParam("task-id")int taskId, @RequestParam("assign-email")String email, HttpSession session)
+    {
+        int tempUserId = userRepo.getUserIDFromEmail(email);
+        int tempProjectId = taskRepo.getProjectIdFromTaskId(taskId);
+
+        /*FJERN UDKOMMENTERING EFTER MERGE IND I MAIN. METODE LIGGER PÅ MAIN BRANCH
+        if (project_userRepo.doesAssignmentExist(tempUserId, tempProjectId))
+        {
+            task_userRepo.assignUserToTask(taskId, tempUserId);
+            session.setAttribute("emailerror", false);
+        }
+        else
+        {
+            session.setAttribute("emailerror", true);
+        }*/
+
+        return "redirect:/task/"+taskId;
+    }
+
+    @PostMapping("/edittask")
+    public String editTask(@RequestParam("taskId")int taskId, @RequestParam("taskName")String taskName, @RequestParam("taskDescription")String taskDescription, @RequestParam("taskStart")String taskStart, @RequestParam("taskPriority")int taskPriority, @RequestParam("taskHours")int taskHours, @RequestParam("taskStatus")String taskStatus, HttpSession session)
+    {
+        Task task = new Task(taskId, taskName, taskDescription, taskStart, taskHours, taskPriority, taskStatus);
+        taskRepo.editTask(task);
+        return "redirect:/task/" + taskId;
+    }
+
+    @PostMapping("/editcomment")
+    public String editComment(@RequestParam("taskId")int taskId, @RequestParam("taskComment")String taskComment)
+    {
+        taskRepo.editTaskComment(taskId, taskComment);
+        return "redirect:/task/" + taskId;
     }
 }
