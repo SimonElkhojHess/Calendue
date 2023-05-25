@@ -7,35 +7,110 @@
 #background-image
 {
     width:auto;
-    height:85vh;
+    height:81.2vh;
 }
 
-.form-popup {
-    display: block;
+.form-faux-popup
+{
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     position: fixed;
-    top:20%;
-    left:35%;
-    max-width: 300px;
+    top:27%;
+    left:40.8%;
+    max-width: 350px;
     right: 15px;
     border: 3px solid #c1c1c1;
     z-index: 9;
     font-family: "Calibri Light";
-    background-color: white;
+    background-color: #8ED0AB;
 }
 
-.form-container {
+.form-container
+{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     max-width: 300px;
-    padding: 10px;
-
+    grid-column: 2/8;
+    grid-row: 1/7;
 }
 
 .delete-user-form
 {
-    position:fixed;
-    left: 49%;
+    grid-column: 4/6;
+    grid-row: 7/8;
 }
 
-.form-container button, #delete-user
+#delete-user
+{
+    align-content: center;
+}
+
+#edit-headline
+{
+    grid-column: 1/4;
+    grid-row: 1/2;
+    text-align: center;
+}
+
+#edit-username-form
+{
+    align-content: center;
+    grid-column: 1/4;
+    grid-row: 2/3;
+    margin-left: 44px;
+}
+
+#edit-full_name-form
+{
+    align-content: center;
+    grid-column: 1/4;
+    grid-row: 3/4;
+    margin-left: 44px;
+}
+
+#edit-password-form
+{
+    align-content: center;
+    grid-column: 1/4;
+    grid-row: 4/5;
+    margin-left: 44px;
+}
+
+#edit-email-form
+{
+    align-content: center;
+    grid-column: 1/4;
+    grid-row: 5/6;
+    margin-left: 44px;
+}
+
+#edit-admin-privilege-option-form
+{
+    align-content: center;
+    grid-column: 1/4;
+    grid-row: 6/7;
+    margin-left: 44px;
+}
+
+#edit-user-button
+{
+    align-content: center;
+    grid-column: 1/1;
+    grid-row: 7/7;
+}
+
+#cancel-edit-user-button
+{
+    align-content: center;
+    grid-column: 3/3;
+    grid-row: 7/7;
+}
+
+
+
+.form-container button
 {
     padding:1px 3px 1px 3px;
     border-radius: 5px 5px 5px 5px;
@@ -46,4 +121,18 @@
     margin-right:5px;
     cursor:pointer;
 }
+
+#delete-user
+{
+    padding:1px 3px 1px 3px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #fc1414;
+    height:auto;
+    width:auto;
+    margin-top: 24px;
+    margin-right:5px;
+    cursor:pointer;
+}
+
+
 
