@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
   <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
-  <link rel="stylesheet" th:href="@{../css/about.css}" href="../static/css/about.css">
+  <link rel="stylesheet" th:href="@{../css/profile.css}" href="../static/css/profile.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
@@ -13,7 +13,35 @@
 <body>
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 
+  <div class="profile-outer-box">
+    <div class="profile-sidebar">
+      <div class="profile-choice">Edit profile</div>
+    </div>
+    <div class="profile-formbox">
+      <form id="profile-form" action="/editprofile" method="post">
+        <label for="username-edit-field" id="username-edit-field-label"><b>Username</b></label><br>
+        <input id="username-edit-field" name="editUsername" type="text"  th:value="${session.username}" required><br>
 
+        <label for="email-edit-field" ><b>E-mail</b></label><br>
+        <input id="email-edit-field" name="editEmail" type="text"  th:value="${session.email}" required><br>
+
+        <label for="fullname-edit-field" ><b>Full name</b></label><br>
+        <input id="fullname-edit-field" name="editFullname" type="text"  th:value="${session.full_name}" required><br>
+
+        <label for="password-edit-field" ><b>Update password</b></label><br>
+        <input id="password-edit-field" name="editPassword" type="password" placeholder="Enter new password..." ><br>
+
+        <label for="password-confirm-field"><b>Confirm password</b></label><br>
+        <input id="password-confirm-field" name="confirmPassword" type="password" placeholder="Confirm password..."><br>
+
+        <span><b>Admin privileges?</b></span><br>
+        <input class="admin-read-field" id="" name="readAdmin" type="text" placeholder="" value="Yes" th:if="${session.is_admin == 1}" readonly>
+        <input class="admin-read-field" name="readAdmin" type="text" placeholder="" value="No" th:if="${session.is_admin == 0}" readonly><br>
+        <span>Speak to an administrator to edit this</span><br>
+        <button id="submit-profile-edit" type="submit">Save</button>
+      </form>
+    </div>
+  </div>
 
 </body>
 <footer th:insert="~{fragments/navigation.html :: footer}"></footer>
