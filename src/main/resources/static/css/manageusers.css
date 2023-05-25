@@ -72,7 +72,8 @@ input[type=text], input[type=password]
 .user-list
 {
     width:75%;
-    height:auto;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 .user-object
 {
