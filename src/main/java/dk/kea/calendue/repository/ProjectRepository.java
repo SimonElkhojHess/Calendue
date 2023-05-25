@@ -48,10 +48,10 @@ public class ProjectRepository
                 List<Subproject> subList = subprojectRepository.getAllSubprojects(project_id);
                 for(int i = 0; i < subList.size(); i++)
                 {
-                    int subHours = subList.get(i).getTotalSubHours(subList.get(i).getSubproject_id());
+                    int subHours = subprojectRepository.getTotalSubHours(subList.get(i).getSubproject_id());
                     project_hours += subHours;
                 }
-
+                int assigned_users = getProjectAssignmentCount(project_id);
 
 
                 Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status);
@@ -206,6 +206,32 @@ public class ProjectRepository
 
         }
         return userAssignment;
+    }
+
+    public int getProjectAssignmentCount(int projectId)
+    {
+        int assignmentCount = 0;
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT COUNT(user_id)" +
+                                        " from calendue.project_user" +
+                                            " WHERE project_id = "+ projectId;
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            if(resultSet.next())
+            {
+                assignmentCount = resultSet.getInt(1);
+            }
+
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get project assignment count");
+        }
+        return assignmentCount;
     }
 
     public void editProject(Project project)

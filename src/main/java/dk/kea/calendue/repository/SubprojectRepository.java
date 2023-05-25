@@ -6,6 +6,7 @@ import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -184,6 +185,17 @@ public class SubprojectRepository
         int totalSubHours = 0;
         try
         {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "SELECT SUM(task_hours)" +
+                                        " FROM calendue.task" +
+                                            " WHERE subproject_id = " + subprojectId;
+
+            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
+            if(resultSet.next())
+            {
+                totalSubHours = resultSet.getInt(1);
+            }
 
         }
         catch(SQLException e)
@@ -191,6 +203,6 @@ public class SubprojectRepository
             e.printStackTrace();
             System.out.println("Could not get total sub hours");
         }
-
+        return totalSubHours;
     }
 }
