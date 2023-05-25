@@ -280,14 +280,14 @@
     font-weight: bold;
 }
 
-#task_start-title
+#task_deadline-title
 {
     grid-column: 5/9;
     grid-row: 3/3;
     font-weight: bold;
     padding: 0 0 0 10px;
 }
-#task_start
+#task_deadline
 {
     grid-column:5/9;
     grid-row:4/4;

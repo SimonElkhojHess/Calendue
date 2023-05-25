@@ -18,11 +18,10 @@
         <div id="task-name" th:text="${task.task_name}">Task name</div>
         <div id="task-desc" th:text="${task.task_description}">Task description</div>
 
-        <div id="task-start">
-            <span id="task-start-headline">Start: <br></span>
-            <span id="task-start-date" th:text="${task.task_start}"></span>
+        <div id="task-deadline">
+            <span id="task-deadline-headline">Deadline: <br></span>
+            <span id="task-deadline-date" th:text="${task.task_deadline}"></span>
         </div>
-
         <div id="task-priority">
             <span id="task-priority-headline">Priority: <br></span>
             <span id="task-priority-value" th:text="${task.task_priority}"></span>
@@ -73,8 +72,8 @@
                     <div id="task-element-name" th:text="${tasks.task_name}"></div>
                     <div id="task_priority-title">Priority:</div>
                     <div id="task_priority" th:text="${tasks.task_priority}"></div>
-                    <div id="task_start-title">Start date:</div>
-                    <div id="task_start" th:text="${tasks.task_start}"></div>
+                    <div id="task_deadline-title">Deadline:</div>
+                    <div id="task_deadline" th:text="${tasks.task_deadline}"></div>
                     <div id="task_status-title">Status:</div>
                     <div id="task_status" th:text="${tasks.task_status}"></div>
                     <div id="task_description-title">Description:</div>
@@ -107,10 +106,32 @@
     <label for="taskDescription"><b>Task description</b></label><br>
     <textarea id="taskDescription" name="taskDescription" type="text" placeholder="Task description" th:text="${task.getTask_description}"></textarea>
     <br><br>
-    <label for="taskStart"><b>Task start</b></label><br>
-    <input id="taskStart" name="taskStart" type="text" placeholder="Task start" th:value="${task.getTask_start}">
+    <label for="taskDeadline"><b>Task deadline</b></label><br>
+    <input id="taskDeadline" name="taskDeadline" type="text" placeholder="dd/mm/yyyy" th:value="${task.getTask_deadline}">
     <br><br>
-    <label for="taskPriority"><b>Task priority</b></label><br>
+
+    <div class="label-box">
+        <div id="projectHour-title">
+            <label for="projectHours"><b>Project hours</b></label>
+        </div>
+        <div id="projectStatus-title">
+            <label for="projectStatus"><b>Project status</b></label>
+        </div>
+
+    </div>
+    <div class="hours-status-box">
+        <input id="projectHours" name="projectHours" type="text" placeholder="Use only integers" th:value="${project.getProject_hours}">
+
+        <select id="projectStatus" name="projectStatus" >
+            <option disabled selected value>Select an option</option>
+            <option value="To do" th:selected="${project.getProject_status == 'To do'}">To do</option>
+            <option value="In progress" th:selected="${project.getProject_status == 'In progress'}">In progress</option>
+            <option value="Done" th:selected="${project.getProject_status == 'Done'}">Done</option>
+            <option value="Paused" th:selected="${project.getProject_status == 'Paused'}">Paused</option>
+        </select>
+    </div>
+
+    <!--<label for="taskPriority"><b>Task priority</b></label><br>
     <input id="taskPriority" name="taskPriority" type="text" placeholder="Task priority" th:value="${task.getTask_priority}">
     <br><br>
     <label for="taskHours"><b>Task hours</b></label><br>
@@ -118,7 +139,7 @@
     <br><br>
     <label for="taskStatus"><b>Task status</b></label><br>
     <input id="taskStatus" name="taskStatus" type="text" placeholder="Task status" th:value="${task.getTask_status}">
-    <br><br>
+    <br><br>-->
     <button id="edit-button" type="submit">Update</button>
     <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
 </form>
