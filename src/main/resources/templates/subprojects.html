@@ -15,7 +15,12 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
   <div class="grid-box">
-    <span id="name-headline">Project: </span>
+    <div id="name-button-box">
+      <span id="name-headline">Project: </span><br>
+      <div id="backlink">
+        <a href="/homepage" th:href="@{'/homepage'}"><button id="backbutton">Back to <br> homepage</button></a>
+      </div>
+    </div>
     <div id="project-name" th:text="${project.project_name}">Project name</div>
     <div id="project-desc" th:text="${project.project_description}">Project description</div>
 

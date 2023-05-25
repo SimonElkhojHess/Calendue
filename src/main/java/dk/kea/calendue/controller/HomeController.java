@@ -387,6 +387,11 @@ public class HomeController {
     @PostMapping("/edittask")
     public String editTask(@RequestParam("taskId")int taskId, @RequestParam("taskName")String taskName, @RequestParam("taskDescription")String taskDescription, @RequestParam("taskDeadline")String taskDeadline, @RequestParam("taskPriority")int taskPriority, @RequestParam("taskHours")int taskHours, @RequestParam("taskStatus")String taskStatus, HttpSession session)
     {
+        if(taskPriority == 0)
+        {
+            taskPriority = null;
+        }
+
         Task task = new Task(taskId, taskName, taskDescription, taskDeadline, taskHours, taskPriority, taskStatus);
         taskRepo.editTask(task);
         return "redirect:/task/" + taskId;

@@ -14,9 +14,15 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
     <div class="grid-box">
-        <span id="name-headline">Task: </span>
+        <div id="name-button-box">
+        <span id="name-headline">Task: </span><br>
+            <div id="backlink">
+        <a href="/subproject/" th:href="@{'/subproject/'} + ${task.getSubproject_id}"><button id="backbutton">Back to <br> subproject</button></a>
+            </div>
+            </div>
         <div id="task-name" th:text="${task.task_name}">Task name</div>
         <div id="task-desc" th:text="${task.task_description}">Task description</div>
+
 
         <div id="task-deadline">
             <span id="task-deadline-headline">Deadline: <br></span>
@@ -111,23 +117,35 @@
     <br><br>
 
     <div class="label-box">
-        <div id="projectHour-title">
-            <label for="projectHours"><b>Project hours</b></label>
+        <div id="taskHour-title">
+            <label for="taskHours"><b>Task hours</b></label>
         </div>
-        <div id="projectStatus-title">
-            <label for="projectStatus"><b>Project status</b></label>
+        <div id="taskPriority-title">
+            <label for="taskPriority"><b>Task priority</b></label>
+        </div>
+        <div id="taskStatus-title">
+            <label for="taskStatus"><b>Task status</b></label>
         </div>
 
     </div>
     <div class="hours-status-box">
-        <input id="projectHours" name="projectHours" type="text" placeholder="Use only integers" th:value="${project.getProject_hours}">
+        <input id="taskHours" name="taskHours" type="text" placeholder="Use only integers" th:value="${task.getTask_hours}">
 
-        <select id="projectStatus" name="projectStatus" >
+        <select id="taskPriority" name="taskPriority" >
             <option disabled selected value>Select an option</option>
-            <option value="To do" th:selected="${project.getProject_status == 'To do'}">To do</option>
-            <option value="In progress" th:selected="${project.getProject_status == 'In progress'}">In progress</option>
-            <option value="Done" th:selected="${project.getProject_status == 'Done'}">Done</option>
-            <option value="Paused" th:selected="${project.getProject_status == 'Paused'}">Paused</option>
+            <option value="1" th:selected="${task.getTask_priority == '1'}">1</option>
+            <option value="2" th:selected="${task.getTask_priority == '2'}">2</option>
+            <option value="3" th:selected="${task.getTask_priority == '3'}">3</option>
+            <option value="4" th:selected="${task.getTask_priority == '4'}">4</option>
+            <option value="5" th:selected="${task.getTask_priority == '5'}">5</option>
+        </select>
+
+        <select id="taskStatus" name="taskStatus" >
+            <option disabled selected value>Select an option</option>
+            <option value="To do" th:selected="${task.getTask_status == 'To do'}">To do</option>
+            <option value="In progress" th:selected="${task.getTask_status == 'In progress'}">In progress</option>
+            <option value="Paused" th:selected="${task.getTask_status == 'Paused'}">Paused</option>
+            <option value="Done" th:selected="${task.getTask_status == 'Done'}">Done</option>
         </select>
     </div>
 

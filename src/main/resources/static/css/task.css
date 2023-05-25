@@ -33,15 +33,30 @@
 }
 #name-headline
 {
-    grid-column: 1/1;
-    grid-row: 1/1;
     font-weight: bold;
     color: #ffffff;
     font-size:24px;
+
+}
+
+#name-button-box
+{
+    grid-column: 1/1;
+    grid-row: 1/1;
     margin-left: 10px;
     margin-top: 12px;
 }
 
+#backbutton
+{
+    border-radius:10px 10px 10px 10px;
+    background-color: #8ED0AB;
+    color: black;
+    cursor:pointer;
+    height:auto;
+    width:7.5rem;
+    margin-top: 10px;
+}
 #task-desc
 {
     background-color: #A2E9E9;
@@ -199,7 +214,7 @@
     margin:40px 0 0 15px;
     height:1.5rem;
     width:7.5rem;
-    padding-top:5px;
+    /*padding-top:5px;*/
     text-align: center;
     background-color: #8ED0AB;
     border-radius:10px 10px 10px 10px;
@@ -346,7 +361,7 @@ input[type=text]
 
 .edit-form-popup input, .edit-form-popup textarea
 {
-    min-width: 40rem;
+    width: 40rem;
     font-family: "Calibri";
     font-size: 16px;
 
@@ -359,7 +374,7 @@ input[type=text]
     background-color: #8ED0AB;
     height:2rem;
     width:auto;
-    margin-top: 10px;
+    margin-top: 8rem;
     cursor:pointer;
     text-align: center;
 }
@@ -490,4 +505,38 @@ input[type=text]
     grid-row: 6/11;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.hours-status-box, .label-box
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.label-box
+{
+    margin-top: 1rem;
+}
+
+
+
+#taskHours
+{
+    height: auto;
+    width: 6rem;
+}
+
+#taskStatus-title
+{
+    margin-right: 1rem;
+}
+
+#taskPriority-title
+{
+    margin-left: 1rem;
+}
+
+#taskStatus-title
+{
+    margin-left: 1rem;
 }
