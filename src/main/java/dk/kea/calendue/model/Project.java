@@ -12,8 +12,9 @@ public class Project
     private int project_days;
     private int project_hours_per_day;
     private int users_assigned;
+    private int project_hours_scheduled;
 
-    public Project(int project_id, String project_name, String project_description, String project_start, String project_deadline, int project_hours, String project_status, int project_days, int project_hours_per_day, int users_assigned)
+    public Project(int project_id, String project_name, String project_description, String project_start, String project_deadline, int project_hours, String project_status, int project_days, int project_hours_per_day, int users_assigned, int project_hours_scheduled)
     {
         this.project_id = project_id;
         this.project_name = project_name;
@@ -25,6 +26,7 @@ public class Project
         this.project_days = project_days;
         this.project_hours_per_day = project_hours_per_day;
         this.users_assigned = users_assigned;
+        this.project_hours_scheduled = project_hours_scheduled;
     }
 
     public Project(int project_id, String project_name, String project_description, String project_start, String project_deadline, int project_hours, String project_status)
@@ -114,6 +116,27 @@ public class Project
     {
         this.project_hours_per_day = project_hours_per_day;
     }
+
+    public int getUsers_assigned()
+    {
+        return users_assigned;
+    }
+
+    public void setUsers_assigned(int users_assigned)
+    {
+        this.users_assigned = users_assigned;
+    }
+
+    public int getProject_hours_scheduled()
+    {
+        return project_hours_scheduled;
+    }
+
+    public void setProject_hours_scheduled(int project_hours_scheduled)
+    {
+        this.project_hours_scheduled = project_hours_scheduled;
+    }
+
     @Override
     public String toString()
     {

@@ -37,7 +37,7 @@
 
     <div id="project-hours">
       <span id="manhours-headline">Total man-hours: <br></span>
-      <span id="manhours-total" th:text="${project.project_hours}"></span>
+      <span id="manhours-total" th:text="${project.project_hours_scheduled}"></span>
     </div>
     <button id="edit-project-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader' || session.is_admin == 1}">Edit Project</button>
     <a id="assign-project-error" th:if="${session.assign_project_error == true}">Incorrect e-mail</a>

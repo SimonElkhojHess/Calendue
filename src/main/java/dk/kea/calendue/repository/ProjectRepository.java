@@ -45,12 +45,12 @@ public class ProjectRepository
                 String project_start = resultSet.getString(4);
                 String project_deadline = resultSet.getString(5);
                 String project_status = resultSet.getString(7);
-                int project_hours = 0;
+                int project_hours_scheduled = 0;
                 List<Subproject> subList = subprojectRepository.getAllSubprojects(project_id);
                 for(int i = 0; i < subList.size(); i++)
                 {
                     int subHours = subprojectRepository.getTotalSubHours(subList.get(i).getSubproject_id());
-                    project_hours += subHours;
+                    project_hours_scheduled += subHours;
                 }
                 int hours_per_day = 0;
                 int project_days = 0;
@@ -59,8 +59,11 @@ public class ProjectRepository
                     project_days = DateCalculator.returnDateDifference(project_start, project_deadline);
                 }
                 int assigned_users = getProjectAssignmentCount(project_id);
+                int project_hours = project_days*8;
 
-                Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status, project_days, hours_per_day, assigned_users);
+                hours_per_day = project_hours_scheduled/project_days/assigned_users;
+
+                Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status, project_days, hours_per_day, assigned_users, project_hours_scheduled);
                 pList.add(project);
                 System.out.println("Found: " + project);
             }
@@ -229,8 +232,6 @@ public class ProjectRepository
             {
                 assignmentCount = resultSet.getInt(1);
             }
-
-
         }
         catch(SQLException e)
         {

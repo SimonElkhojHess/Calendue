@@ -15,33 +15,43 @@
 <body>
   <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
   <div id="outer-box">
+   <a href="/statistics">
     <div id="resource-object" th:each="project : ${resourceList}">
       <div id="resource-project-name">
-        <span>Project name: </span>
-        <span>*project name*</span>
+        <span style="font-weight:bold;">Project name: <br></span>
+        <span th:text="${project.project_name}">*project name*</span>
       </div>
       <div id="resource-start-date">
-        <span>Start date:</span>
-        <span>*start date*</span>
+        <span style="font-weight:bold;">Start date: <br></span>
+        <span th:text="${project.project_start}">*start date*</span>
       </div>
       <div id="resource-end-date">
-        <span>End date:</span>
-        <span>*end date*</span>
+        <span style="font-weight:bold;">End date: <br></span>
+        <span th:text="${project.project_deadline}">*end date*</span>
       </div>
       <div id="resource-total-days">
-        <span>Days left:</span>
+        <span style="font-weight:bold;">Days remaining: <br></span>
         <span th:text="${project.project_days}">*days left*</span>
       </div>
       <div id="resource-total-hours">
-        <span>Total hours scheduled:  </span>
-        <span>*total hours*</span>
+        <span style="font-weight:bold;">Total hours left:  <br></span>
+        <span th:text="${project.project_hours}">*total hours*</span>
+      </div>
+      <div id="resource-total-hours-scheduled">
+        <span style="font-weight:bold;">Total scheduled hours from tasks:  <br></span>
+        <span th:text="${project.project_hours_scheduled}">*total hours*</span>
+      </div>
+      <div id="assigned-users">
+        <span style="font-weight:bold;">Assigned users: <br></span>
+        <span th:text="${project.users_assigned}">*Assigned users*</span>
       </div>
       <div id="resource-hours-per-day">
-        <span>Avg. hours pr. person/day </span>
-        <span>*Hours per person*</span>
+        <span style="font-weight:bold;">Avg. hours pr. person/day <br></span>
+        <span th:text="${project.project_hours_per_day}">*Hours per person*</span>
+        <span style="color:orange;" th:if="${project.project_hours_per_day} > 8">Assign more users to reduce workload</span>
       </div>
     </div>
-
+   </a>
   </div>
 
 </body>

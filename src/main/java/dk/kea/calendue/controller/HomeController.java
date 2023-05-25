@@ -424,7 +424,11 @@ public class HomeController {
     {
         model.addAttribute("resourceList", projectRepo.getAllProjects());
 
-
         return "resources";
+    }
+    @GetMapping("/statistics")
+    public String showStatistics()
+    {
+        return "statistics";
     }
 }

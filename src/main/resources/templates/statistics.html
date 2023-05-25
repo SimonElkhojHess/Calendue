@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+    <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+    <title>Statistics</title>
+  <style>
+    *{font-family:"Calibri Light";}
+  </style>
+</head>
+<body>
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+  <h1>Statistics</h1>
+  <br><br>
+  <img style="height:70vh; width:auto;" th:src="@{../images/underconstruction.png}">
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+</html>
