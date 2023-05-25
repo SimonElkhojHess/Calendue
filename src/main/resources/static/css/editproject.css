@@ -1,10 +1,12 @@
 .edit-form-popup {
     display: none;
     position: fixed;
-    left:25%;
-    top:15%;
-    height:33rem;
-    width:50rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: auto;
+    min-width:50rem;
     background-color: white;
     border: 3px solid #1d3c65;
     z-index: 9;
@@ -60,20 +62,20 @@
 
 .delete-project-button
 {
-    display: flex;
     border: 2px outset black;
     border-radius: 5px 5px 5px 5px;
-    background-color: #8ED0AB;
-    height:2rem;
-    width:3rem;
+    background-color: #fc1414;
+    width:7rem;
     cursor:pointer;
-    align-items: center;
-    justify-content: center;
-    font-size: 13.3333px;
-    float: right;
-    margin-right: 6px;
-    margin-top: 6px;
-
+    font-size: 19px;
+    margin: 7px 7px 7px 7px;
+    text-align: center;
+    font-weight: bold;
+    padding: 0px 2px 2px 2px;
 }
 
-
+#delete-project
+{
+    align-content: center;
+    margin-top: 2px;
+}

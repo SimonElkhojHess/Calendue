@@ -121,6 +121,11 @@
     <br><br>
     <button id="edit-button" type="submit">Update</button>
     <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
+    <div class="delete-task-button">
+        <a id="delete-task" th:href="@{'/deletetask/' + ${task.task_id}}">
+            Delete Task
+        </a>
+    </div>
 </form>
 </div>
 

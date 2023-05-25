@@ -133,12 +133,6 @@
   <!-- Pop up for editing a project including delete button-->
   <div class="edit-form-popup" id="editForm">
 
-    <div class="delete-project-button">
-      <a id="delete-project" th:href="@{'/deleteproject/' + ${project.project_id}}">
-        Delete
-      </a>
-    </div>
-
     <form action="/editproject" method="post">
 
       <input id="projectID" name="projectID" type="hidden" th:value="${project.getProject_id}">
@@ -182,6 +176,11 @@
       <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
 
     </form>
+    <div class="delete-project-button">
+      <a id="delete-project" th:href="@{'/deleteproject/' + ${project.project_id}}">
+        Delete Project
+      </a>
+    </div>
   </div>
 </div>
 <script>
