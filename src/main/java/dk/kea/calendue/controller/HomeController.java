@@ -443,4 +443,10 @@ public class HomeController {
     {
         return "about";
     }
+
+    @GetMapping("/profile")
+    public String showProfile()
+    {
+        return "profile";
+    }
 }
