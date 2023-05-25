@@ -73,11 +73,6 @@
 
     <div class="edit-form-popup" id="editForm">
 
-        <div class="delete-subproject-button">
-            <a id="delete-subproject" th:href="@{'/deletesubproject/' + ${subproject.subproject_id}}">
-                Delete
-            </a>
-        </div>
 
         <form action="/editsubproject" method="post">
             <br>
@@ -121,6 +116,12 @@
             <br><br>
             <button id="edit-button" type="submit">Update</button>
             <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
+
+            <div class="delete-subproject-button">
+                <a id="delete-subproject" th:href="@{'/deletesubproject/' + ${subproject.subproject_id}}">
+                    Delete Subproject
+                </a>
+            </div>
 
         </form>
     </div>
