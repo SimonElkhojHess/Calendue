@@ -15,35 +15,39 @@
 <div class="blurred-background">
   <img id="background-image" th:src="@{../images/tempbackground.png}">
 </div>
-  <div class="form-popup" id="myEditForm">
+  <div class="form-faux-popup" id="myEditForm">
     <form action="/deleteuser" method="post" class="delete-user-form">
       <input type="hidden" name="user_id" th:value="${oneuser.user_id}">
-      <input id="delete-user" type="submit" value="Delete user"></a>
+      <input id="delete-user" type="submit" value="Delete user">
     </form>
     <form action="/edituser" method="post" class="form-container">
-      <h1>Edit user</h1>
-      <br>
+      <h1 id="edit-headline">Edit user</h1>
+      <div id="edit-username-form">
       <input type="hidden" name="user_id" th:value="${oneuser.user_id}">
       <label for="edit-username"><b>Username</b></label><br>
       <input id="edit-username" name="edit-username" type="text" th:value="${oneuser.username}" required>
-      <br>
+      </div>
+      <div id="edit-full_name-form">
       <label for="edit-full_name"><b>Full name</b></label><br>
       <input id="edit-full_name" name="edit-full_name" type="text" th:value="${oneuser.full_name}" required>
-      <br>
+      </div>
+      <div id="edit-password-form">
       <label for="edit-password"><b>Password</b></label><br>
       <input id="edit-password" name="edit-password" type="password" th:value="${oneuser.password}">
-      <br>
+      </div>
+      <div id="edit-email-form">
       <label for="edit-email"><b>Email</b></label><br>
       <input id="edit-email" name="edit-email" type="text" th:value="${oneuser.email}" required>
-      <br>
-      <p><b>Give admin privileges?</b></p>
+      </div>
+      <div id="edit-admin-privilege-option-form">
+      <p id="edit-admin-privilege-option"><b>Give admin privileges?</b></p>
       <input id="edit-admin-privilege-yes" name="edit-admin-privilege" type="radio" value="1" th:checked="${oneuser.is_admin == 1}">
       <label for="edit-admin-privilege-yes" ><b>Yes</b></label>
       <input id="edit-admin-privilege-no" name="edit-admin-privilege" type="radio" value="0"  th:checked="${oneuser.is_admin == 0}">
       <label for="edit-admin-privilege-no"><b>No</b></label>
-      <br>
-      <button class="submit-edit-button" type="submit">Done</button>
-      <button class="btn cancel" type="button" onclick="history.back()">Cancel</button>
+      </div>
+      <button class="submit-edit-button" id="edit-user-button" type="submit">Done</button>
+      <button class="btn cancel" id="cancel-edit-user-button" type="button" onclick="history.back()">Cancel</button>
     </form>
   </div>
 
