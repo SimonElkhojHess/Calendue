@@ -14,6 +14,7 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
     <div class="grid-box">
+        <span id="name-headline">Subproject: </span>
         <div id="subproject-name" th:text="${subproject.subproject_name}">Project name</div>
         <div id="subproject-desc" th:text="${subproject.subproject_description}">Project description</div>
 
@@ -34,50 +35,6 @@
         </div>
         <button id="edit-subproject-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Subproject</button>
 
-        <!-- <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
-            <form action="/assignproject" method="post">
-                <input name="projectId" type="hidden" th:value="${project.getProject_id}">
-                <label for="assign-email">Enter E-mail</label>
-                <input id=assign-email list="email-box" name="assign-email" placeholder="Enter E-mail..." required>
-
-                <datalist id="email-box" size="5">
-                    <option th:each="users : ${all_users}" th:value="${users.email}">
-                    </option>
-                </datalist>
-                <label for="assign-roles">Assign a role:</label>
-                <select id="assign-roles" name="role">
-                    <option value="Developer" selected>Developer</option>
-                    <option value="Project Leader">Project Leader</option>
-                </select>
-                <input id="assign-project-button" type="submit" value="Assign">
-            </form>
-        </div> -->
-
-        <!-- <button class="open-editroles-button" onclick="openCreateForm()" th:if="${session.project_role == 'Project Leader'}">Edit Participants</button>
-        <div class="editroles-popup" id="myEditRoleForm">
-            <h2>Edit Participants</h2>
-            <div class="editroles-popup-outerbox">
-                <div id="editroles-popup-user-object" th:each="user : ${assignedusers}">
-                    <div id="editroles-popup-user-fullname" th:text="${user.getFull_name}">Full name</div>
-                    <div id="editroles-popup-user-email" th:text="${user.getEmail}">Email adress</div>
-                    <div id="editroles-popup-user-role">
-                        <form action="/editrole" method="post">
-                            <input type="hidden" name="user_id" th:value="${user.getUser_id}">
-                            <input type="hidden" name="project_id" th:value="${project.getProject_id}">
-                            <select id="edit-roles" name="role">
-                                <option value="Developer" th:selected="${user.getRole == 'Developer'}">Developer</option>
-                                <option value="Project Leader" th:selected="${user.getRole == 'Project Leader'}">Project Leader</option>
-                                <input id="editroles-popup-submit-button" type="submit" value="Submit">
-                            </select>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <button class="close-editroles-button" onclick="closeCreateForm()">Close</button>
-        </div> -->
-
-
-
         <div id="create-task-form">
             <form action="/createtask" method="post">
                 <input name="subprojectId" type="hidden" th:value="${subproject.getSubproject_id}">
@@ -86,7 +43,6 @@
             </form>
         </div>
 
-        <!-- Lav om til at det er dem der er assigned til task, som bliver listet -->
         <div id="subproject-participants">
             <div id="assignment-object" th:each="user : ${assignedusers}">
                 <div id="assigned-user-fullname" th:text="${user.full_name}"></div>
@@ -116,8 +72,15 @@
     </div>
 
     <div class="edit-form-popup" id="editForm">
-        <form action="/editsubproject" method="post">
 
+        <div class="delete-subproject-button">
+            <a id="delete-subproject" th:href="@{'/deletesubproject/' + ${subproject.subproject_id}}">
+                Delete
+            </a>
+        </div>
+
+        <form action="/editsubproject" method="post">
+            <br>
             <input id="subprojectID" name="subprojectID" type="hidden" th:value="${subproject.getSubproject_id}">
             <label for="subprojectName"><b>Subproject name</b></label><br>
             <input id="subprojectName" name="subprojectName" type="text" placeholder="Subproject name" th:value="${subproject.getSubproject_name}">
@@ -128,11 +91,33 @@
             <label for="subprojectDeadline"><b>Subproject deadline</b></label><br>
             <input id="subprojectDeadline" name="subprojectDeadline" type="text" placeholder="Subproject deadline" th:value="${subproject.getSubproject_deadline}">
             <br><br>
-            <label for="subprojectHours"><b>Subproject hours</b></label><br>
+
+            <div class="label-box">
+                <div id="subprojectHour-title">
+                    <label for="subprojectHours"><b>Subproject hours</b></label>
+                </div>
+                <div id="subprojectStatus-title">
+                    <label for="subprojectStatus"><b>Subproject status</b></label>
+                </div>
+
+            </div>
+            <div class="hours-status-box">
+                <input id="subprojectHours" name="subprojectHours" type="text" placeholder="Use only integers" th:value="${subproject.getSubproject_hours}">
+
+                <select id="subprojectStatus" name="subprojectStatus" >
+                    <option disabled selected value>Select an option</option>
+                    <option value="To do" th:selected="${subproject.getSubproject_status == 'To do'}">To do</option>
+                    <option value="In progress" th:selected="${subproject.getSubproject_status == 'In progress'}">In progress</option>
+                    <option value="Done" th:selected="${subproject.getSubproject_status == 'Done'}">Done</option>
+                    <option value="Paused" th:selected="${subproject.getSubproject_status == 'Paused'}">Paused</option>
+                </select>
+            </div>
+
+            <!--<label for="subprojectHours"><b>Subproject hours</b></label><br>
             <input id="subprojectHours" name="subprojectHours" type="text" placeholder="Subproject hours" th:value="${subproject.getSubproject_hours}">
             <br><br>
             <label for="subprojectStatus"><b>Subproject status</b></label><br>
-            <input id="subprojectStatus" name="subprojectStatus" type="text" placeholder="Subproject status" th:value="${subproject.getSubproject_status}">
+            <input id="subprojectStatus" name="subprojectStatus" type="text" placeholder="Subproject status" th:value="${subproject.getSubproject_status}">-->
             <br><br>
             <button id="edit-button" type="submit">Update</button>
             <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>

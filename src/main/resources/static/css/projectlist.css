@@ -5,8 +5,7 @@
     /*width: 120%;*/
     font-size:30px;
     padding-top:1px;
-    padding-bottom:30px;
-    overflow: hidden;
+    overflow:visible;
 }
 
 .table-names

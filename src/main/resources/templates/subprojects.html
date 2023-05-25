@@ -15,6 +15,7 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
   <div class="grid-box">
+    <span id="name-headline">Project: </span>
     <div id="project-name" th:text="${project.project_name}">Project name</div>
     <div id="project-desc" th:text="${project.project_description}">Project description</div>
 
@@ -128,15 +129,20 @@
 
   </div>
 
+
+  <!-- Pop up for editing a project including delete button-->
   <div class="edit-form-popup" id="editForm">
 
-    <form action="/deleteproject" method="post" class="delete-project-form">
-      <input type="hidden" name="project_id" th:value="${project.project_id}">
-      <input id="delete-project" type="submit" value="Delete project"></a>
-    </form>
+    <div class="delete-project-button">
+      <a id="delete-project" th:href="@{'/deleteproject/' + ${project.project_id}}">
+        Delete
+      </a>
+    </div>
+
     <form action="/editproject" method="post">
 
       <input id="projectID" name="projectID" type="hidden" th:value="${project.getProject_id}">
+      <br>
       <label for="projectName"><b>Project name</b></label><br>
       <input id="projectName" name="projectName" type="text" placeholder="Project name" th:value="${project.getProject_name}">
       <br><br>
@@ -144,16 +150,33 @@
       <textarea id="projectDescription" name="projectDescription" type="text" placeholder="Project description" th:text="${project.getProject_description}"></textarea>
       <br><br>
       <label for="projectStart"><b>Project start date</b></label><br>
-      <input id="projectStart" name="projectStart" type="text" placeholder="Project start date" th:value="${project.getProject_start}">
+      <input id="projectStart" name="projectStart" type="text" placeholder="dd/mm/yyyy" th:value="${project.getProject_start}">
       <br><br>
       <label for="projectDeadline"><b>Project deadline</b></label><br>
-      <input id="projectDeadline" name="projectDeadline" type="text" placeholder="Project deadline" th:value="${project.getProject_deadline}">
+      <input id="projectDeadline" name="projectDeadline" type="text" placeholder="dd/mm/yyyy" th:value="${project.getProject_deadline}">
       <br><br>
-      <label for="projectHours"><b>Project hours</b></label><br>
-      <input id="projectHours" name="projectHours" type="text" placeholder="Project hours" th:value="${project.getProject_hours}">
-      <br><br>
-      <label for="projectStatus"><b>Project status</b></label><br>
-      <input id="projectStatus" name="projectStatus" type="text" placeholder="Project status" th:value="${project.getProject_status}">
+
+      <div class="label-box">
+        <div id="projectHour-title">
+      <label for="projectHours"><b>Project hours</b></label>
+        </div>
+        <div id="projectStatus-title">
+        <label for="projectStatus"><b>Project status</b></label>
+        </div>
+
+      </div>
+      <div class="hours-status-box">
+      <input id="projectHours" name="projectHours" type="text" placeholder="Use only integers" th:value="${project.getProject_hours}">
+
+      <select id="projectStatus" name="projectStatus" >
+        <option disabled selected value>Select an option</option>
+        <option value="To do" th:selected="${project.getProject_status == 'To do'}">To do</option>
+        <option value="In progress" th:selected="${project.getProject_status == 'In progress'}">In progress</option>
+        <option value="Done" th:selected="${project.getProject_status == 'Done'}">Done</option>
+        <option value="Paused" th:selected="${project.getProject_status == 'Paused'}">Paused</option>
+      </select>
+      </div>
+      <!--<input id="projectStatus" name="projectStatus" type="text" placeholder="Project status" th:value="${project.getProject_status}">-->
       <br><br>
       <button id="edit-button" type="submit">Update</button>
       <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
