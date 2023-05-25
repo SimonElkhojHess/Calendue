@@ -343,10 +343,11 @@
     min-width: 50rem;
     background-color: white;
     border: 3px solid #1d3c65;
-    z-index: 9;
+    z-index: 11;
     font-family: "Calibri Light";
     text-align: center;
     font-size: 18px;
+    padding: 10px;
 
 }
 
@@ -389,7 +390,6 @@
     cursor:pointer;
     font-size: 15.5px;
     font-weight: bold;
-    margin: 7px 7px 7px 7px;
     padding: 2px 2px 2px 2px;
 }
 

@@ -336,10 +336,10 @@ input[type=text]
     width: auto;
     background-color: white;
     border: 3px solid #1d3c65;
-    z-index: 9;
+    z-index: 11;
     font-family: "Calibri Light";
     text-align: center;
-    padding-top: 2rem;
+    padding: 10px;
     font-size: 18px;
 }
 
@@ -351,7 +351,6 @@ input[type=text]
     width:6rem;
     cursor:pointer;
     font-size: 19px;
-    margin: 7px 7px 7px 7px;
     text-align: center;
     font-weight: bold;
     padding: 0px 2px 2px 2px;

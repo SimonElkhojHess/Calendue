@@ -9,10 +9,11 @@
     min-width:50rem;
     background-color: white;
     border: 3px solid #1d3c65;
-    z-index: 9;
+    z-index: 11;
     font-family: "Calibri Light";
     text-align: center;
     font-size: 18px;
+    padding: 10px;
 
 }
 
@@ -68,7 +69,6 @@
     width:7rem;
     cursor:pointer;
     font-size: 19px;
-    margin: 7px 7px 7px 7px;
     text-align: center;
     font-weight: bold;
     padding: 0px 2px 2px 2px;

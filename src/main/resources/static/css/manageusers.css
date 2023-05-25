@@ -4,7 +4,7 @@ html
 }
 .form-popup
 {
-    display: none;
+    display: inline;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -21,8 +21,6 @@ html
 
 .form-container
 {
-    margin-left: 9%;
-    max-width: 300px;
     padding: 10px;
 }
 
