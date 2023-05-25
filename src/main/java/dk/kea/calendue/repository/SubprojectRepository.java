@@ -178,4 +178,19 @@ public class SubprojectRepository
             System.out.println("Could not edit subproject");
         }
     }
+
+    public int getTotalSubHours(int subprojectId)
+    {
+        int totalSubHours = 0;
+        try
+        {
+
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not get total sub hours");
+        }
+
+    }
 }

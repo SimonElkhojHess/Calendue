@@ -1,6 +1,7 @@
 package dk.kea.calendue.repository;
 
 import dk.kea.calendue.model.Project;
+import dk.kea.calendue.model.Subproject;
 import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,8 @@ import java.util.List;
 @Repository
 public class ProjectRepository
 {
+    SubprojectRepository subprojectRepository = new SubprojectRepository();
+
     @Value("${spring.datasource.url}")
     private String HOSTNAME;
 
@@ -40,8 +43,16 @@ public class ProjectRepository
                 String project_description = resultSet.getString(3);
                 String project_start = resultSet.getString(4);
                 String project_deadline = resultSet.getString(5);
-                int project_hours = resultSet.getInt(6);
                 String project_status = resultSet.getString(7);
+                int project_hours = 0;
+                List<Subproject> subList = subprojectRepository.getAllSubprojects(project_id);
+                for(int i = 0; i < subList.size(); i++)
+                {
+                    int subHours = subList.get(i).getTotalSubHours(subList.get(i).getSubproject_id());
+                    project_hours += subHours;
+                }
+
+
 
                 Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status);
                 pList.add(project);
@@ -96,6 +107,8 @@ public class ProjectRepository
         return pList;
 
     }
+
+
 
     public void createProject(Project project)
     {

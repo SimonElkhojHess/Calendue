@@ -418,4 +418,13 @@ public class HomeController {
         return "redirect:/project/" + tempID;
 
     }
+
+    @GetMapping("/resources")
+    public String showResourcePage(HttpSession session, Model model)
+    {
+        model.addAttribute("resourceList", projectRepo.getAllProjects());
+
+
+        return "resources";
+    }
 }

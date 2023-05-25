@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My projects</title>
+
+  <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+  <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+  <link rel="stylesheet" th:href="@{../css/resources.css}" href="../static/css/resources.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <title>Resources</title>
+</head>
+<body>
+  <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+  <div id="outer-box">
+    <div id="resource-object" th:each="resource : ${resourceList}">
+      <div id="resource-project-name">
+        <span>Project name: </span>
+        <span>*project name*</span>
+      </div>
+      <div id="resource-start-date">
+        <span>Start date:</span>
+        <span>*start date*</span>
+      </div>
+      <div id="resource-end-date">
+        <span>End date:</span>
+        <span>*end date*</span>
+      </div>
+      <div id="resource-total-days">
+        <span>Days left:</span>
+        <span>*days left*</span>
+      </div>
+      <div id="resource-total-hours">
+        <span>Total hours needed: </span>
+        <span>*total hours*</span>
+      </div>
+      <div id="resource-hours-per-day">
+        <span>Total hours scheduled: </span>
+        <span>*total scheduled hours*</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+</html>

@@ -9,7 +9,23 @@ public class Project
     private String project_deadline;
     private int project_hours;
     private String project_status;
+    private int project_days;
+    private int project_hours_per_day;
+    private int users_assigned;
 
+    public Project(int project_id, String project_name, String project_description, String project_start, String project_deadline, int project_hours, String project_status, int project_days, int project_hours_per_day, int users_assigned)
+    {
+        this.project_id = project_id;
+        this.project_name = project_name;
+        this.project_description = project_description;
+        this.project_start = project_start;
+        this.project_deadline = project_deadline;
+        this.project_hours = project_hours;
+        this.project_status = project_status;
+        this.project_days = project_days;
+        this.project_hours_per_day = project_hours_per_day;
+        this.users_assigned = users_assigned;
+    }
 
     public Project(int project_id, String project_name, String project_description, String project_start, String project_deadline, int project_hours, String project_status)
     {
@@ -79,7 +95,25 @@ public class Project
         this.project_status = project_status;
     }
 
+    public int getProject_days()
+    {
+        return project_days;
+    }
 
+    public void setProject_days(int project_days)
+    {
+        this.project_days = project_days;
+    }
+
+    public int getProject_hours_per_day()
+    {
+        return project_hours_per_day;
+    }
+
+    public void setProject_hours_per_day(int project_hours_per_day)
+    {
+        this.project_hours_per_day = project_hours_per_day;
+    }
     @Override
     public String toString()
     {

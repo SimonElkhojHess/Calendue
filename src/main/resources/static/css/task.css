@@ -74,6 +74,7 @@
     font-size: 30px;
     font-weight: bold;
 }
+
 #task-status
 {
     grid-column: 5/7;

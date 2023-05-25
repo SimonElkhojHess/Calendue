@@ -1,0 +1,29 @@
+#outer-box
+{
+    width:100%;
+    height:82vh;
+}
+
+#resource-object
+{
+    display:grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    width:88%;
+    height:150px;
+}
+
+#resource-project-name
+{
+
+}
+
+#resource-start-date{}
+
+#resource-end-date{}
+
+#resource-total-days{}
+
+#resource-total-hours{}
+
+#resource-hours-per-day{}
