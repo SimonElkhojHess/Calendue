@@ -23,11 +23,23 @@
 
 #project-name
 {
-    font-size: 40px;
+    font-size: 35px;
     color:white;
-    grid-column:1/5;
+    grid-column:2/5;
     grid-row: 1/1;
     margin-left:7px;
+    margin-top: 4px;
+}
+
+#name-headline
+{
+    grid-column: 1/1;
+    grid-row: 1/1;
+    font-weight: bold;
+    color: #ffffff;
+    font-size:24px;
+    margin-left: 10px;
+    margin-top: 12px;
 }
 
 #project-desc
@@ -483,6 +495,7 @@ input[type=text]
 {
     background-color: #a2e9e9;
 }
+
 
 
 

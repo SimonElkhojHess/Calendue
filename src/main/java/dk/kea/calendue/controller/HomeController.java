@@ -313,13 +313,13 @@ public class HomeController {
     }
 
     @PostMapping("/editsubproject")
-    public String editSubproject(@RequestParam("subprojectID") int tempID, @RequestParam("subprojectName") String editName, @RequestParam("subprojectDescription") String editDescription, @RequestParam("subprojectDeadline") String editDeadline, @RequestParam("projectHours") int editHours, @RequestParam("subprojectStatus") String editStatus, HttpSession session, Model model)
+    public String editSubproject(@RequestParam("subprojectID") int tempID, @RequestParam("subprojectName") String editName, @RequestParam("subprojectDescription") String editDescription, @RequestParam("subprojectDeadline") String editDeadline, @RequestParam("subprojectHours") int editHours, @RequestParam("subprojectStatus") String editStatus, HttpSession session, Model model)
     {
         Subproject tempSubproject = new Subproject(tempID, editName, editDescription, editDeadline, editHours, editStatus);
         subprojectRepo.editSubproject(tempSubproject);
 
 
-        return "redirect:/project/" + tempID;
+        return "redirect:/subproject/" + tempID;
     }
 
     @PostMapping("/createtask")

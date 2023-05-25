@@ -150,4 +150,32 @@ public class SubprojectRepository
             System.out.println("Could not delete subproject");
         }
     }
+
+    public void editSubproject(Subproject subproject)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            final String UPDATE_QUERY =
+                    "UPDATE calendue.subproject " +
+                            "SET subproject_name=?, subproject_description=?, " +
+                            "subproject_deadline=?, subproject_hours=?, subproject_status=? " +
+                            "WHERE subproject_id = " + subproject.getSubproject_id();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, subproject.getSubproject_name());
+            preparedStatement.setString(2, subproject.getSubproject_description());
+            preparedStatement.setString(3, subproject.getSubproject_deadline());
+            preparedStatement.setInt(4, subproject.getSubproject_hours());
+            preparedStatement.setString(5, subproject.getSubproject_status());
+
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not edit subproject");
+        }
+    }
 }

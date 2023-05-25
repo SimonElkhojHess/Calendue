@@ -15,6 +15,7 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
   <div class="grid-box">
+    <span id="name-headline">Project: </span>
     <div id="project-name" th:text="${project.project_name}">Project name</div>
     <div id="project-desc" th:text="${project.project_description}">Project description</div>
 
