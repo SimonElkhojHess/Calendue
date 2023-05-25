@@ -1,0 +1,16 @@
+#contact-form-outerbox
+{
+    display:block;
+    position:fixed;
+    top:30%;
+    left:25%;
+    height: 40vh;
+    width: 60vh;
+}
+#contact-form-innerbox
+{
+}
+#contact-email-box
+{}
+#contact-message-box
+{}

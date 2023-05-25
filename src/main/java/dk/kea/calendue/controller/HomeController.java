@@ -431,4 +431,16 @@ public class HomeController {
     {
         return "statistics";
     }
+
+    @GetMapping("/contact")
+    public String showContactPage()
+    {
+        return "contact";
+    }
+
+    @GetMapping("/about")
+    public String showAboutPage()
+    {
+        return "about";
+    }
 }
