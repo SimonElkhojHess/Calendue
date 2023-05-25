@@ -24,6 +24,16 @@ public class Subproject
         this.subproject_status = subproject_status;
     }
 
+    public Subproject(int subproject_id, String subproject_name, String subproject_description, String subproject_deadline, int subproject_hours, String subproject_status)
+    {
+        this.subproject_id = subproject_id;
+        this.subproject_name = subproject_name;
+        this.subproject_description = subproject_description;
+        this.subproject_deadline = subproject_deadline;
+        this.subproject_hours = subproject_hours;
+        this.subproject_status = subproject_status;
+    }
+
     public int getSubproject_id()
     {
         return subproject_id;

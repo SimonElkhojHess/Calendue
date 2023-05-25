@@ -14,6 +14,7 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
     <div class="grid-box">
+        <span id="name-headline">Task: </span>
         <div id="task-name" th:text="${task.task_name}">Task name</div>
         <div id="task-desc" th:text="${task.task_description}">Task description</div>
 

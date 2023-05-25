@@ -19,12 +19,25 @@
     min-height: 5rem;
 }
 
+.hours-status-box, .label-box
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
 .edit-form-popup input, .edit-form-popup textarea
 {
-    min-width: 40rem;
+    width: 40rem;
     font-family: "Calibri";
     font-size: 16px;
 
+}
+
+#projectHours
+{
+    height: auto;
+    width: 4rem;
 }
 
 .edit-form-popup button

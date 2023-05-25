@@ -1,6 +1,7 @@
 package dk.kea.calendue.controller;
 
 import dk.kea.calendue.model.Project;
+import dk.kea.calendue.model.Subproject;
 import dk.kea.calendue.model.Task;
 import dk.kea.calendue.model.User;
 import dk.kea.calendue.repository.*;
@@ -274,13 +275,13 @@ public class HomeController {
 
         return "redirect:/manage";
     }
-    @GetMapping("/editproject/{id}")
+    /*@GetMapping("/editproject/{id}")
     public String showEditProject(@PathVariable("id") int project_ID, HttpSession session, Model model)
     {
         Project editProject = projectRepo.getOneProject(project_ID);
         model.addAttribute("project", editProject);
         return "editproject";
-    }
+    }*/
 
     @PostMapping("/editproject")
     public String editProject(@RequestParam("projectID") int tempID, @RequestParam("projectName") String editName, @RequestParam("projectDescription") String editDescription, @RequestParam("projectStart") String editStart, @RequestParam("projectDeadline") String editDeadline, @RequestParam("projectHours") int editHours, @RequestParam("projectStatus") String editStatus, HttpSession session, Model model)
@@ -309,6 +310,16 @@ public class HomeController {
         //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
 
         return "subprojecttask";
+    }
+
+    @PostMapping("/editsubproject")
+    public String editSubproject(@RequestParam("subprojectID") int tempID, @RequestParam("subprojectName") String editName, @RequestParam("subprojectDescription") String editDescription, @RequestParam("subprojectDeadline") String editDeadline, @RequestParam("subprojectHours") int editHours, @RequestParam("subprojectStatus") String editStatus, HttpSession session, Model model)
+    {
+        Subproject tempSubproject = new Subproject(tempID, editName, editDescription, editDeadline, editHours, editStatus);
+        subprojectRepo.editSubproject(tempSubproject);
+
+
+        return "redirect:/subproject/" + tempID;
     }
 
     @PostMapping("/createtask")
