@@ -15,7 +15,7 @@
 <body>
   <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
   <div id="outer-box">
-    <div id="resource-object" th:each="resource : ${resourceList}">
+    <div id="resource-object" th:each="project : ${resourceList}">
       <div id="resource-project-name">
         <span>Project name: </span>
         <span>*project name*</span>
@@ -30,15 +30,15 @@
       </div>
       <div id="resource-total-days">
         <span>Days left:</span>
-        <span>*days left*</span>
+        <span th:text="${project.project_days}">*days left*</span>
       </div>
       <div id="resource-total-hours">
-        <span>Total hours needed: </span>
+        <span>Total hours scheduled:  </span>
         <span>*total hours*</span>
       </div>
       <div id="resource-hours-per-day">
-        <span>Total hours scheduled: </span>
-        <span>*total scheduled hours*</span>
+        <span>Avg. hours pr. person/day </span>
+        <span>*Hours per person*</span>
       </div>
     </div>
 

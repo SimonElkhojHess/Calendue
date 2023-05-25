@@ -3,6 +3,7 @@ package dk.kea.calendue.repository;
 import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Subproject;
 import dk.kea.calendue.utility.ConnectionManager;
+import dk.kea.calendue.utility.DateCalculator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -51,10 +52,15 @@ public class ProjectRepository
                     int subHours = subprojectRepository.getTotalSubHours(subList.get(i).getSubproject_id());
                     project_hours += subHours;
                 }
+                int hours_per_day = 0;
+                int project_days = 0;
+                if(project_start != null && project_deadline != null)
+                {
+                    project_days = DateCalculator.returnDateDifference(project_start, project_deadline);
+                }
                 int assigned_users = getProjectAssignmentCount(project_id);
 
-
-                Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status);
+                Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status, project_days, hours_per_day, assigned_users);
                 pList.add(project);
                 System.out.println("Found: " + project);
             }
