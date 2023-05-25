@@ -373,12 +373,10 @@ public class UserRepository
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
             final String DELETE_ASSIGMENT_PROJECT_SQL = "DELETE FROM calendue.project_user WHERE user_id="+user_id;
-            final String DELETE_ASSIGMENT_SUBPROJECT_SQL = "DELETE FROM calendue.subproject_user WHERE user_id="+user_id;
             final String DELETE_ASSIGMENT_TASK_SQL = "DELETE FROM calendue.task_user WHERE user_id="+user_id;
             final String DELETE_USER_SQL="DELETE FROM calendue.user WHERE user_id="+user_id;
 
             statement.executeUpdate(DELETE_ASSIGMENT_TASK_SQL);
-            statement.executeUpdate(DELETE_ASSIGMENT_SUBPROJECT_SQL);
             statement.executeUpdate(DELETE_ASSIGMENT_PROJECT_SQL);
             statement.executeUpdate(DELETE_USER_SQL);
 
