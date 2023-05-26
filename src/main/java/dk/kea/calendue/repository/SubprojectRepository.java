@@ -122,7 +122,9 @@ public class SubprojectRepository
                 tempSubproject.setSubproject_name(resultSet.getString(3));
                 tempSubproject.setSubproject_description(resultSet.getString(4));
                 tempSubproject.setSubproject_deadline(resultSet.getString(5));
-                tempSubproject.setSubproject_hours(resultSet.getInt(6));
+                int manhours = 0;
+                manhours = getTotalSubHours(subprojectID);
+                tempSubproject.setSubproject_hours(manhours);
                 tempSubproject.setSubproject_status(resultSet.getString(7));
             }
         }

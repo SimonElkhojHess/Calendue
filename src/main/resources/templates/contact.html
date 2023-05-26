@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{../css/navbar.css}" href="../static/css/navbar.css">
+  <link rel="stylesheet" th:href="@{../css/footer.css}" href="../static/css/footer.css">
+    <link rel="stylesheet" th:href="@{../css/contact.css}" href="../static/css/contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <title>Contact us</title>
+</head>
+<body>
+<nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
+<div id="background-box">
+    <img th:src="@{../images/loginImage.png}" src="../static/images/loginImage.png" alt="loginPicture" style="height:auto; width:100%;">
+</div>
+<div id="contact-form-outerbox">
+        <form id="contact-form-innerbox">
+          <h1>Contact Us</h1>
+        <input id="contact-email-box" name="contact-email" type="text" placeholder="Please Enter E-mail..."><br>
+        <textarea id="contact-message-box" name="contact-message" type="text" placeholder="Enter Message..."></textarea><br>
+        <button id="contact-submit" type="submit">Send</button><br>
+      </form>
+    </div>
+
+</body>
+<footer th:insert="~{fragments/navigation.html :: footer}"></footer>
+
+</html>

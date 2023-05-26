@@ -1,0 +1,40 @@
+.about-outer-box
+{
+    display:flex;
+    width:40%;
+    height:80vh;
+    margin:3vh 0 0 30%;
+    border:1px inset black;
+    overflow:hidden;
+    font-family:"Calibri Light";
+}
+
+.about-sidebar
+{
+    height:100%;
+    width:30%;
+    border:1px solid black;
+}
+.about-choice
+{
+    width:100%;
+    font-size:18px;
+    height:30px;
+    background-color: #8ba6ce;
+    text-align:center;
+    padding-top:10px;
+}
+
+.about-infobox
+{
+    margin-left:1%;
+    width:69%;
+}
+
+footer
+{
+    position:fixed;
+    width:100%;
+    bottom:0;
+    left:0;
+}
