@@ -431,4 +431,64 @@ public class HomeController {
     {
         return "statistics";
     }
+
+    @GetMapping("/contact")
+    public String showContactPage()
+    {
+        return "contact";
+    }
+
+    @GetMapping("/about")
+    public String showAboutPage()
+    {
+        return "about";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session)
+    {
+
+        return "profile";
+    }
+
+    @PostMapping("/editprofile")
+    public String editProfile(@RequestParam("editUsername")String editUsername,@RequestParam("editEmail")String editEmail,@RequestParam("editFullname")String editFullname, @RequestParam("editPassword")String editPassword, @RequestParam("confirmPassword")String confirmPassword, HttpSession session)
+    {
+        User user = new User();
+        int userId = (int) session.getAttribute("user_id");
+        int is_admin = (int) session.getAttribute("is_admin");
+        if(editPassword.length() > 0)
+        {
+            if(editPassword.equals(confirmPassword))
+            {
+                editPassword = userRepo.encodePassword(editPassword);
+            }
+            else
+            {
+                session.setAttribute("passwordNoMatch", true);
+                return "redirect:/profile";
+            }
+        }
+        else
+        {
+            editPassword = "noEdit";
+        }
+        user.setUser_id(userId);
+        user.setUsername(editUsername);
+        user.setPassword(editPassword);
+        user.setEmail(editEmail);
+        user.setFull_name(editFullname);
+        user.setIs_admin(is_admin);
+        userRepo.editUser(user);
+
+        //Updates credentials for page
+        user = userRepo.getUserInfo(editUsername);
+        session.setAttribute("user_id", user.getUser_id());
+        session.setAttribute("username", user.getUsername());
+        session.setAttribute("email", user.getEmail());
+        session.setAttribute("is_admin", user.getIs_admin());
+        session.setAttribute("full_name", user.getFull_name());
+
+        return "redirect:/homepage";
+    }
 }

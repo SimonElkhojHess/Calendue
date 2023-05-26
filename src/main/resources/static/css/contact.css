@@ -1,0 +1,44 @@
+html
+{
+    overflow:hidden;
+}
+#contact-form-outerbox
+{
+    display:block;
+    position:fixed;
+    top:30%;
+    left:35%;
+    height: 40vh;
+    width: 60vh;
+    border:1px solid grey;
+    background-color: white;
+    z-index:10;
+}
+#contact-form-innerbox
+{
+    height: 100%;
+    width: 100%;
+}
+#contact-email-box
+{
+    margin: 10% 0 0 0;
+    height:1.5rem;
+    width: 16rem;
+}
+#contact-message-box
+{
+    margin: 5% 0 0 0;
+    height:4rem;
+    width:20rem;
+}
+#contact-submit
+{
+margin: 5% 0 0 0;
+}
+footer
+{
+    position:fixed;
+    width:100%;
+    bottom:0;
+    left:0;
+}
