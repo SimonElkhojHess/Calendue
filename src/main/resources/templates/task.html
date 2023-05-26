@@ -61,6 +61,7 @@
                 <input id="assign-project-button" type="submit" value="Assign">
             </form>
         </div>
+        <button class="open-edit-assigned-button" onclick="openCreateForm()" th:if="${session.project_role == 'Project Leader'}">Edit Participants</button>
         <div id="task-comment-outerbox">
             <button id="open-comment-button" onclick="openCommentForm()">View comments</button>
         </div>
@@ -129,6 +130,22 @@
 </form>
 </div>
 
+<div class="edit-assigned-popup" id="myEditAssignedForm">
+    <h2>Edit Participants</h2>
+    <div class="edit-assigned-popup-outerbox">
+        <div id="edit-assigned-popup-user-object" th:each="user : ${assignedusers}">
+            <div id="edit-assigned-popup-user-fullname" th:text="${user.getFull_name}">Full name</div>
+            <div id="edit-assigned-popup-user-email" th:text="${user.getEmail}">Email adress</div>
+            <div id="edit-assigned-popup-user-role" th:text="${user.role}">Role</div>
+            <div id="edit-assigned-popup-user-delete">
+                <a  id="edit-assigned-popup-user-delete-alink" th:href="@{'/taskassignment/delete/' + ${user.user_id} + '/' + ${task.task_id}}">
+                    <p style="font-size:14px; margin:3px 0 0 5px; overflow:hidden; font-weight: bold;">Remove</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <button class="close-edit-assigned-button" onclick="closeCreateForm()">Close</button>
+</div>
 
 <script>
     function openCommentForm()
@@ -150,6 +167,16 @@
     {
         document.getElementById("editForm").style.display = "none";
     }
+
+
+    function openCreateForm() {
+        document.getElementById("myEditAssignedForm").style.display = "block";
+    }
+
+    function closeCreateForm() {
+        document.getElementById("myEditAssignedForm").style.display = "none";
+    }
+
 </script>
 </body>
 <footer th:insert="~{fragments/navigation.html :: footer}"></footer>

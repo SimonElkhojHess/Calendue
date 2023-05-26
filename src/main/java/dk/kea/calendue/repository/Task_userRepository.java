@@ -144,4 +144,22 @@ public class Task_userRepository
 
     }
 
+    public void deleteTaskAssignment(int userId, int taskId)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String SQL_QUERY = "DELETE FROM calendue.task_user " +
+                    "WHERE user_id = " + userId +
+                    " AND task_id = " + taskId;
+            statement.executeUpdate(SQL_QUERY);
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not delete task-user assignment");
+        }
+    }
+
 }

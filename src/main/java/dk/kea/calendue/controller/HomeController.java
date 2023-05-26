@@ -401,6 +401,14 @@ public class HomeController {
         return "redirect:/task/" + taskId;
     }
 
+    @PostMapping("/taskassignment/delete/{user_id}/{task_id}")
+    public String deleteTaskAssignment(@PathVariable("user_id")int user_id, @PathVariable("task_id")int task_id)
+    {
+        task_userRepo.deleteTaskAssignment(user_id, task_id);
+
+        return "redirect:/task/" + task_id;
+    }
+
     @GetMapping("/deleteproject/{id}")
     public String deleteProject(@PathVariable("id") int projectID)
     {
