@@ -13,16 +13,25 @@
 <body>
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 
-<h1>About us</h1>
-<p></p>
+<div class="about-outer-box">
+    <div class="about-sidebar">
+        <div class="about-choice">About us</div>
+    </div>
+    <div class="about-infobox">
+        <h1>Who are we & what do we do?</h1><br>
+        <p>We are a group of computer science students, working on projects like these both during school hours and in our own time.<br>
+        <br>This project specifically is created in collaboration with Alpha Solutions as a school project, to further our experience in full-stack development.
+        </p>
 
-<h2>Who are we?</h2>
-<p></p>
 
-<h2>What do we do?</h2>
-<p></p>
+    </div>
+
+</div>
+
+
+
+
 
 </body>
 <footer th:insert="~{fragments/navigation.html :: footer}"></footer>
-
 </html>
