@@ -30,12 +30,12 @@
         </div>
         <div id="task-priority">
             <span id="task-priority-headline">Priority: <br></span>
-            <span id="task-priority-value" th:text="${task.task_priority}"></span>
+            <span id="task-priority-value" th:styleappend="${task.task_priority == 0 ? 'display:none' : ''}" th:text="${task.task_priority}" ></span>
         </div>
 
         <div id="task-status">
             <span id="task-status-headline">Status: <br></span>
-            <span id="task-status-current" th:text="${task.task_status}"></span>
+            <span id="task-status-current" th:styleappend="${task.task_status == 'null' ? 'display:none' : ''}" th:text="${task.task_status}"></span>
         </div>
 
         <div id="task-hours">
@@ -77,11 +77,11 @@
                 <div class="task-element" th:styleappend="${task.task_id == tasks.task_id ? 'border:2px solid red' : 'border:none'}">
                     <div id="task-element-name" th:text="${tasks.task_name}"></div>
                     <div id="task_priority-title">Priority:</div>
-                    <div id="task_priority" th:text="${tasks.task_priority}"></div>
+                    <div id="task_priority" th:styleappend="${tasks.task_priority == 0 ? 'display:none' : ''}" th:text="${tasks.task_priority}"></div>
                     <div id="task_deadline-title">Deadline:</div>
                     <div id="task_deadline" th:text="${tasks.task_deadline}"></div>
                     <div id="task_status-title">Status:</div>
-                    <div id="task_status" th:text="${tasks.task_status}"></div>
+                    <div id="task_status" th:styleappend="${tasks.task_status == 'null' ? 'display:none' : ''}" th:text="${tasks.task_status}"></div>
                     <div id="task_description-title">Description:</div>
                     <div id="task_description" th:text="${tasks.task_description}"></div>
                 </div>
@@ -132,7 +132,7 @@
         <input id="taskHours" name="taskHours" type="text" placeholder="Use only integers" th:value="${task.getTask_hours}">
 
         <select id="taskPriority" name="taskPriority" >
-            <option disabled selected value>Select an option</option>
+            <option value="0" th:selected="${task.getTask_priority == '0'}">Select an option</option>
             <option value="1" th:selected="${task.getTask_priority == '1'}">1</option>
             <option value="2" th:selected="${task.getTask_priority == '2'}">2</option>
             <option value="3" th:selected="${task.getTask_priority == '3'}">3</option>
@@ -141,7 +141,7 @@
         </select>
 
         <select id="taskStatus" name="taskStatus" >
-            <option disabled selected value>Select an option</option>
+            <option value="null" th:selected="${task.getTask_priority == 'null'}">Select an option</option>
             <option value="To do" th:selected="${task.getTask_status == 'To do'}">To do</option>
             <option value="In progress" th:selected="${task.getTask_status == 'In progress'}">In progress</option>
             <option value="Paused" th:selected="${task.getTask_status == 'Paused'}">Paused</option>

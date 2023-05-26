@@ -36,7 +36,7 @@
 
     <div id="project-status">
       <span id="status-headline">Status: <br></span>
-      <span id="status-current" th:text="${project.project_status}"></span>
+      <span id="status-current" th:styleappend="${project.project_status == 'null' ? 'display:none' : ''}" th:text="${project.project_status}"></span>
     </div>
 
 
@@ -98,8 +98,8 @@
       <div id="create-subproject-form">
         <form action="/createsubproject" method="post">
           <input name="projectId" type="hidden" th:value="${project.getProject_id}">
-          <input id="create-subproject-name" name="subprojectName" type="text" placeholder="Subproject title...">
-          <input id="create-subproject-button" type="submit" value="Create subproject" required>
+          <input id="create-subproject-name" name="subprojectName" type="text" placeholder="Subproject title..." required>
+          <input id="create-subproject-button" type="submit" value="Create subproject">
         </form>
       </div>
 
@@ -126,7 +126,7 @@
       <div id="subproject_deadline-title">Deadline:</div>
       <div id="subproject_deadline" th:text="${subproject.subproject_deadline}"></div>
       <div id="subproject_status-title">Status:</div>
-      <div id="subproject_status" th:text="${subproject.subproject_status}"></div>
+      <div id="subproject_status" th:styleappend="${subproject.subproject_status == 'null' ? 'display:none' : ''}" th:text="${subproject.subproject_status}"></div>
 
     </div>
     </a>
@@ -174,7 +174,7 @@
       <input id="projectHours" name="projectHours" type="text" placeholder="Use only integers" th:value="${project.getProject_hours}">
 
       <select id="projectStatus" name="projectStatus" >
-        <option disabled selected value>Select an option</option>
+        <option value="null" th:selected="${project.getProject_status == 'null'}">Select an option</option>
         <option value="To do" th:selected="${project.getProject_status == 'To do'}">To do</option>
         <option value="In progress" th:selected="${project.getProject_status == 'In progress'}">In progress</option>
         <option value="Done" th:selected="${project.getProject_status == 'Done'}">Done</option>
