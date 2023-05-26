@@ -33,13 +33,29 @@
 
 #name-headline
 {
-    grid-column: 1/1;
-    grid-row: 1/1;
     font-weight: bold;
     color: #ffffff;
     font-size:24px;
+
+}
+
+#name-button-box
+{
+    grid-column: 1/1;
+    grid-row: 1/1;
     margin-left: 10px;
     margin-top: 12px;
+}
+
+#backbutton
+{
+    border-radius:10px 10px 10px 10px;
+    background-color: #8ED0AB;
+    color: black;
+    cursor:pointer;
+    height:auto;
+    width:7.5rem;
+    margin-top: 10px;
 }
 
 #subproject-desc
@@ -280,14 +296,14 @@
     font-weight: bold;
 }
 
-#task_start-title
+#task_deadline-title
 {
     grid-column: 5/9;
     grid-row: 3/3;
     font-weight: bold;
     padding: 0 0 0 10px;
 }
-#task_start
+#task_deadline
 {
     grid-column:5/9;
     grid-row:4/4;

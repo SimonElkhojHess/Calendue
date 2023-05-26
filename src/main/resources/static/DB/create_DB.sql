@@ -34,7 +34,7 @@ CREATE TABLE `calendue`.`task` (
                                    `task_name` VARCHAR(255) NOT NULL,
                                    `task_description` VARCHAR(1000) NULL,
                                    `task_comment` VARCHAR(1000) NULL,
-                                   `task_start` VARCHAR(255) NULL,
+                                   `task_deadline` VARCHAR(255) NULL,
                                    `task_hours` INT NULL,
                                    `task_priority` INT NULL,
                                    `task_status` VARCHAR(255) NULL,
@@ -82,21 +82,6 @@ CREATE TABLE `calendue`.`project_user` (
                                                    ON DELETE CASCADE
                                                    ON UPDATE NO ACTION);
 
-CREATE TABLE `calendue`.`subproject_user` (
-                                              `subproject_id` INT NOT NULL,
-                                              `user_id` INT NOT NULL,
-                                              INDEX `subproject_user_subproject_id_idx` (`subproject_id` ASC) VISIBLE,
-                                              INDEX `subproject_user_user_id_idx` (`user_id` ASC) VISIBLE,
-                                              CONSTRAINT `subproject_fk_subproject_user`
-                                                  FOREIGN KEY (`subproject_id`)
-                                                      REFERENCES `calendue`.`subproject` (`subproject_id`)
-                                                      ON DELETE CASCADE
-                                                      ON UPDATE NO ACTION,
-                                              CONSTRAINT `subproject_fk_user`
-                                                  FOREIGN KEY (`user_id`)
-                                                      REFERENCES `calendue`.`user` (`user_id`)
-                                                      ON DELETE CASCADE
-                                                      ON UPDATE NO ACTION);
 
 CREATE TABLE `calendue`.`task_user` (
                                         `task_id` INT NOT NULL,

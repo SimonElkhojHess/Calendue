@@ -14,23 +14,28 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
     <div class="grid-box">
-        <span id="name-headline">Task: </span>
+        <div id="name-button-box">
+        <span id="name-headline">Task: </span><br>
+            <div id="backlink">
+        <a href="/subproject/" th:href="@{'/subproject/'} + ${task.getSubproject_id}"><button id="backbutton">Back to <br> subproject</button></a>
+            </div>
+            </div>
         <div id="task-name" th:text="${task.task_name}">Task name</div>
         <div id="task-desc" th:text="${task.task_description}">Task description</div>
 
-        <div id="task-start">
-            <span id="task-start-headline">Start: <br></span>
-            <span id="task-start-date" th:text="${task.task_start}"></span>
-        </div>
 
+        <div id="task-deadline">
+            <span id="task-deadline-headline">Deadline: <br></span>
+            <span id="task-deadline-date" th:text="${task.task_deadline}"></span>
+        </div>
         <div id="task-priority">
             <span id="task-priority-headline">Priority: <br></span>
-            <span id="task-priority-value" th:text="${task.task_priority}"></span>
+            <span id="task-priority-value" th:styleappend="${task.task_priority == 0 ? 'display:none' : ''}" th:text="${task.task_priority}" ></span>
         </div>
 
         <div id="task-status">
             <span id="task-status-headline">Status: <br></span>
-            <span id="task-status-current" th:text="${task.task_status}"></span>
+            <span id="task-status-current" th:styleappend="${task.task_status == 'null' ? 'display:none' : ''}" th:text="${task.task_status}"></span>
         </div>
 
         <div id="task-hours">
@@ -73,11 +78,11 @@
                 <div class="task-element" th:styleappend="${task.task_id == tasks.task_id ? 'border:2px solid red' : 'border:none'}">
                     <div id="task-element-name" th:text="${tasks.task_name}"></div>
                     <div id="task_priority-title">Priority:</div>
-                    <div id="task_priority" th:text="${tasks.task_priority}"></div>
-                    <div id="task_start-title">Start date:</div>
-                    <div id="task_start" th:text="${tasks.task_start}"></div>
+                    <div id="task_priority" th:styleappend="${tasks.task_priority == 0 ? 'display:none' : ''}" th:text="${tasks.task_priority}"></div>
+                    <div id="task_deadline-title">Deadline:</div>
+                    <div id="task_deadline" th:text="${tasks.task_deadline}"></div>
                     <div id="task_status-title">Status:</div>
-                    <div id="task_status" th:text="${tasks.task_status}"></div>
+                    <div id="task_status" th:styleappend="${tasks.task_status == 'null' ? 'display:none' : ''}" th:text="${tasks.task_status}"></div>
                     <div id="task_description-title">Description:</div>
                     <div id="task_description" th:text="${tasks.task_description}"></div>
                 </div>
@@ -108,10 +113,44 @@
     <label for="taskDescription"><b>Task description</b></label><br>
     <textarea id="taskDescription" name="taskDescription" type="text" placeholder="Task description" th:text="${task.getTask_description}"></textarea>
     <br><br>
-    <label for="taskStart"><b>Task start</b></label><br>
-    <input id="taskStart" name="taskStart" type="text" placeholder="Task start" th:value="${task.getTask_start}">
+    <label for="taskDeadline"><b>Task deadline</b></label><br>
+    <input id="taskDeadline" name="taskDeadline" type="text" placeholder="dd/mm/yyyy" th:value="${task.getTask_deadline}">
     <br><br>
-    <label for="taskPriority"><b>Task priority</b></label><br>
+
+    <div class="label-box">
+        <div id="taskHour-title">
+            <label for="taskHours"><b>Task hours</b></label>
+        </div>
+        <div id="taskPriority-title">
+            <label for="taskPriority"><b>Task priority</b></label>
+        </div>
+        <div id="taskStatus-title">
+            <label for="taskStatus"><b>Task status</b></label>
+        </div>
+
+    </div>
+    <div class="hours-status-box">
+        <input id="taskHours" name="taskHours" type="text" placeholder="Use only integers" th:value="${task.getTask_hours}">
+
+        <select id="taskPriority" name="taskPriority" >
+            <option value="0" th:selected="${task.getTask_priority == '0'}">Select an option</option>
+            <option value="1" th:selected="${task.getTask_priority == '1'}">1</option>
+            <option value="2" th:selected="${task.getTask_priority == '2'}">2</option>
+            <option value="3" th:selected="${task.getTask_priority == '3'}">3</option>
+            <option value="4" th:selected="${task.getTask_priority == '4'}">4</option>
+            <option value="5" th:selected="${task.getTask_priority == '5'}">5</option>
+        </select>
+
+        <select id="taskStatus" name="taskStatus" >
+            <option value="null" th:selected="${task.getTask_priority == 'null'}">Select an option</option>
+            <option value="To do" th:selected="${task.getTask_status == 'To do'}">To do</option>
+            <option value="In progress" th:selected="${task.getTask_status == 'In progress'}">In progress</option>
+            <option value="Paused" th:selected="${task.getTask_status == 'Paused'}">Paused</option>
+            <option value="Done" th:selected="${task.getTask_status == 'Done'}">Done</option>
+        </select>
+    </div>
+
+    <!--<label for="taskPriority"><b>Task priority</b></label><br>
     <input id="taskPriority" name="taskPriority" type="text" placeholder="Task priority" th:value="${task.getTask_priority}">
     <br><br>
     <label for="taskHours"><b>Task hours</b></label><br>
@@ -119,7 +158,7 @@
     <br><br>
     <label for="taskStatus"><b>Task status</b></label><br>
     <input id="taskStatus" name="taskStatus" type="text" placeholder="Task status" th:value="${task.getTask_status}">
-    <br><br>
+    <br><br>-->
     <button id="edit-button" type="submit">Update</button>
     <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
     <div class="delete-task-button">

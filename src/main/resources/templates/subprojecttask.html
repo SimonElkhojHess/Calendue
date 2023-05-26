@@ -14,7 +14,12 @@
 <nav th:insert="~{fragments/navigation.html :: navbar}"> </nav>
 <div class="outer-box">
     <div class="grid-box">
-        <span id="name-headline">Subproject: </span>
+        <div id="name-button-box">
+            <span id="name-headline">Subproject: </span><br>
+            <div id="backlink">
+                <a href="/project/" th:href="@{'/project/' + ${subproject.getProject_id}}"><button id="backbutton">Back to <br> project</button></a>
+            </div>
+        </div>
         <div id="subproject-name" th:text="${subproject.subproject_name}">Project name</div>
         <div id="subproject-desc" th:text="${subproject.subproject_description}">Project description</div>
 
@@ -25,7 +30,7 @@
 
         <div id="subproject-status">
             <span id="status-headline">Status: <br></span>
-            <span id="status-current" th:text="${subproject.subproject_status}"></span>
+            <span id="status-current" th:styleappend="${subproject.subproject_status == 'null' ? 'display:none' : ''}" th:text="${subproject.subproject_status}"></span>
         </div>
 
 
@@ -38,7 +43,7 @@
         <div id="create-task-form">
             <form action="/createtask" method="post">
                 <input name="subprojectId" type="hidden" th:value="${subproject.getSubproject_id}">
-                <input id="create-task-name" name="taskName" type="text" placeholder="Task title...">
+                <input id="create-task-name" name="taskName" type="text" placeholder="Task title..." required>
                 <input id="create-task-button" type="submit" value="Create task" required>
             </form>
         </div>
@@ -59,9 +64,9 @@
             <div class="task-element">
                 <div id="task-name" th:text="${task.task_name}"></div>
             <div id="task_priority-title">Priority:</div>
-            <div id="task_priority" th:text="${task.task_priority}"></div>
-            <div id="task_start-title">Start date:</div>
-            <div id="task_start" th:text="${task.task_start}"></div>
+            <div id="task_priority" th:styleappend="${task.task_priority == 0 ? 'display:none' : ''}" th:text="${task.task_priority}" ></div>
+            <div id="task_deadline-title">Deadline:</div>
+            <div id="task_deadline" th:text="${task.task_deadline}"></div>
             <div id="task_status-title">Status:</div>
             <div id="task_status" th:text="${task.task_status}"></div>
             <div id="task_description-title">Description:</div>
@@ -100,7 +105,7 @@
                 <input id="subprojectHours" name="subprojectHours" type="text" placeholder="Use only integers" th:value="${subproject.getSubproject_hours}">
 
                 <select id="subprojectStatus" name="subprojectStatus" >
-                    <option disabled selected value>Select an option</option>
+                    <option value="null" th:selected="${subproject.getSubproject_status == 'null'}">Select an option</option>
                     <option value="To do" th:selected="${subproject.getSubproject_status == 'To do'}">To do</option>
                     <option value="In progress" th:selected="${subproject.getSubproject_status == 'In progress'}">In progress</option>
                     <option value="Done" th:selected="${subproject.getSubproject_status == 'Done'}">Done</option>

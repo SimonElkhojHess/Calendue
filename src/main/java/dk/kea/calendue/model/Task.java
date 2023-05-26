@@ -10,7 +10,7 @@ public class Task
     private String task_name;
     private String task_description;
     private String task_comment;
-    private String task_start;
+    private String task_deadline;
     private int task_hours;
     private int task_priority;
     private String task_status;
@@ -18,24 +18,24 @@ public class Task
     public Task()
     {}
 
-    public Task(int task_id, int subproject_id, String task_name, String task_description, String task_comment, String task_start, int task_hours, int task_priority, String task_status)
+    public Task(int task_id, int subproject_id, String task_name, String task_description, String task_comment, String task_deadline, int task_hours, int task_priority, String task_status)
     {
         this.task_id = task_id;
         this.subproject_id = subproject_id;
         this.task_name = task_name;
         this.task_description = task_description;
         this.task_comment = task_comment;
-        this.task_start = task_start;
+        this.task_deadline = task_deadline;
         this.task_hours = task_hours;
         this.task_priority = task_priority;
         this.task_status = task_status;
     }
-    public Task(int task_id, String task_name, String task_description, String task_start, int task_hours, int task_priority, String task_status)
+    public Task(int task_id, String task_name, String task_description, String task_deadline, int task_hours, int task_priority, String task_status)
     {
         this.task_id = task_id;
         this.task_name = task_name;
         this.task_description = task_description;
-        this.task_start = task_start;
+        this.task_deadline = task_deadline;
         this.task_hours = task_hours;
         this.task_priority = task_priority;
         this.task_status = task_status;
@@ -91,14 +91,14 @@ public class Task
         this.task_comment = task_comment;
     }
 
-    public String getTask_start()
+    public String getTask_deadline()
     {
-        return task_start;
+        return task_deadline;
     }
 
-    public void setTask_start(String task_start)
+    public void setTask_deadline(String task_deadline)
     {
-        this.task_start = task_start;
+        this.task_deadline = task_deadline;
     }
 
     public int getTask_hours()
@@ -140,7 +140,7 @@ public class Task
                 ", task_name='" + task_name + '\'' +
                 ", task_description='" + task_description + '\'' +
                 ", task_comment='" + task_comment + '\'' +
-                ", task_start='" + task_start + '\'' +
+                ", task_deadline='" + task_deadline + '\'' +
                 ", task_hours=" + task_hours +
                 ", task_priority=" + task_priority +
                 ", task_status='" + task_status + '\'' +
