@@ -33,15 +33,30 @@
 }
 #name-headline
 {
-    grid-column: 1/1;
-    grid-row: 1/1;
     font-weight: bold;
     color: #ffffff;
     font-size:24px;
+
+}
+
+#name-button-box
+{
+    grid-column: 1/1;
+    grid-row: 1/1;
     margin-left: 10px;
     margin-top: 12px;
 }
 
+#backbutton
+{
+    border-radius:10px 10px 10px 10px;
+    background-color: #b0d4de;
+    color: black;
+    cursor:pointer;
+    height:auto;
+    width:7.5rem;
+    margin-top: 10px;
+}
 #task-desc
 {
     background-color: white;
@@ -95,20 +110,20 @@
     font-size: 30px;
     font-weight: bold;
 }
-#task-start
+#task-deadline
 {
     grid-column: 5/7;
     grid-row:2/3;
     padding-top:10px;
     color:white;
 }
-#task-start-headline
+#task-deadline-headline
 {
     font-weight: bold;
     color: #ffffff;
 }
 
-#task-start-date
+#task-deadline-date
 {
     color: #ffffff;
     font-size: 30px;
@@ -201,7 +216,7 @@
     margin:40px 0 0 15px;
     height:1.5rem;
     width:7.5rem;
-    padding-top:5px;
+    /*padding-top:5px;*/
     text-align: center;
     background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;
@@ -370,7 +385,7 @@ input[type=text]
 
 .edit-form-popup input, .edit-form-popup textarea
 {
-    min-width: 40rem;
+    width: 40rem;
     font-family: "Calibri";
     font-size: 16px;
 
@@ -383,7 +398,7 @@ input[type=text]
     background-color: #b0d4de;
     height:2rem;
     width:auto;
-    margin-top: 10px;
+    margin-top: 8rem;
     cursor:pointer;
     text-align: center;
 }
@@ -472,14 +487,14 @@ input[type=text]
     font-weight: bold;
 }
 
-#task_start-title
+#task_deadline-title
 {
     grid-column: 5/9;
     grid-row: 3/3;
     font-weight: bold;
     padding: 0 0 0 10px;
 }
-#task_start
+#task_deadline
 {
     grid-column:5/9;
     grid-row:4/4;
@@ -517,6 +532,7 @@ input[type=text]
     padding-left: 10px;
     padding-right: 10px;
 }
+
 
 .open-edit-assigned-button
 {
@@ -601,6 +617,7 @@ input[type=text]
     cursor: pointer;
 }
 
+
 .close-edit-assigned-button
 {
     height:1.5rem;
@@ -608,6 +625,40 @@ input[type=text]
     background-color: #b0d4de;
     border-radius: 10px 10px 10px 10px;
     margin: 5px 30px 0 0;
-    float:right;
-    cursor:pointer;
+    float: right;
+    cursor: pointer;
+}
+
+.hours-status-box, .label-box
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.label-box
+{
+    margin-top: 1rem;
+}
+
+
+
+#taskHours
+{
+    height: auto;
+    width: 6rem;
+}
+
+#taskStatus-title
+{
+    margin-right: 1rem;
+}
+
+#taskPriority-title
+{
+    margin-left: 1rem;
+}
+
+#taskStatus-title
+{
+    margin-left: 1rem;
 }

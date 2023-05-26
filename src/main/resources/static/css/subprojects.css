@@ -33,13 +33,29 @@
 
 #name-headline
 {
-    grid-column: 1/1;
-    grid-row: 1/1;
     font-weight: bold;
     color: #ffffff;
     font-size:24px;
+
+}
+
+#name-button-box
+{
+    grid-column: 1/1;
+    grid-row: 1/1;
     margin-left: 10px;
     margin-top: 12px;
+}
+
+#backbutton
+{
+    border-radius:10px 10px 10px 10px;
+    background-color: #b0d4de;
+    color: black;
+    cursor:pointer;
+    height:auto;
+    width:7.5rem;
+    margin-top: 10px;
 }
 
 #project-desc
@@ -145,7 +161,6 @@
     margin:40px 0 0 15px;
     height:1.5rem;
     width:7.5rem;
-    padding-top:5px;
     text-align: center;
     background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;

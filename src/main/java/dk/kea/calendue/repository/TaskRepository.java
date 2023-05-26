@@ -39,7 +39,7 @@ public class TaskRepository
                             "FROM calendue.task t JOIN calendue.task_user u " +
                                 "WHERE t.task_id = u.task_id" +
                                     " AND u.user_id = "+user_id+
-                                        " ORDER BY t.task_start, t.task_priority DESC";
+                                        " ORDER BY t.task_deadline, t.task_priority DESC";
 
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
 
@@ -51,12 +51,12 @@ public class TaskRepository
                 String task_name = resultSet.getString(3);
                 String task_description = resultSet.getString(4);
                 String task_comment = resultSet.getString(5);
-                String task_start = resultSet.getString(6);
+                String task_deadline = resultSet.getString(6);
                 int task_hours = resultSet.getInt(7);
                 int task_priority = resultSet.getInt(8);
                 String task_status = resultSet.getString(9);
 
-                Task task = new Task(task_id, subproject_id, task_name, task_description, task_comment, task_start, task_hours,task_priority, task_status);
+                Task task = new Task(task_id, subproject_id, task_name, task_description, task_comment, task_deadline, task_hours,task_priority, task_status);
                 tList.add(task);
                 System.out.println("Found:" + task);
             }
@@ -91,12 +91,12 @@ public class TaskRepository
                 String task_name = resultSet.getString(3);
                 String task_description = resultSet.getString(4);
                 String task_comment = resultSet.getString(5);
-                String task_start = resultSet.getString(6);
+                String task_deadline = resultSet.getString(6);
                 int task_hours = resultSet.getInt(7);
                 int task_priority = resultSet.getInt(8);
                 String task_status = resultSet.getString(9);
 
-                Task task = new Task(task_id, subproject_id, task_name, task_description, task_comment, task_start, task_hours, task_priority, task_status);
+                Task task = new Task(task_id, subproject_id, task_name, task_description, task_comment, task_deadline, task_hours, task_priority, task_status);
                 tList.add(task);
                 System.out.println("Found :" + task);
             }
@@ -135,12 +135,12 @@ public class TaskRepository
                 String task_name = resultSet.getString(3);
                 String task_description = resultSet.getString(4);
                 String task_comment = resultSet.getString(5);
-                String task_start = resultSet.getString(6);
+                String task_deadline = resultSet.getString(6);
                 int task_hours = resultSet.getInt(7);
                 int task_priority = resultSet.getInt(8);
                 String task_status = resultSet.getString(9);
 
-                Task task = new Task(task_id, subproject_id, task_name, task_description, task_comment, task_start, task_hours, task_priority, task_status);
+                Task task = new Task(task_id, subproject_id, task_name, task_description, task_comment, task_deadline, task_hours, task_priority, task_status);
                 tList.add(task);
                 System.out.println("Found :" + task);
             }
@@ -206,7 +206,7 @@ public class TaskRepository
         {
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
-            final String SQL_QUERY = "SELECT task_name, task_description, task_comment, task_start, task_hours, task_priority, task_status, subproject_id" +
+            final String SQL_QUERY = "SELECT task_name, task_description, task_comment, task_deadline, task_hours, task_priority, task_status, subproject_id" +
                                         " FROM calendue.task WHERE task_id = " + taskId;
 
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
@@ -216,7 +216,7 @@ public class TaskRepository
                 task.setTask_name(resultSet.getString(1));
                 task.setTask_description(resultSet.getString(2));
                 task.setTask_comment(resultSet.getString(3));
-                task.setTask_start(resultSet.getString(4));
+                task.setTask_deadline(resultSet.getString(4));
                 task.setTask_hours(resultSet.getInt(5));
                 task.setTask_priority(resultSet.getInt(6));
                 task.setTask_status(resultSet.getString(7));
@@ -238,14 +238,14 @@ public class TaskRepository
             Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
             final String UPDATE_QUERY =
                         "UPDATE calendue.task " +
-                            "SET task_name=?, task_description=?, task_start=?, task_hours=?, task_priority=?, task_status=? " +
+                            "SET task_name=?, task_description=?, task_deadline=?, task_hours=?, task_priority=?, task_status=? " +
                                 "WHERE task_id = " + task.getTask_id();
 
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
 
             preparedStatement.setString(1, task.getTask_name());
             preparedStatement.setString(2, task.getTask_description());
-            preparedStatement.setString(3, task.getTask_start());
+            preparedStatement.setString(3, task.getTask_deadline());
             preparedStatement.setInt(4, task.getTask_hours());
             preparedStatement.setInt(5, task.getTask_priority());
             preparedStatement.setString(6, task.getTask_status());
