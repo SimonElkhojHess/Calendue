@@ -22,6 +22,7 @@ public class Project_userRepository {
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
+    //Adds a row to project_user and assigns the user a role for the project
     public void setRole(int projectID, int userID, String role)
     {
         try{
@@ -42,6 +43,7 @@ public class Project_userRepository {
         }
     }
 
+    //Updates the user's role on the project_user assignment
     public void updateRole(int projectID, int userID, String EditRole)
     {
         try{
@@ -85,6 +87,7 @@ public class Project_userRepository {
         return tempProjectID;
     }*/
 
+    //Checks for the existence of a project_user assignment
     public boolean doesAssignmentExist(int userId, int projectId)
     {
         boolean exists = false;
@@ -114,6 +117,7 @@ public class Project_userRepository {
         return exists;
     }
 
+    //Deletes a project_user assignment
     public void deleteProjectAssignment(int userId, int projectId)
     {
         try

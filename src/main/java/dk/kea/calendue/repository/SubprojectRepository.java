@@ -23,6 +23,7 @@ public class SubprojectRepository
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
+    //Gets all  
     public List<Subproject> getAllSubprojects(int project_id)
     {
         List<Subproject> sList = new ArrayList<>();

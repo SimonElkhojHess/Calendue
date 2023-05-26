@@ -84,7 +84,7 @@ input[type=text], input[type=password]
     display:grid;
     grid-template-columns: repeat(24, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    border:1px solid orange;
+    border:3px outset #6c6b6b;
     margin:20px 0 15px 30px;
     width:85%;
     border-radius: 7px 7px 7px 7px;
@@ -120,5 +120,11 @@ input[type=text], input[type=password]
 {
     grid-column: 20/23;
     grid-row: 3/5;
-    background-color: b0d4de;
+    background-color: #b0d4de;
+    border:1px outset #6c6b6b;
+    width: 5rem;
+    border-radius: 10% / 50%;
+    cursor:pointer;
+    text-align: center;
+    margin-top: 1px;
 }

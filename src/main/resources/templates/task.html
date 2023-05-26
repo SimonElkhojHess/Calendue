@@ -75,7 +75,7 @@
     <div class="task-outerbox">
         <div th:each="tasks : ${tasks}">
             <a href="/allsubprojecttasks" th:href="@{'/task/'+${tasks.getTask_id}}">
-                <div class="task-element" th:styleappend="${task.task_id == tasks.task_id ? 'border:2px solid red' : 'border:none'}">
+                <div class="task-element" th:styleappend="${task.task_id == tasks.task_id ? 'border:3px outset red;' : ''}">
                     <div id="task-element-name" th:text="${tasks.task_name}"></div>
                     <div id="task_priority-title">Priority:</div>
                     <div id="task_priority" th:styleappend="${tasks.task_priority == 0 ? 'display:none' : ''}" th:text="${tasks.task_priority}"></div>
@@ -162,7 +162,7 @@
     <button id="edit-button" type="submit">Update</button>
     <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
     <div class="delete-task-button">
-        <a id="delete-task" th:href="@{'/deletetask/' + ${task.task_id}}">
+        <a id="delete-task" th:href="@{'/deletetask/' + ${task.task_id} + '/' +${task.subproject_id}}">
             Delete Task
         </a>
     </div>

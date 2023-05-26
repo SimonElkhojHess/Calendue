@@ -308,6 +308,21 @@ public class TaskRepository
     }
 
 
+    public void deleteTask(int taskID)
+    {
+        try
+        {
+            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            final String DELETE_QUERY = "DELETE FROM calendue.task WHERE task_id =" + taskID;
 
+            statement.executeUpdate(DELETE_QUERY);
 
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            System.out.println("Could not delete task");
+        }
+    }
 }

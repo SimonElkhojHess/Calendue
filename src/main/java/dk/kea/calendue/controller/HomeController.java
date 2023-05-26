@@ -61,7 +61,7 @@ public class HomeController {
         return "redirect:/homepage";
     }
 
-    //First checks for user in table 'user', then tries login method
+    //First checks for user in table 'user', then tries login method.
     @PostMapping("/login")
     public String tryLogin(@RequestParam String username, @RequestParam String password, HttpSession session)
     {
@@ -94,6 +94,7 @@ public class HomeController {
         return "redirect:/login";
     }
 
+
     @GetMapping("/homepage")
     public String showHomepage(HttpSession session, Model model)
     {
@@ -109,6 +110,7 @@ public class HomeController {
         return "homepage";
     }
 
+    //Creates project and assigns the user creating it.
     @PostMapping("/createproject")
     public String createProject(@RequestParam("project-name") String project_name, HttpSession session)
     {
@@ -130,7 +132,7 @@ public class HomeController {
         return "redirect:/project/" + tempProjectID;
     }
 
-
+    //Gets all projects
     @GetMapping("/project/{id}")
     public String showProject(@PathVariable("id")int project_id, HttpSession session, Model model)
     {
@@ -162,6 +164,8 @@ public class HomeController {
         int subprojectId = subprojectRepo.getMaxSubprojectId();
         return "redirect:/subproject/" + subprojectId;
     }
+
+    //Gets all projects that matches userId
     @GetMapping("/myprojects")
     public String showMyprojects(HttpSession session, Model model)
     {
@@ -176,6 +180,7 @@ public class HomeController {
         return "myprojects";
     }
 
+    //Gets all tasks that matches userId
     @GetMapping("/mytasks")
     public String showMyTasks(Model model, HttpSession session)
     {
@@ -189,26 +194,26 @@ public class HomeController {
         return "mytasks";
     }
 
-
-   @PostMapping("/assignproject")
+    //Assigns user if not assigned already
+    @PostMapping("/assignproject")
     public String assignUser(@RequestParam("assign-email")String email, @RequestParam("role")String role, @RequestParam("projectId")int projectId, HttpSession session)
-   {
-       if(userRepo.doesEmailExist(email))
-       {
-           session.setAttribute("assign_project_error", false);
-           int assignuserId = userRepo.getUserIDFromEmail(email);
-
-           if(!project_userRepo.doesAssignmentExist(assignuserId, projectId))
+    {
+           if(userRepo.doesEmailExist(email))
            {
-               project_userRepo.setRole(projectId, assignuserId, role);
+               session.setAttribute("assign_project_error", false);
+               int assignuserId = userRepo.getUserIDFromEmail(email);
+
+               if(!project_userRepo.doesAssignmentExist(assignuserId, projectId))
+               {
+                   project_userRepo.setRole(projectId, assignuserId, role);
+               }
            }
-       }
-       else
-       {
-           session.setAttribute("assign_project_error", true);
-       }
-       return "redirect:/project/" + projectId;
-   }
+           else
+           {
+               session.setAttribute("assign_project_error", true);
+           }
+           return "redirect:/project/" + projectId;
+    }
 
    @PostMapping("/editrole")
    public String editRole(@RequestParam("user_id")int user_id, @RequestParam("project_id")int project_id, @RequestParam("role")String role)
@@ -296,10 +301,10 @@ public class HomeController {
     @GetMapping("/subproject/{id}")
     public String showSubproject(@PathVariable("id")int subproject_id, HttpSession session, Model model)
     {
-        /*if (session.getAttribute("user_id") == null)
+        if (session.getAttribute("user_id") == null || session.getAttribute("projectID") == null)
         {
             return "redirect:/login";
-        }*/
+        }
         model.addAttribute("subproject", subprojectRepo.getOneSubproject(subproject_id));
         model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
         model.addAttribute("assignedusers", task_userRepo.getUsersOnSubproject(subproject_id));
@@ -318,7 +323,6 @@ public class HomeController {
         Subproject tempSubproject = new Subproject(tempID, editName, editDescription, editDeadline, editHours, editStatus);
         subprojectRepo.editSubproject(tempSubproject);
 
-
         return "redirect:/subproject/" + tempID;
     }
 
@@ -336,6 +340,7 @@ public class HomeController {
 
         return "redirect:/task/" + tempTaskID;
     }
+
 
     @GetMapping("/task/{id}")
     public String showTask(@PathVariable("id")int task_id, HttpSession session, Model model)
@@ -362,6 +367,7 @@ public class HomeController {
         return "task";
     }
 
+    //Assigns user to task, if already assigned to project, and not assigned to task already
     @PostMapping("/assigntask")
     public String assignToTask(@RequestParam("task-id")int taskId, @RequestParam("assign-email")String email, HttpSession session)
     {
@@ -401,7 +407,7 @@ public class HomeController {
         return "redirect:/task/" + taskId;
     }
 
-    @PostMapping("/taskassignment/delete/{user_id}/{task_id}")
+    @GetMapping("/taskassignment/delete/{user_id}/{task_id}")
     public String deleteTaskAssignment(@PathVariable("user_id")int user_id, @PathVariable("task_id")int task_id)
     {
         task_userRepo.deleteTaskAssignment(user_id, task_id);
@@ -409,22 +415,25 @@ public class HomeController {
         return "redirect:/task/" + task_id;
     }
 
+    @GetMapping("/deletetask/{task_id}/{subproject_id}")
+    public String deleteTask(@PathVariable("task_id")int task_id, @PathVariable("subproject_id")int subproject_id)
+    {
+        taskRepo.deleteTask(task_id);
+        return "redirect:/subproject/" + subproject_id;
+    }
+
     @GetMapping("/deleteproject/{id}")
     public String deleteProject(@PathVariable("id") int projectID)
     {
         projectRepo.deleteProject(projectID);
         return "redirect:/homepage";
-
     }
 
-    @GetMapping("/deletesubproject/{id}")
-    public String deleteSubproject(@PathVariable("id") int subprojectID, HttpSession session)
+    @GetMapping("/deletesubproject/{subproject_id}/{project_id}")
+    public String deleteSubproject(@PathVariable("subproject_id") int subprojectID, @PathVariable("project_id")int project_id)
     {
         subprojectRepo.deleteSubproject(subprojectID);
-        int tempID = (int) session.getAttribute("projectID");
-
-        return "redirect:/project/" + tempID;
-
+        return "redirect:/project/" + project_id;
     }
 
     @GetMapping("/resources")
@@ -459,6 +468,7 @@ public class HomeController {
         return "profile";
     }
 
+    //Updates profile info, and only edits password if user has entered something
     @PostMapping("/editprofile")
     public String editProfile(@RequestParam("editUsername")String editUsername,@RequestParam("editEmail")String editEmail,@RequestParam("editFullname")String editFullname, @RequestParam("editPassword")String editPassword, @RequestParam("confirmPassword")String confirmPassword, HttpSession session)
     {

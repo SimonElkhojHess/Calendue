@@ -30,7 +30,9 @@
                     <span th:if="${user.is_admin == 0}">Admin: No</span>
                     <span th:if="${user.is_admin == 1}">Admin: Yes</span>
                 </div>
-                <div class="submit-edit-button"><a th:href="@{'/editusers/'+${user.getUser_id}}">Edit user</a></div>
+                <div class="submit-edit-button">
+                    <a id="submit-edit-button" th:href="@{'/editusers/'+${user.getUser_id}}">Edit user</a>
+                </div>
             </div>
 
 

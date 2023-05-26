@@ -123,7 +123,7 @@
             <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
 
             <div class="delete-subproject-button">
-                <a id="delete-subproject" th:href="@{'/deletesubproject/' + ${subproject.subproject_id}}">
+                <a id="delete-subproject" th:href="@{'/deletesubproject/' + ${subproject.subproject_id}} + '/' + ${subproject.project_id}">
                     Delete Subproject
                 </a>
             </div>

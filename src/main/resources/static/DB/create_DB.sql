@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `project`, `subproject`, `task`, `user`, `linkedtask`, `pro
 CREATE TABLE `calendue`.`project` (
                                       `project_id` INT NOT NULL AUTO_INCREMENT,
                                       `project_name` VARCHAR(255) NOT NULL,
-                                      `project_description` VARCHAR(1000) NULL,
+                                      `project_description` VARCHAR(2400) NULL,
                                       `project_start` VARCHAR(255) NULL,
                                       `project_deadline` VARCHAR(255) NULL,
                                       `project_hours` INT NULL,

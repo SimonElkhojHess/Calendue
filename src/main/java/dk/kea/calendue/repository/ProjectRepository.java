@@ -25,6 +25,7 @@ public class ProjectRepository
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
+    //Gets all projects
     public List<Project> getAllProjects()
     {
         List<Project> pList = new ArrayList<>();
@@ -78,6 +79,7 @@ public class ProjectRepository
         return pList;
     }
 
+    //Gets all projects with an assignment matching the user_id
     public List<Project> getAllMyProjects(int user_id)
     {
         List<Project> pList = new ArrayList<>();
@@ -119,8 +121,7 @@ public class ProjectRepository
 
     }
 
-
-
+    //Creates a project in the database
     public void createProject(Project project)
     {
         try
@@ -142,6 +143,7 @@ public class ProjectRepository
         }
     }
 
+    //Gets the maximum project id
     public int getMaxProjectId()
     {
         int tempProjectID = -99;
@@ -166,7 +168,7 @@ public class ProjectRepository
             return tempProjectID;
     }
 
-
+    //Gets a single project by project id
     public Project getOneProject(int projectID)
     {
         Project tempProject = new Project();
@@ -195,6 +197,7 @@ public class ProjectRepository
          return tempProject;
     }
 
+    //Gets the role on a specific project_user assignment
     public String getUserProjectAssignment(int user_id, int project_id)
     {
         String userAssignment = "none";
@@ -219,6 +222,7 @@ public class ProjectRepository
         return userAssignment;
     }
 
+    //Gets the amount of project_user assignments on project
     public int getProjectAssignmentCount(int projectId)
     {
         int assignmentCount = 0;
@@ -243,6 +247,7 @@ public class ProjectRepository
         return assignmentCount;
     }
 
+    //Edits all project info in database
     public void editProject(Project project)
     {
         try
@@ -272,6 +277,7 @@ public class ProjectRepository
         }
     }
 
+    //Deletes a project from database
     public void deleteProject(int projectID)
     {
         try
