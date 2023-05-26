@@ -21,10 +21,10 @@
     transform: translate(-50%, -50%);
     max-width: 350px;
     right: 15px;
-    border: 3px solid #c1c1c1;
+    border: 3px outset #6c6b6b;
     z-index: 9;
     font-family: "Calibri Light";
-    background-color: #8ED0AB;
+    background-color: white;
 }
 
 .form-container
@@ -100,6 +100,7 @@
     align-content: center;
     grid-column: 1/1;
     grid-row: 7/7;
+    background-color: #b0d4de;
 }
 
 #cancel-edit-user-button
@@ -107,6 +108,7 @@
     align-content: center;
     grid-column: 3/3;
     grid-row: 7/7;
+    background-color: #b0d4de;
 }
 
 
@@ -115,7 +117,7 @@
 {
     padding:1px 3px 1px 3px;
     border-radius: 5px 5px 5px 5px;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     height:auto;
     width:auto;
     margin-top: 10px;
@@ -134,6 +136,3 @@
     margin-right:5px;
     cursor:pointer;
 }
-
-
-

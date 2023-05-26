@@ -13,7 +13,7 @@
     grid-template-rows: repeat(4, 1fr);
     width:100%;
     height: 25rem;
-    background-color: #1d3c65;
+    background-color: #516877;
 }
 
 .grid-box div
@@ -44,7 +44,7 @@
 
 #subproject-desc
 {
-    background-color: #A2E9E9;
+    background-color: white;
     color: black;
     grid-column: 1/5;
     grid-row:2/4;
@@ -127,7 +127,7 @@
     width:7.5rem;
     padding-top:5px;
     text-align: center;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;
     color:black;
     cursor:pointer;
@@ -150,7 +150,7 @@
     grid-row: 1/5;
     margin:40px 0 0 0;
     height:80%;
-    background-color: #a2e9e9;
+    background-color: white;
     color: black;
     border-radius: 5px 5px 5px 5px;
     border: 4px inset #a2e9e9;
@@ -165,7 +165,8 @@
     margin: 5px 0 10px 10px;
     height:2.5rem;
     border-radius: 10px 10px 10px 10px;
-    background-color: #8ED0AB;
+    border:1px outset #6c6b6b;
+    background-color: white;
     box-shadow: 2px 4px 2px #727391;
 }
 
@@ -213,7 +214,7 @@
     height: 1.5rem;
     width: 7.5rem;
     border-radius:10px 10px 10px 10px;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     cursor: pointer;
 }
 
@@ -228,6 +229,7 @@
     padding-bottom: 30px;
     text-align: center;
     justify-content: center;
+    background-color: white;
 }
 
 .task-element
@@ -240,7 +242,8 @@
     height:25rem;
     width:20rem;
     font-size:18px;
-    background-color:#8ED0AB;
+    background-color:white;
+    border:3px outset #6c6b6b;
     border-radius:10px 10px 10px 10px;
     box-shadow: 10px 10px 5px #727391;
     transition: transform 200ms ease-in-out;
@@ -326,11 +329,6 @@
     padding-right: 10px;
 }
 
-.task-outerbox
-{
-    background-color: #a2e9e9;
-}
-
 /*Pop-up css*/
 .edit-form-popup {
     display: none;
@@ -368,7 +366,7 @@
 {
     padding:1px 3px 1px 3px;
     border-radius: 5px 5px 5px 5px;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     height:2rem;
     width:auto;
     margin-top: 10px;
@@ -379,6 +377,7 @@
 #edit-button
 {
     margin-right: 45px;
+    background-color: #b0d4de;
 }
 
 .delete-subproject-button

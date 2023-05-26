@@ -15,8 +15,6 @@ public class DateCalculator
     LocalDate date2 = LocalDate.parse(inputString2, dtf);
     int daysBetween = (int) ChronoUnit.DAYS.between(date1, date2);
 
-    System.out.println("Days: " + daysBetween);
-
-        return daysBetween;
+    return daysBetween;
     }
 }

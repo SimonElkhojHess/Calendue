@@ -53,10 +53,12 @@ public class ProjectRepository
                     project_hours_scheduled += subHours;
                 }
                 int hours_per_day = 0;
-                int project_days = 0;
+                int project_days = 1;
                 if(project_start != null && project_deadline != null)
                 {
-                    project_days = DateCalculator.returnDateDifference(project_start, project_deadline);
+                    if (project_start.length() > 5 && project_deadline.length() > 5) {
+                        project_days = DateCalculator.returnDateDifference(project_start, project_deadline);
+                    }
                 }
                 int assigned_users = getProjectAssignmentCount(project_id);
                 int project_hours = project_days*8;

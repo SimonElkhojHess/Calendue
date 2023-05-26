@@ -31,9 +31,10 @@ html
     height:4rem;
     width:20rem;
 }
-#contact-submit
+#contact-submit-button
 {
-margin: 5% 0 0 0;
+    background-color: #b0d4de;
+    margin: 5% 0 0 0;
 }
 footer
 {

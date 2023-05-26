@@ -47,7 +47,7 @@
 {
     padding:1px 3px 1px 3px;
     border-radius: 5px 5px 5px 5px;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     height:2rem;
     width:3rem;
     margin-top: 10px;
@@ -59,6 +59,7 @@
 #edit-button
 {
     margin-right: 45px;
+    background-color: #b0d4de;
 }
 
 .delete-project-button

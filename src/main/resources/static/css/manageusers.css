@@ -4,7 +4,7 @@ html
 }
 .form-popup
 {
-    display: inline;
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -35,7 +35,7 @@ html
 .create-project
 {
     width:25%;
-    background-color: #1d3c65;
+    background-color: #526a7a;
 }
 
 input[type=text], input[type=password]
@@ -51,7 +51,7 @@ input[type=text], input[type=password]
 {
     padding:1px 3px 1px 3px;
     border-radius: 5px 5px 5px 5px;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     height:auto;
     width:auto;
     margin-top: 10px;
@@ -68,7 +68,7 @@ input[type=text], input[type=password]
     border-radius: 10px 10px 10px 10px;
     min-height: 2rem;
     min-width:6rem;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     cursor:pointer;
     font-size:24px;
 }
@@ -120,4 +120,5 @@ input[type=text], input[type=password]
 {
     grid-column: 20/23;
     grid-row: 3/5;
+    background-color: b0d4de;
 }

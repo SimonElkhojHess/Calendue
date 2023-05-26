@@ -57,12 +57,12 @@
     margin-bottom:0 !important;
 }
 
-#submit-profile-edit
+#submit-profile-edit-button
 {
     margin: 30px 0 0 0;
     height:1.5rem;
     width:7.5rem;
-    background-color: #8ba6ce;
+    background-color: #b0d4de;
     border-radius: 10% / 50%;
     cursor:pointer;
 }

@@ -22,7 +22,7 @@ html
 {
     width:25%;
     height:100%;
-    background-color: #1d3c65;
+    background-color: #526a7a;
 }
 nav
 {
@@ -80,4 +80,5 @@ input[type=text]
     width:10rem;
     height:1.8rem;
     border-radius: 10% / 50%;
+    background-color: #b0d4de;
 }

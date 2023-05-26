@@ -11,7 +11,7 @@
 .login-box
 {
     width:25%;
-    background-color: #1d3c65;
+    background-color: #526a7a;
 }
 .login-form-image
 {
@@ -60,4 +60,5 @@ input[type=password]
     width:6rem;
     height:1.8rem;
     border-radius: 20% / 50%;
+    background-color: #b0d4de;
 }

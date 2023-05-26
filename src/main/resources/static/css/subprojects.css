@@ -13,7 +13,7 @@
     grid-template-rows: repeat(4, 1fr);
     width:100%;
     height: 25rem;
-    background-color: #1d3c65;
+    background-color: #40525e;
 }
 
 .grid-box div
@@ -44,7 +44,7 @@
 
 #project-desc
 {
-    background-color: #A2E9E9;
+    background-color: white;
     color: black;
     grid-column: 1/5;
     grid-row:2/4;
@@ -147,7 +147,7 @@
     width:7.5rem;
     padding-top:5px;
     text-align: center;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;
     color:black;
     cursor:pointer;
@@ -203,7 +203,7 @@ input[type=text]
     height:1.5rem;
     width:7.5rem;
     text-align: center;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;
     color:black;
     cursor:pointer;
@@ -225,7 +225,7 @@ input[type=text]
     grid-row: 1/5;
     margin:40px 0 0 0;
     height:80%;
-    background-color: #a2e9e9;
+    background-color: white;
     color: black;
     border-radius: 5px 5px 5px 5px;
     border: 4px inset #a2e9e9;
@@ -239,8 +239,9 @@ input[type=text]
     width:92%;
     margin: 5px 0 10px 10px;
     height:2.5rem;
+    border:1px outset #6c6b6b;
     border-radius: 10px 10px 10px 10px;
-    background-color: #8ED0AB;
+    background-color: white;
     box-shadow: 2px 4px 2px #727391;
 }
 
@@ -273,7 +274,7 @@ input[type=text]
     grid-row: 3/4;
     height:1.5rem;
     width:7.5rem;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     border-radius:10px 10px 10px 10px;
     margin: 5px 0 0 15px;
     cursor:pointer;
@@ -311,8 +312,9 @@ input[type=text]
     height: 2.5rem;
     margin:10px 10px 0px 10px;
     border-radius: 10px 10px 10px 10px;
-    background-color: #8ED0AB;
+    background-color: white;
     box-shadow: 2px 4px 2px #727391;
+    border:1px outset #6c6b6b;
 }
 #editroles-popup-user-fullname
 {
@@ -343,7 +345,7 @@ input[type=text]
 {
     width: 4rem;
     margin-left: 10px;
-    background-color: #8ba6ce;
+    background-color: #b0d4de;
     border-radius: 10% / 50%;
     cursor:pointer;
 }
@@ -352,20 +354,30 @@ input[type=text]
     grid-column: 5/6;
     grid-row:1/3;
     margin: 10px 0 0 25px;
-    background-color:#8ba6ce;
+    background-color:#b0d4de;
     border-radius: 10% / 50%;
     border:1px solid black;
     font-size:14px;
     width: 60px;
     height: 20px;
     cursor: pointer;
+    align-items: center;
+}
+
+#editroles-popup-user-delete-alink p
+{
+    font-size:14px;
+    text-align: center;
+    margin-top: 1px;
+    overflow:hidden;
+    font-weight: bold;
 }
 
 .close-editroles-button
 {
     height:1.5rem;
     width:7rem;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     border-radius: 10px 10px 10px 10px;
     margin: 5px 30px 0 0;
     float:right;
@@ -398,7 +410,7 @@ input[type=text]
     height: 1.5rem;
     width: 7.5rem;
     border-radius:10px 10px 10px 10px;
-    background-color: #8ED0AB;
+    background-color: #b0d4de;
     cursor: pointer;
 }
 
@@ -413,6 +425,7 @@ input[type=text]
     padding-bottom: 30px;
     text-align: center;
     justify-content: center;
+    background-color: white;
 }
 
 .subproject-element
@@ -425,7 +438,8 @@ input[type=text]
     height:25rem;
     width:20rem;
     font-size:18px;
-    background-color:#8ED0AB;
+    background-color:white;
+    border:3px outset #6c6b6b;
     border-radius:10px 10px 10px 10px;
     box-shadow: 10px 10px 5px #727391;
     transition: transform 200ms ease-in-out;
@@ -491,12 +505,3 @@ input[type=text]
     font-weight: bold;
     float: right;
 }
-
-.subproject-outerbox
-{
-    background-color: #a2e9e9;
-}
-
-
-
-
