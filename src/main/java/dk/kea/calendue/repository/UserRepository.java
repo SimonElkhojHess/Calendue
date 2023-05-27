@@ -24,7 +24,7 @@ public class UserRepository
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
-    //Compares password with hashed password from DB and logs in if it matches
+    //Compares password with hashed password belonging to username in DB
     public boolean checkLogin(String username, String password)
     {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10); //The strength affects how long it takes to encrypt and decrypt the password. 10 takes about a second for us, so we will leave it there.
@@ -56,13 +56,14 @@ public class UserRepository
         return false;
     }
 
+    //Receives password straight from login page as written by user, and hashes it before returning it.
     public String encodePassword(String password)
     {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10); //The strength affects how long it takes to encrypt and decrypt the password. 10 takes about a second for us, so we will leave it there.
         return encoder.encode(password);
     }
 
-    //Searches for specific username in database table 'user'
+    //Searches for existence of specific username in database table 'user'
     public boolean checkUsername(String username)
     {
         try
@@ -195,7 +196,7 @@ public class UserRepository
         return userList;
     }
 
-
+    //Finds the user id belonging to email in DB table 'users'
     public int getUserIDFromEmail(String email)
     {
         int assignuserId = 0;
@@ -227,6 +228,7 @@ public class UserRepository
 
     }
 
+    //Checks existence of email in DB table 'users'
     public boolean doesEmailExist(String email)
     {
         boolean exists = false;

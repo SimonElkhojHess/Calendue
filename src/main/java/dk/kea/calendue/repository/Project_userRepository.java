@@ -4,7 +4,6 @@ import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 @Repository

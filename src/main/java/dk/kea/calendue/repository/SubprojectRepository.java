@@ -1,12 +1,10 @@
 package dk.kea.calendue.repository;
 
-import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Subproject;
 import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,6 @@ public class SubprojectRepository
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
-    //Gets all  
     public List<Subproject> getAllSubprojects(int project_id)
     {
         List<Subproject> sList = new ArrayList<>();
@@ -83,6 +80,7 @@ public class SubprojectRepository
         }
     }
 
+    //Gets the maximum subproject Id from database
     public int getMaxSubprojectId()
     {
         int tempSubprojectID = -99;
@@ -183,6 +181,7 @@ public class SubprojectRepository
         }
     }
 
+    //Gets the total amount of task_hours belonging to subproject.
     public int getTotalSubHours(int subprojectId)
     {
         int totalSubHours = 0;

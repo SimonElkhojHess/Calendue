@@ -5,8 +5,6 @@ import dk.kea.calendue.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.plaf.nimbus.State;
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.*;
 
@@ -23,6 +21,7 @@ public class Task_userRepository
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
+    //Get users assigned to this on task_user table
     public List<User> getUsersOnTask(int taskId)
     {
         ArrayList<User> userList = new ArrayList<>();
@@ -55,7 +54,7 @@ public class Task_userRepository
         return userList;
     }
 
-
+    //Gets users assigned to all tasks in task_user table, belonging to the subproject
     public List<User> getUsersOnSubproject(int subprojectID)
     {
         ArrayList<User> userList = new ArrayList<>();
@@ -96,6 +95,7 @@ public class Task_userRepository
         return userList;
     }
 
+    //Assigns user to task in task_user table
     public void assignUserToTask(int taskId, int userId)
     {
         try{
@@ -115,6 +115,7 @@ public class Task_userRepository
         }
     }
 
+    //Checks for existence of task_user assignment
     public boolean doesTaskAssignmentExist(int taskId, int tempUserId)
     {
         boolean exists = false;
@@ -144,6 +145,7 @@ public class Task_userRepository
 
     }
 
+    //Deletes assignment in task_user table.
     public void deleteTaskAssignment(int userId, int taskId)
     {
         try

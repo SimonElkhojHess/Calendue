@@ -31,9 +31,7 @@ public class HomeController {
     private Project_userRepository project_userRepo;
     private Task_userRepository task_userRepo;
 
-
     public HomeController(UserRepository userRepo, ProjectRepository projectRepo, SubprojectRepository subprojectRepo, TaskRepository taskRepo, Project_userRepository project_userRepo, Task_userRepository task_userRepo)
-
     {
         this.userRepo = userRepo;
         this.projectRepo = projectRepo;
@@ -106,7 +104,6 @@ public class HomeController {
         model.addAttribute("allprojectlist", projectRepo.getAllProjects());
         session.setAttribute("currentpage", "/homepage");
 
-
         return "homepage";
     }
 
@@ -130,39 +127,6 @@ public class HomeController {
 
 
         return "redirect:/project/" + tempProjectID;
-    }
-
-    //Gets all projects
-    @GetMapping("/project/{id}")
-    public String showProject(@PathVariable("id")int project_id, HttpSession session, Model model)
-    {
-        if (session.getAttribute("user_id") == null)
-        {
-            return "redirect:/login";
-        }
-        model.addAttribute("project", projectRepo.getOneProject(project_id));
-        model.addAttribute("subprojects", subprojectRepo.getAllSubprojects(project_id));
-        model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
-        model.addAttribute("all_users", userRepo.getAllUsers());
-
-        int tempID = (int) session.getAttribute("user_id");
-        session.setAttribute("projectID", project_id);
-
-        session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
-
-        return "subprojects";
-    }
-
-    @PostMapping("/createsubproject")
-    public String createSubproject(@RequestParam("subprojectName")String subprojectName, @RequestParam("projectId")int projectId,HttpSession session)
-    {
-        if (subprojectName.equals("")) //Stops null subproject names
-        {
-            return "redirect:/project/" + projectId;
-        }
-        subprojectRepo.createSubProject(projectId, subprojectName);
-        int subprojectId = subprojectRepo.getMaxSubprojectId();
-        return "redirect:/subproject/" + subprojectId;
     }
 
     //Gets all projects that matches userId
@@ -194,99 +158,63 @@ public class HomeController {
         return "mytasks";
     }
 
+    //Shows chosen project
+    @GetMapping("/project/{id}")
+    public String showProject(@PathVariable("id")int project_id, HttpSession session, Model model)
+    {
+        if (session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
+        model.addAttribute("project", projectRepo.getOneProject(project_id));
+        model.addAttribute("subprojects", subprojectRepo.getAllSubprojects(project_id));
+        model.addAttribute("assignedusers", userRepo.getUsersOnProject(project_id));
+        model.addAttribute("all_users", userRepo.getAllUsers());
+
+        int tempID = (int) session.getAttribute("user_id");
+        session.setAttribute("projectID", project_id);
+
+        session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
+
+        return "subprojects";
+    }
+
     //Assigns user if not assigned already
     @PostMapping("/assignproject")
     public String assignUser(@RequestParam("assign-email")String email, @RequestParam("role")String role, @RequestParam("projectId")int projectId, HttpSession session)
     {
-           if(userRepo.doesEmailExist(email))
-           {
-               session.setAttribute("assign_project_error", false);
-               int assignuserId = userRepo.getUserIDFromEmail(email);
+        if(userRepo.doesEmailExist(email))
+        {
+            session.setAttribute("assign_project_error", false);
+            int assignuserId = userRepo.getUserIDFromEmail(email);
 
-               if(!project_userRepo.doesAssignmentExist(assignuserId, projectId))
-               {
-                   project_userRepo.setRole(projectId, assignuserId, role);
-               }
-           }
-           else
-           {
-               session.setAttribute("assign_project_error", true);
-           }
-           return "redirect:/project/" + projectId;
-    }
-
-   @PostMapping("/editrole")
-   public String editRole(@RequestParam("user_id")int user_id, @RequestParam("project_id")int project_id, @RequestParam("role")String role)
-   {
-        project_userRepo.updateRole(project_id, user_id, role);
-        return "redirect:/project/" + project_id;
-   }
-
-   @GetMapping("/projectassignment/delete/{user_id}/{project_id}")
-   public String deleteProjectAssignment(@PathVariable("user_id")int user_id, @PathVariable("project_id")int project_id)
-   {
-       project_userRepo.deleteProjectAssignment(user_id, project_id);
-
-       return "redirect:/project/"+project_id;
-   }
-
-    @GetMapping("/manage")
-    public String showManageUsers(HttpSession session, Model model)
-    {
-        model.addAttribute("userlist", userRepo.getAllUsersForAdmin());
-        return "manageusers";
-    }
-
-    @GetMapping("/editusers/{id}")
-    public String showEditUsers(@PathVariable("id")int tempId, Model model)
-    {
-        model.addAttribute("oneuser", userRepo.getOneUser(tempId));
-        return "editusers";
-    }
-
-    @PostMapping("/edituser")
-    public String editUser(@RequestParam("user_id") int user_id, @RequestParam("edit-username")String username, @RequestParam("edit-password")String password, @RequestParam("edit-email")String email, @RequestParam("edit-admin-privilege")int is_admin, @RequestParam("edit-full_name")String full_name)
-    {
-        if(password.length() > 0){
-            password = userRepo.encodePassword(password);
+            if(!project_userRepo.doesAssignmentExist(assignuserId, projectId))
+            {
+                project_userRepo.setRole(projectId, assignuserId, role);
+            }
         }
         else
         {
-            password = "noEdit";
+            session.setAttribute("assign_project_error", true);
         }
-        User user = new User(user_id, username, full_name, password, email, is_admin);
-        userRepo.editUser(user);
-
-        return "redirect:/manage";
+        return "redirect:/project/" + projectId;
     }
 
-    @PostMapping("/createuser")
-    public String createUser(@RequestParam("create-username") String username, @RequestParam("create-full_name")String fullname, @RequestParam("create-password")String password, @RequestParam("create-email")String email, @RequestParam("create-admin-privilege")int is_admin)
+    @GetMapping("/projectassignment/delete/{user_id}/{project_id}")
+    public String deleteProjectAssignment(@PathVariable("user_id")int user_id, @PathVariable("project_id")int project_id)
     {
-        if(is_admin != 1)
-        {
-            is_admin = 0;
-        }
-        password = userRepo.encodePassword(password);
-        User user = new User(username, fullname, password, email, is_admin);
-        userRepo.createUser(user);
+        project_userRepo.deleteProjectAssignment(user_id, project_id);
 
-        return "redirect:/manage";
+        return "redirect:/project/"+project_id;
     }
 
-    @PostMapping("/deleteuser")
-    public String deleteUser(@RequestParam("user_id")int userID) {
-        userRepo.deleteUser(userID);
-
-        return "redirect:/manage";
-    }
-    /*@GetMapping("/editproject/{id}")
-    public String showEditProject(@PathVariable("id") int project_ID, HttpSession session, Model model)
+    //Edits the user role on their assignment in project_user table
+    @PostMapping("/editrole")
+    public String editRole(@RequestParam("user_id")int user_id, @RequestParam("project_id")int project_id, @RequestParam("role")String role)
     {
-        Project editProject = projectRepo.getOneProject(project_ID);
-        model.addAttribute("project", editProject);
-        return "editproject";
-    }*/
+        project_userRepo.updateRole(project_id, user_id, role);
+        return "redirect:/project/" + project_id;
+    }
 
     @PostMapping("/editproject")
     public String editProject(@RequestParam("projectID") int tempID, @RequestParam("projectName") String editName, @RequestParam("projectDescription") String editDescription, @RequestParam("projectStart") String editStart, @RequestParam("projectDeadline") String editDeadline, @RequestParam("projectHours") int editHours, @RequestParam("projectStatus") String editStatus, HttpSession session, Model model)
@@ -294,8 +222,19 @@ public class HomeController {
         Project tempProject = new Project(tempID, editName, editDescription, editStart, editDeadline, editHours, editStatus);
         projectRepo.editProject(tempProject);
 
-
         return "redirect:/project/" + tempID;
+    }
+
+    @PostMapping("/createsubproject")
+    public String createSubproject(@RequestParam("subprojectName")String subprojectName, @RequestParam("projectId")int projectId,HttpSession session)
+    {
+        if (subprojectName.equals("")) //Stops null subproject names
+        {
+            return "redirect:/project/" + projectId;
+        }
+        subprojectRepo.createSubProject(projectId, subprojectName);
+        int subprojectId = subprojectRepo.getMaxSubprojectId();
+        return "redirect:/subproject/" + subprojectId;
     }
 
     @GetMapping("/subproject/{id}")
@@ -340,7 +279,6 @@ public class HomeController {
 
         return "redirect:/task/" + tempTaskID;
     }
-
 
     @GetMapping("/task/{id}")
     public String showTask(@PathVariable("id")int task_id, HttpSession session, Model model)
@@ -398,6 +336,7 @@ public class HomeController {
         return "redirect:/task/" + taskId;
     }
 
+    //Checks if comment is able to fit into database size limit, then sends it to database if true
     @PostMapping("/editcomment")
     public String editComment(@RequestParam("taskId")int taskId, @RequestParam("taskComment")String taskComment)
     {
@@ -436,6 +375,58 @@ public class HomeController {
         return "redirect:/project/" + project_id;
     }
 
+    @GetMapping("/manage")
+    public String showManageUsers(HttpSession session, Model model)
+    {
+        model.addAttribute("userlist", userRepo.getAllUsersForAdmin());
+        return "manageusers";
+    }
+
+    @GetMapping("/editusers/{id}")
+    public String showEditUsers(@PathVariable("id")int tempId, Model model)
+    {
+        model.addAttribute("oneuser", userRepo.getOneUser(tempId));
+        return "editusers";
+    }
+
+    @PostMapping("/edituser")
+    public String editUser(@RequestParam("user_id") int user_id, @RequestParam("edit-username")String username, @RequestParam("edit-password")String password, @RequestParam("edit-email")String email, @RequestParam("edit-admin-privilege")int is_admin, @RequestParam("edit-full_name")String full_name)
+    {
+        if(password.length() > 0){
+            password = userRepo.encodePassword(password);
+        }
+        else
+        {
+            password = "noEdit";
+        }
+        User user = new User(user_id, username, full_name, password, email, is_admin);
+        userRepo.editUser(user);
+
+        return "redirect:/manage";
+    }
+
+    @PostMapping("/createuser")
+    public String createUser(@RequestParam("create-username") String username, @RequestParam("create-full_name")String fullname, @RequestParam("create-password")String password, @RequestParam("create-email")String email, @RequestParam("create-admin-privilege")int is_admin)
+    {
+        if(is_admin != 1)
+        {
+            is_admin = 0;
+        }
+        password = userRepo.encodePassword(password);
+        User user = new User(username, fullname, password, email, is_admin);
+        userRepo.createUser(user);
+
+        return "redirect:/manage";
+    }
+
+    @PostMapping("/deleteuser")
+    public String deleteUser(@RequestParam("user_id")int userID) {
+        userRepo.deleteUser(userID);
+
+        return "redirect:/manage";
+    }
+
+
     @GetMapping("/resources")
     public String showResourcePage(HttpSession session, Model model)
     {
@@ -443,6 +434,7 @@ public class HomeController {
 
         return "resources";
     }
+
     @GetMapping("/statistics")
     public String showStatistics()
     {
@@ -453,6 +445,12 @@ public class HomeController {
     public String showContactPage()
     {
         return "contact";
+    }
+
+    @PostMapping("/contact")
+    public String tryContact(@RequestParam("contact-email")String email, @RequestParam("contact-message")String message, HttpSession session)
+    {
+        return "redirect:/homepage";
     }
 
     @GetMapping("/about")

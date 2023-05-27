@@ -1,12 +1,9 @@
 package dk.kea.calendue.repository;
 
-import dk.kea.calendue.model.Project;
 import dk.kea.calendue.model.Task;
 import dk.kea.calendue.utility.ConnectionManager;
-import org.apache.catalina.Host;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.tags.form.SelectTag;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -110,8 +107,9 @@ public class TaskRepository
         return tList;
     }
 
+    //Gets all tasks on subproject, that is assigned to user in task_user table
     public List<Task> getMySubprojectTasks(int user_id, int subproject_id)
-{
+    {
         List<Task> tList = new ArrayList<>();
 
         try
@@ -174,6 +172,7 @@ public class TaskRepository
         }
     }
 
+    //Gets the maximum task id in task table
     public int getMaxTaskId()
     {
         int tempTaskID = -99;
@@ -259,6 +258,8 @@ public class TaskRepository
         }
     }
 
+    //Finds the project id, which the chosen task belongs to.
+    //Uses subprojectid from 'task' table, and finds belonging projectid in 'subproject' table.
     public int getProjectIdFromTaskId(int taskId)
     {
         int projectId = 0;
@@ -306,7 +307,6 @@ public class TaskRepository
             System.out.println("Could not edit task comment");
         }
     }
-
 
     public void deleteTask(int taskID)
     {
