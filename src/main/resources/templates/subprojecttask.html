@@ -68,7 +68,7 @@
             <div id="task_deadline-title">Deadline:</div>
             <div id="task_deadline" th:text="${task.task_deadline}"></div>
             <div id="task_status-title">Status:</div>
-            <div id="task_status" th:text="${task.task_status}"></div>
+            <div id="task_status" th:styleappend="${task.task_status == 'null' ? 'display:none' : ''}" th:text="${task.task_status}"></div>
             <div id="task_description-title">Description:</div>
             <div id="task_description" th:text="${task.task_description}"></div>
             </div>
