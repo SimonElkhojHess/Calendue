@@ -1,6 +1,7 @@
 package dk.kea.calendue.repository;
 
 import dk.kea.calendue.model.User;
+import dk.kea.calendue.utility.DateCalculator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
