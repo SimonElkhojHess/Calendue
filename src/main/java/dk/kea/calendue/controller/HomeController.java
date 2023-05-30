@@ -61,7 +61,7 @@ public class HomeController {
 
     //First checks for user in table 'user', then tries login method.
     @PostMapping("/login")
-    public String tryLogin(@RequestParam String username, @RequestParam String password, HttpSession session)
+    public String tryLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session)
     {
         if (userRepo.checkUsername(username))
         {

@@ -28,8 +28,7 @@ class UserRepositoryTest {
 
     @BeforeAll
     void setUp()
-    {
-    }
+    {}
 
     @BeforeEach
     void setUpEach()
