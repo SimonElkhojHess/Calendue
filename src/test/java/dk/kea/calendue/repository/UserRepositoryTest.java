@@ -62,4 +62,34 @@ class UserRepositoryTest {
         //assert
         assertEquals(false, result);
     }
+
+    //Tests calculation tool
+    @Test
+    void testDateDifferenceCalculator() {
+        //arrange
+        String date1 = "16/05/2023";
+        String date2 = "31/05/2023";
+
+        //act
+        int result = DateCalculator.returnDateDifference(date1, date2);
+
+        //assert
+        assertEquals(15, result);
+    }
+
+    //Tests exception handling of DateTimeParseException
+    //Should catch, and return 0.
+    @Test
+    void testDateCalculatorErrorHandling()
+    {
+        //arrange
+        String date1 = "16-05-2023";
+        String date2 = "31-05-2023";
+
+        //act
+        int result = DateCalculator.returnDateDifference(date1, date2);
+
+        //assert
+        assertEquals(0, result);
+    }
 }
