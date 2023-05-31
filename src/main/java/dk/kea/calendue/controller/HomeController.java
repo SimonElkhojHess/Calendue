@@ -220,9 +220,9 @@ public class HomeController {
     }
 
     @PostMapping("/editproject")
-    public String editProject(@RequestParam("projectID") int tempID, @RequestParam("projectName") String editName, @RequestParam("projectDescription") String editDescription, @RequestParam("projectStart") String editStart, @RequestParam("projectDeadline") String editDeadline, @RequestParam("projectHours") int editHours, @RequestParam("projectStatus") String editStatus, HttpSession session, Model model)
+    public String editProject(@RequestParam("projectID") int tempID, @RequestParam("projectName") String editName, @RequestParam("projectDescription") String editDescription, @RequestParam("projectStart") String editStart, @RequestParam("projectDeadline") String editDeadline, @RequestParam("projectStatus") String editStatus, HttpSession session, Model model)
     {
-        Project tempProject = new Project(tempID, editName, editDescription, editStart, editDeadline, editHours, editStatus);
+        Project tempProject = new Project(tempID, editName, editDescription, editStart, editDeadline, editStatus);
         projectRepo.editProject(tempProject);
 
         return "redirect:/project/" + tempID;
@@ -255,9 +255,9 @@ public class HomeController {
     }
 
     @PostMapping("/editsubproject")
-    public String editSubproject(@RequestParam("subprojectID") int tempID, @RequestParam("subprojectName") String editName, @RequestParam("subprojectDescription") String editDescription, @RequestParam("subprojectDeadline") String editDeadline, @RequestParam("subprojectHours") int editHours, @RequestParam("subprojectStatus") String editStatus, HttpSession session, Model model)
+    public String editSubproject(@RequestParam("subprojectID") int tempID, @RequestParam("subprojectName") String editName, @RequestParam("subprojectDescription") String editDescription, @RequestParam("subprojectDeadline") String editDeadline, @RequestParam("subprojectStatus") String editStatus, HttpSession session, Model model)
     {
-        Subproject tempSubproject = new Subproject(tempID, editName, editDescription, editDeadline, editHours, editStatus);
+        Subproject tempSubproject = new Subproject(tempID, editName, editDescription, editDeadline, editStatus);
         subprojectRepo.editSubproject(tempSubproject);
 
         return "redirect:/subproject/" + tempID;

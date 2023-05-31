@@ -39,6 +39,18 @@ public class Project
         this.project_hours = project_hours;
         this.project_status = project_status;
     }
+
+    public Project(int project_id, String project_name, String project_description, String project_start, String project_deadline, String project_status)
+    {
+        this.project_id = project_id;
+        this.project_name = project_name;
+        this.project_description = project_description;
+        this.project_start = project_start;
+        this.project_deadline = project_deadline;
+        this.project_status = project_status;
+    }
+
+
     public Project(){}
 
     public int getProject_id() {

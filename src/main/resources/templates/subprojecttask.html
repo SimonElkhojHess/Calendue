@@ -93,17 +93,12 @@
             <br><br>
 
             <div class="label-box">
-                <div id="subprojectHour-title">
-                    <label for="subprojectHours"><b>Subproject hours</b></label>
-                </div>
                 <div id="subprojectStatus-title">
                     <label for="subprojectStatus"><b>Subproject status</b></label>
                 </div>
 
             </div>
             <div class="hours-status-box">
-                <input id="subprojectHours" name="subprojectHours" type="text" placeholder="Use only integers" th:value="${subproject.getSubproject_hours}">
-
                 <select id="subprojectStatus" name="subprojectStatus" >
                     <option value="null" th:selected="${subproject.getSubproject_status == 'null'}">Select an option</option>
                     <option value="To do" th:selected="${subproject.getSubproject_status == 'To do'}">To do</option>
