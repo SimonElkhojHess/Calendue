@@ -52,7 +52,7 @@ public class HomeController {
         if(session.getAttribute("user_id") == null)
         {
             session.setAttribute("wronglogin", false);
-            return "/login";
+            return "login";
         }
 
         return "redirect:/homepage";
@@ -76,7 +76,7 @@ public class HomeController {
            }
         }
         session.setAttribute("wronglogin", true);
-        return "/login";
+        return "login";
     }
 
     //Removes session attributes from token
