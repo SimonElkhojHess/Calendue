@@ -46,7 +46,7 @@ class UserRepositoryTest {
         boolean result = userRepository.checkLogin(username, password);
 
         //assert
-        assertEquals(true, result);
+        assertTrue(result, "This returns true when logging in");
     }
 
    @Test
@@ -60,7 +60,7 @@ class UserRepositoryTest {
         boolean result = userRepository.checkLogin(username, password);
 
         //assert
-        assertEquals(false, result);
+        assertFalse(result, "This return false when login fails");
     }
 
     //Tests calculation tool
