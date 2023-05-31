@@ -8,9 +8,6 @@ import java.sql.*;
 
 @Repository
 public class Project_userRepository {
-    /*private int project_id;
-    private int user_id;
-    private String role;*/
 
     @Value("${spring.datasource.url}")
     private String HOSTNAME;
@@ -62,29 +59,6 @@ public class Project_userRepository {
         }
     }
 
-    /*public int getMaxProject_idByUser(int user_id)
-    {
-        int tempProjectID = -99;
-        try{
-            Connection connection = ConnectionManager.getConnection(HOSTNAME, USERNAME, PASSWORD);
-            Statement statement = connection.createStatement();
-            final String SQL_QUERY = "SELECT MAX(project_id) FROM calendue.project_user WHERE user_id ="+user_id;
-
-            ResultSet resultSet = statement.executeQuery(SQL_QUERY);
-
-            if(resultSet.next())
-            {
-                tempProjectID = resultSet.getInt(1);
-            }
-
-        } catch(SQLException e)
-        {
-            e.printStackTrace();
-            System.out.println("Could not find project id by user");
-        }
-
-        return tempProjectID;
-    }*/
 
     //Checks for the existence of a project_user assignment
     public boolean doesAssignmentExist(int userId, int projectId)

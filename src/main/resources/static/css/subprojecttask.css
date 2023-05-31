@@ -170,6 +170,7 @@
     color: black;
     border-radius: 5px 5px 5px 5px;
     border: 4px inset #a2e9e9;
+    overflow-y:scroll;
 }
 
 #assignment-object

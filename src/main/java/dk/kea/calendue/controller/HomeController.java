@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -201,8 +200,12 @@ public class HomeController {
     }
 
     @GetMapping("/projectassignment/delete/{user_id}/{project_id}")
-    public String deleteProjectAssignment(@PathVariable("user_id")int user_id, @PathVariable("project_id")int project_id)
+    public String deleteProjectAssignment(@PathVariable("user_id")int user_id, @PathVariable("project_id")int project_id, HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         project_userRepo.deleteProjectAssignment(user_id, project_id);
 
         return "redirect:/project/"+project_id;
@@ -247,11 +250,6 @@ public class HomeController {
         model.addAttribute("subproject", subprojectRepo.getOneSubproject(subproject_id));
         model.addAttribute("tasks", taskRepo.getSubprojectTasks(subproject_id));
         model.addAttribute("assignedusers", task_userRepo.getUsersOnSubproject(subproject_id));
-        //model.addAttribute("all_users", userRepo.getAllUsers());
-
-        //int tempID = (int) session.getAttribute("user_id");
-
-        //session.setAttribute("project_role", projectRepo.getUserProjectAssignment(tempID, project_id));
 
         return "subprojecttask";
     }
@@ -347,30 +345,46 @@ public class HomeController {
     }
 
     @GetMapping("/taskassignment/delete/{user_id}/{task_id}")
-    public String deleteTaskAssignment(@PathVariable("user_id")int user_id, @PathVariable("task_id")int task_id)
+    public String deleteTaskAssignment(@PathVariable("user_id")int user_id, @PathVariable("task_id")int task_id, HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         task_userRepo.deleteTaskAssignment(user_id, task_id);
 
         return "redirect:/task/" + task_id;
     }
 
     @GetMapping("/deletetask/{task_id}/{subproject_id}")
-    public String deleteTask(@PathVariable("task_id")int task_id, @PathVariable("subproject_id")int subproject_id)
+    public String deleteTask(@PathVariable("task_id")int task_id, @PathVariable("subproject_id")int subproject_id, HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         taskRepo.deleteTask(task_id);
         return "redirect:/subproject/" + subproject_id;
     }
 
     @GetMapping("/deleteproject/{id}")
-    public String deleteProject(@PathVariable("id") int projectID)
+    public String deleteProject(@PathVariable("id") int projectID, HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         projectRepo.deleteProject(projectID);
         return "redirect:/homepage";
     }
 
     @GetMapping("/deletesubproject/{subproject_id}/{project_id}")
-    public String deleteSubproject(@PathVariable("subproject_id") int subprojectID, @PathVariable("project_id")int project_id)
+    public String deleteSubproject(@PathVariable("subproject_id") int subprojectID, @PathVariable("project_id")int project_id, HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         subprojectRepo.deleteSubproject(subprojectID);
         return "redirect:/project/" + project_id;
     }
@@ -378,13 +392,21 @@ public class HomeController {
     @GetMapping("/manage")
     public String showManageUsers(HttpSession session, Model model)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         model.addAttribute("userlist", userRepo.getAllUsersForAdmin());
         return "manageusers";
     }
 
     @GetMapping("/editusers/{id}")
-    public String showEditUsers(@PathVariable("id")int tempId, Model model)
+    public String showEditUsers(@PathVariable("id")int tempId, Model model, HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         model.addAttribute("oneuser", userRepo.getOneUser(tempId));
         return "editusers";
     }
@@ -430,20 +452,32 @@ public class HomeController {
     @GetMapping("/resources")
     public String showResourcePage(HttpSession session, Model model)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         model.addAttribute("resourceList", projectRepo.getAllProjects());
 
         return "resources";
     }
 
     @GetMapping("/statistics")
-    public String showStatistics()
+    public String showStatistics(HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         return "statistics";
     }
 
     @GetMapping("/contact")
-    public String showContactPage()
+    public String showContactPage(HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         return "contact";
     }
 
@@ -454,15 +488,22 @@ public class HomeController {
     }
 
     @GetMapping("/about")
-    public String showAboutPage()
+    public String showAboutPage(HttpSession session)
     {
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         return "about";
     }
 
     @GetMapping("/profile")
     public String showProfile(HttpSession session)
     {
-
+        if(session.getAttribute("user_id") == null)
+        {
+            return "redirect:/login";
+        }
         return "profile";
     }
 

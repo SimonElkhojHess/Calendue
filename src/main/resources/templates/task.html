@@ -42,7 +42,7 @@
             <span id="task-manhours-headline">Total man-hours: <br></span>
             <span id="task-manhours-total" th:text="${task.task_hours}"></span>
         </div>
-        <button id="edit-task-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Task</button>
+        <button id="edit-task-button" type="button" onclick="openEditForm()">Edit Task</button>
         <a id="assign-project-error" th:if="${session.emailerror == true}">User is not assigned to this project</a>
         <div id="task-participants">
             <div id="assignment-object" th:each="user : ${assignedusers}">
@@ -53,7 +53,7 @@
         </div>
         <div id="participants-headline">Participants on the task</div>
 
-        <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
+        <div id="assign-form">
             <form action="/assigntask" method="post">
                 <input name="task-id" type="hidden" th:value="${task.getTask_id}">
                 <label for="assign-email">Enter E-mail</label>
@@ -66,7 +66,7 @@
                 <input id="assign-project-button" type="submit" value="Assign">
             </form>
         </div>
-        <button class="open-edit-assigned-button" onclick="openCreateForm()" th:if="${session.project_role == 'Project Leader'}">Edit Participants</button>
+        <button class="open-edit-assigned-button" onclick="openCreateForm()">Edit Participants</button>
         <div id="task-comment-outerbox">
             <button id="open-comment-button" onclick="openCommentForm()">Open comments</button>
         </div>
@@ -149,16 +149,6 @@
             <option value="Done" th:selected="${task.getTask_status == 'Done'}">Done</option>
         </select>
     </div>
-
-    <!--<label for="taskPriority"><b>Task priority</b></label><br>
-    <input id="taskPriority" name="taskPriority" type="text" placeholder="Task priority" th:value="${task.getTask_priority}">
-    <br><br>
-    <label for="taskHours"><b>Task hours</b></label><br>
-    <input id="taskHours" name="taskHours" type="text" placeholder="Task hours" th:value="${task.getTask_hours}">
-    <br><br>
-    <label for="taskStatus"><b>Task status</b></label><br>
-    <input id="taskStatus" name="taskStatus" type="text" placeholder="Task status" th:value="${task.getTask_status}">
-    <br><br>-->
     <button id="edit-button" type="submit">Update</button>
     <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
     <div class="delete-task-button">

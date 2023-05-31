@@ -46,7 +46,7 @@
     </div>
     <button id="edit-project-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader' || session.is_admin == 1}">Edit Project</button>
     <a id="assign-project-error" th:if="${session.assign_project_error == true}">Incorrect e-mail</a>
-    <div id="assign-form" th:if="${session.project_role == 'Project Leader'}">
+    <div id="assign-form" th:if="${session.project_role == 'Project Leader' || session.is_admin == 1}">
       <form action="/assignproject" method="post">
         <input name="projectId" type="hidden" th:value="${project.getProject_id}">
         <label for="assign-email">Enter E-mail</label>
@@ -65,7 +65,7 @@
       </form>
     </div>
 
-    <button class="open-editroles-button" onclick="openCreateForm()" th:if="${session.project_role == 'Project Leader'}">Edit Participants</button>
+    <button class="open-editroles-button" onclick="openCreateForm()" th:if="${session.project_role == 'Project Leader' || session.is_admin == 1}">Edit Participants</button>
     <div class="editroles-popup" id="myEditRoleForm">
       <h2>Edit Participants</h2>
       <div class="editroles-popup-outerbox">
@@ -95,7 +95,7 @@
 
 
 
-      <div id="create-subproject-form">
+      <div id="create-subproject-form" th:if="${session.project_role == 'Project Leader' || session.is_admin == 1}">
         <form action="/createsubproject" method="post">
           <input name="projectId" type="hidden" th:value="${project.getProject_id}">
           <input id="create-subproject-name" name="subprojectName" type="text" placeholder="Subproject title..." required>
@@ -156,17 +156,12 @@
       <br><br>
 
       <div class="label-box">
-        <div id="projectHour-title">
-      <label for="projectHours"><b>Project hours</b></label>
-        </div>
         <div id="projectStatus-title">
         <label for="projectStatus"><b>Project status</b></label>
         </div>
 
       </div>
       <div class="hours-status-box">
-      <input id="projectHours" name="projectHours" type="text" placeholder="Use only integers" th:value="${project.getProject_hours}">
-
       <select id="projectStatus" name="projectStatus" >
         <option value="null" th:selected="${project.getProject_status == 'null'}">Select an option</option>
         <option value="To do" th:selected="${project.getProject_status == 'To do'}">To do</option>
@@ -196,10 +191,6 @@
   function closeCreateForm() {
     document.getElementById("myEditRoleForm").style.display = "none";
   }
-
-
-
-
 
   function openEditForm()
   {

@@ -44,10 +44,12 @@
            <div class="project-header">
                <div class="table-names">
                    <div class="name-box">
-                       <span>Project name</span>
+                       <span th:if="${session.currentpage != '/mytasks'}">Project name</span>
+                       <span th:if="${session.currentpage == '/mytasks'}">Task name</span>
                    </div>
                    <div class="start-date-box">
-                       <span>Start date</span>
+                       <span th:if="${session.currentpage != '/mytasks'}">Start date</span>
+                       <span th:if="${session.currentpage == '/mytasks'}">Deadline</span>
                    </div>
                    <div class="deadline-box">
                        <span th:if="${session.currentpage != '/mytasks'}">Deadline</span>

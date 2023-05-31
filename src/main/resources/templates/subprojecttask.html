@@ -38,7 +38,7 @@
             <span id="manhours-headline">Total man-hours: <br></span>
             <span id="manhours-total" th:text="${subproject.subproject_hours}"></span>
         </div>
-        <button id="edit-subproject-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader'}">Edit Subproject</button>
+        <button id="edit-subproject-button" type="button" onclick="openEditForm()" th:if="${session.project_role == 'Project Leader' || session.is_admin == 1}">Edit Subproject</button>
 
         <div id="create-task-form">
             <form action="/createtask" method="post">
@@ -113,11 +113,6 @@
                 </select>
             </div>
 
-            <!--<label for="subprojectHours"><b>Subproject hours</b></label><br>
-            <input id="subprojectHours" name="subprojectHours" type="text" placeholder="Subproject hours" th:value="${subproject.getSubproject_hours}">
-            <br><br>
-            <label for="subprojectStatus"><b>Subproject status</b></label><br>
-            <input id="subprojectStatus" name="subprojectStatus" type="text" placeholder="Subproject status" th:value="${subproject.getSubproject_status}">-->
             <br><br>
             <button id="edit-button" type="submit">Update</button>
             <button class="btn cancel" type="button" onclick="closeEditForm()">Cancel</button>
@@ -132,16 +127,6 @@
     </div>
 </div>
 <script>
-    function openCreateForm() {
-        document.getElementById("myEditRoleForm").style.display = "block";
-    }
-
-    function closeCreateForm() {
-        document.getElementById("myEditRoleForm").style.display = "none";
-    }
-
-
-
 
 
     function openEditForm()

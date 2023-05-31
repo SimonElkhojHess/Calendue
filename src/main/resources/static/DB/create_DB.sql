@@ -5,11 +5,11 @@ DROP TABLE IF EXISTS `project`, `subproject`, `task`, `user`, `linkedtask`, `pro
 CREATE TABLE `calendue`.`project` (
                                       `project_id` INT NOT NULL AUTO_INCREMENT,
                                       `project_name` VARCHAR(255) NOT NULL,
-                                      `project_description` VARCHAR(2400) NULL,
-                                      `project_start` VARCHAR(255) NULL,
-                                      `project_deadline` VARCHAR(255) NULL,
+                                      `project_description` VARCHAR(3000) NULL,
+                                      `project_start` VARCHAR(20) NULL,
+                                      `project_deadline` VARCHAR(20) NULL,
                                       `project_hours` INT NULL,
-                                      `project_status` VARCHAR(255) NULL,
+                                      `project_status` VARCHAR(20) NULL,
                                       PRIMARY KEY (`project_id`));
 
 CREATE TABLE `calendue`.`subproject` (
@@ -17,9 +17,9 @@ CREATE TABLE `calendue`.`subproject` (
                                          `project_id` INT NOT NULL,
                                          `subproject_name` VARCHAR(255) NOT NULL,
                                          `subproject_description` VARCHAR(1000) NULL,
-                                         `subproject_deadline` VARCHAR(255) NULL,
+                                         `subproject_deadline` VARCHAR(20) NULL,
                                          `subproject_hours` INT NULL,
-                                         `subproject_status` VARCHAR(255) NULL,
+                                         `subproject_status` VARCHAR(20) NULL,
                                          PRIMARY KEY (`subproject_id`),
                                          INDEX `project_id_idx` (`project_id` ASC) VISIBLE,
                                          CONSTRAINT `project_fk_subproject`
@@ -33,11 +33,11 @@ CREATE TABLE `calendue`.`task` (
                                    `subproject_id` INT NOT NULL,
                                    `task_name` VARCHAR(255) NOT NULL,
                                    `task_description` VARCHAR(1000) NULL,
-                                   `task_comment` VARCHAR(1000) NULL,
-                                   `task_deadline` VARCHAR(255) NULL,
+                                   `task_comment` VARCHAR(3000) NULL,
+                                   `task_deadline` VARCHAR(20) NULL,
                                    `task_hours` INT NULL,
                                    `task_priority` INT NULL,
-                                   `task_status` VARCHAR(255) NULL,
+                                   `task_status` VARCHAR(20) NULL,
                                    PRIMARY KEY (`task_id`),
                                    INDEX `subproject_id_idx` (`subproject_id` ASC) VISIBLE,
                                    CONSTRAINT `subproject_fk_task`
@@ -68,7 +68,7 @@ CREATE TABLE `calendue`.`linkedtask` (
 CREATE TABLE `calendue`.`project_user` (
                                            `project_id` INT NOT NULL,
                                            `user_id` INT NOT NULL,
-                                           `role` VARCHAR(255) NOT NULL,
+                                           `role` VARCHAR(20) NOT NULL,
                                            INDEX `project_user_project_id_idx` (`project_id` ASC) VISIBLE,
                                            INDEX `project_user_user_id_idx` (`user_id` ASC) VISIBLE,
                                            CONSTRAINT `project_fk_project_user`

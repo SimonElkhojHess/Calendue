@@ -7,7 +7,9 @@ import dk.kea.calendue.utility.DateCalculator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import java.math.RoundingMode;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,8 @@ public class ProjectRepository
                     int subHours = subprojectRepository.getTotalSubHours(subList.get(i).getSubproject_id());
                     project_hours_scheduled += subHours;
                 }
-                int hours_per_day = 0;
+                double hours_per_day;
+                double hours_per_user;
                 int project_days = 1;
                 if(project_start != null && project_deadline != null)
                 {
@@ -64,9 +67,15 @@ public class ProjectRepository
                 int assigned_users = getProjectAssignmentCount(project_id);
                 int project_hours = project_days*8;
 
-                hours_per_day = project_hours_scheduled/project_days/assigned_users;
+                hours_per_day = project_hours_scheduled/project_days;
+                hours_per_user = hours_per_day/assigned_users;
 
-                Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status, project_days, hours_per_day, assigned_users, project_hours_scheduled);
+                //Sets double to 2 decimals
+                hours_per_user=hours_per_user*100;
+                hours_per_user=Math.floor(hours_per_user);
+                hours_per_user=hours_per_user/100;
+
+                Project project = new Project(project_id, project_name, project_description, project_start, project_deadline, project_hours, project_status, project_days, hours_per_user, assigned_users, project_hours_scheduled);
                 pList.add(project);
                 System.out.println("Found: " + project);
             }
@@ -187,6 +196,14 @@ public class ProjectRepository
                 tempProject.setProject_deadline(resultSet.getString(5));
                 tempProject.setProject_hours(resultSet.getInt(6));
                 tempProject.setProject_status(resultSet.getString(7));
+                int project_hours_scheduled = 0;
+                List<Subproject> subList = subprojectRepository.getAllSubprojects(projectID);
+                for(int i = 0; i < subList.size(); i++)
+                {
+                    int subHours = subprojectRepository.getTotalSubHours(subList.get(i).getSubproject_id());
+                    project_hours_scheduled += subHours;
+                }
+                tempProject.setProject_hours_scheduled(project_hours_scheduled);
             }
         }
         catch(SQLException e)
